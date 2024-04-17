@@ -1,0 +1,486 @@
+/* Телефоны */
+@media screen and (max-width: 992px) {
+
+    /*Главная страница до входа*/
+    .logo {
+        font-size: 20px;
+        letter-spacing: 2px;
+        margin-left: 32px;
+    }
+
+    .header_icons {
+        margin-right: 32px;
+    }
+
+    .account_icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .main_info {
+        gap: 24px;
+    }
+
+    .main_title {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+
+    .main_text {
+        font-size: 14px;
+        width: 320px;
+    }
+
+    .main_button {
+        width: 152px;
+        height: 48px;
+        border-radius: 8px;
+        border-style: none;
+        font-size: 16px;
+    }
+
+    .main_photo {
+        width: 320px;
+        height: 216px;
+        margin: 40px auto;
+    }
+
+    .developer_info {
+        gap: 24px;
+    }
+
+    .developer_title {
+        font-size: 20px;
+    }
+
+    .developer_text {
+        font-size: 14px;
+        width: 262px;
+    }
+
+    .developer_photo {
+        width: 64px;
+        height: 64px;
+    }
+
+    .developer {
+        gap: 16px;
+    }
+
+    .developer_name {
+        font-size: 12px;
+    }
+
+    .main_line {
+        width: 320px;
+        margin: 40px auto 24px auto;
+    }
+
+    .footer {
+        gap: 60px;
+        margin-bottom: 24px;
+    }
+
+    .footer_text {
+        font-size: 12px;
+    }
+
+    .support_title {
+        display: none;
+    }
+
+    .support_icon {
+        width: 32px;
+        height: 32px;
+        transition: 0.5s ease;
+    }
+
+    .support_icon:hover {
+        box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, 0.15);
+        transition: 0.5s ease;
+    }
+
+    /* Вход и регистрация */
+
+    .photo_part {
+        display: none;
+    }
+
+    .sign_up_part {
+        width: 100%;
+    }
+
+    /*Всплывающее окно Помощь*/
+
+    .support_popup {
+        width: 340px;
+    }
+
+    .new_note_popup,
+    .share_popup,
+    .delete_popup {
+        width: 440px;
+    }
+
+    .close-popup {
+        width: 8px;
+        height: 8px;
+    }
+
+    .close-popup::before,
+    .close-popup::after {
+        width: 18px;
+    }
+
+    .support_popup form input[type="submit"],
+    .new_note_popup input[type="submit"] {
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .account_popup-bg {
+        display: none;
+    }
+
+    /* Главная страница после входа */
+    .logo_main {
+        font-size: 24px;
+        letter-spacing: 2px;
+        margin-left: 32px;
+    }
+
+    .container_notes {
+        margin-top: 0;
+    }
+    .user,
+    .second_part_screen,
+    .menu {
+        display: none;
+    }
+
+    .list_notes {
+        border-right: none;
+        justify-content: center;
+        margin-bottom: 104px;
+
+    }
+
+
+    .note,
+    .note-selected {
+        width: 350px;
+        padding: 20px 24px 20px 24px;
+    }
+
+    .note_title,
+    .note_title-selected {
+        font-size: 18px;
+    }
+
+    .note_text,
+    .note_text-selected {
+        font-size: 14px;
+    }
+
+    .note_time,
+    .note_time-selected {
+        font-size: 12px;
+    }
+
+    .menu_mobile {
+        width: 100%;
+        height: 72px;
+        background: rgb(245, 245, 245);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .my_notes_icon,
+    .trash_icon,
+    .help_icon,
+    .share_icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .plus {
+        width: 64px;
+        height: 64px;
+        background-size: 40% 3px, 3px 40%;
+    }
+
+    .first_part_mob_menu,
+    .second_part_mob_menu {
+        display: flex;
+        gap: 36px;
+    }
+
+    .new_note_icon {
+        margin: 0 40px 64px 40px;
+    }
+
+    .part_screen {
+        margin: 40px auto 80px auto;
+    }
+
+    .written_note_title {
+        font-size: 24px;
+    }
+
+    .written_note_date {
+        font-size: 12px;
+        margin-top: 16px;
+    }
+
+    .dot {
+        width: 4px;
+        height: 4px;
+    }
+
+    .written_note_text {
+        font-size: 14px;
+        margin-top: 40px;
+    }
+}
+
+/* Маленькие телефоны */
+@media screen and (max-width: 400px) {
+    .back_title {
+        font-size: 14px;
+    }
+
+    .sign_up_logo {
+        font-size: 32px;
+    }
+
+    .create_account_title {
+        font-size: 18px;
+        margin: 56px auto 56px auto;
+    }
+
+    .email_title,
+    .password_title {
+        font-size: 12px;
+    }
+
+    .input_email,
+    .input_password {
+        width: 288px;
+        height: 42px;
+    }
+
+    .email_and_password {
+        gap: 12px;
+    }
+
+    .email,
+    .password {
+        gap: 4px;
+    }
+
+    .sign_up_button {
+        width: 288px;
+        font-size: 14px;
+        margin-top: 24px;
+    }
+
+    .sign_up_text1,
+    .sign_up_text2,
+    .sign_up_text3 {
+        font-size: 12px;
+    }
+
+    .sign_up_text3 {
+        margin: 40px auto 16px auto;
+    }
+
+
+    /* Всплывающее окно Помощь */
+
+    .support_popup,
+    .new_note_popup {
+        width: 320px;
+    }
+
+    .share_popup,
+    .delete_popup {
+        width: 400px;
+    }
+
+    .account_page {
+        padding: 16px 40px 24px 40px;
+    }
+
+    .account_title_main {
+        font-size: 18px;
+    }
+
+    .account_title_mobile {
+        margin-top: 32px;
+    }
+
+    .input_account_mobile {
+        margin-top: 32px;
+    }
+}
+
+@media screen and (min-width: 560px) and (max-width: 960px) {
+
+    /* Главная страница до входа */
+    .logo {
+        margin-left: 64px;
+    }
+
+    .header_icons {
+        margin-right: 64px;
+    }
+
+    .main_text {
+        width: 362px;
+    }
+
+    .main_photo {
+        width: 460px;
+        height: 316px;
+        margin: 56px auto;
+    }
+
+    .main_line {
+        width: 460px;
+    }
+
+    .footer {
+        gap: 198px;
+    }
+
+}
+
+/* Планшеты */
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+    .photo_part {
+        display: none;
+    }
+
+    .sign_up_part {
+        width: 100%;
+    }
+
+    .sign_up_part_container {
+        margin-top: 104px;
+    }
+
+    .arrow {
+        border-width: 0 3px 3px 0;
+        padding: 6px;
+    }
+
+    .back_title {
+        font-size: 20px;
+    }
+
+    .sign_up_logo {
+        font-size: 44px;
+    }
+
+    .create_account_title {
+        font-size: 24px;
+        margin: 72px auto 72px auto;
+    }
+
+    .email_and_password {
+        gap: 24px;
+    }
+
+    .email,
+    .password {
+        gap: 12px;
+    }
+
+    .email_title,
+    .password_title {
+        font-size: 18px;
+    }
+
+    .input_email,
+    .input_password {
+        width: 352px;
+        height: 48px;
+    }
+
+    .sign_up_button {
+        width: 352px;
+        height: 48px;
+        font-size: 20px;
+        margin-top: 40px;
+    }
+
+    .sign_up_text,
+    .sign_up_text_2 {
+        gap: 16px;
+    }
+
+    .sign_up_text1,
+    .sign_up_text2,
+    .sign_up_text3 {
+        font-size: 18px;
+    }
+
+    .sign_up_text {
+        margin-top: 56px;
+    }
+
+    .sign_up_text3 {
+        margin: 56px auto 32px auto;
+    }
+
+    .support_popup,
+    .new_note_popup,
+    .share_popup,
+    .delete_popup {
+        width: 660px;
+    }
+
+    /* .account_popup-bg {
+    display: initial;
+} */
+}
+
+@media screen and (max-width: 1024px) and (max-height: 600px) {
+    .sign_up_part_container {
+        margin-top: 24px;
+    }
+
+    .account_popup {
+        padding: 24px 40px 24px 40px;
+    }
+
+    .account_title {
+        margin-top: 0px;
+    }
+
+    .input_name,
+    .input_surname,
+    .input_email_account,
+    .input_password_account {
+        margin-bottom: 12px;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .account_page {
+        display: none;
+    }
+
+    .menu_mobile {
+        display: none;
+    }
+
+    .written_note_mobile {
+        display: none;
+    }
+
+}

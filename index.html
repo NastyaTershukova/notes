@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notes</title>
+    <link rel="shortcut icon" href="img/browser_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+</head>
+
+<body>
+    
+
+    <div class="account_popup-bg">
+        <div class="account_popup">
+            <div class="account_title_close">
+                <h5 class="account_popup_title">Мой профиль</h5>
+                <div class="close-popup"></div>
+            </div>
+            <form action="">
+                <div class="account_title">
+                    <div class="account_photo_and_change">
+                        <img src="img/user_photo.jpg" class="user_photo_change">
+                        <p class="change_photo">Изменить</p>
+                    </div>
+                    <div class="name_and_email">
+                        <h2 class="account_name">Анастасия <br> Тершукова</h2>
+                        <p class="account_email">nastya@gmail.com</p>
+                    </div>
+                </div>
+                <div class="input_account">
+                    <p class="input_name_title">Имя</p>
+                    <input type="text" class="input_name">
+                    <p class="input_surname_title">Фамилия</p>
+                    <input type="text" class="input_surname">
+                    <p class="input_email_title">Почта</p>
+                    <input type="email" class="input_email_account">
+                    <p class="input_password_title">Пароль</p>
+                    <input type="password" class="input_password_account">
+                </div>
+                <input value="Сохранить" type="submit">
+            </form>
+        </div>
+    </div>
+
+    <nav id="nav_bar" class="ui-side_nav">
+        <button onclick="toggle_navbar()"> <i class="ph-list"></i> </button>
+
+        <button onclick="tab('home')" id="btn_home"> <i class="ph-compass"></i> <p>Главная</p> </button>
+        <button onclick="tab('trash')" id="btn_trash"> <i class="ph-trash"></i> <p>Корзина</p> </button>
+        <button onclick="" id="btn_user"> <img src="img/user_photo.jpg" class="user_photo"> <p> Анастасия Т. </p></button>
+        <button onclick="tab('create')" id="btn_create"> <i class="ph-note-pencil"></i> <p>Новая заметка...</p> </button>
+        <button onclick="tab('help')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
+    </nav>
+
+    <div class="flex-row security">
+        
+        <button class="phones_menu" onclick="toggle_navbar()"> <i class="ph-list"></i> </button>
+    </div>
+
+    <div class="header_main">
+        <div class="search_and_sort">
+            <div class="search">
+                <i class="ph-magnifying-glass"></i>
+                <input type="text" placeholder="Поиск">
+            </div>
+
+            <button class="sorting">
+                <i class="ph-sort-ascending"></i>
+            </button>
+        </div>
+        <div class="user">
+        </div>
+    </div>
+
+    <div id="page_home" class="page">
+        <div class="container_notes">
+                
+
+                <div class="list_notes">
+                    <div class="note" id="list_note0">
+                        <p class="note_title">Заметка</p>
+                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
+                        <p class="note_time">10 часов назад</p>
+                    </div>
+                    <div class="note selected" id="list_note1">
+                        <p class="note_title selected">Заметка</p>
+                        <p class="note_text selected">Описание заметки описание заметки описание заметки</p>
+                        <p class="note_time selected">10 часов назад</p>
+                    </div>
+                    <div class="note" id="list_note2">
+                        <p class="note_title">Заметка</p>
+                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
+                        <p class="note_time">10 часов назад</p>
+                    </div>
+                    <div class="note" id="list_note3">
+                        <p class="note_title">Заметка</p>
+                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
+                        <p class="note_time">10 часов назад</p>
+                    </div>
+                    <div class="note" id="list_note4">
+                        <p class="note_title">Заметка</p>
+                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
+                        <p class="note_time">10 часов назад</p>
+                    </div>
+                    <div class="note" id="list_note5">
+                        <p class="note_title">Заметка</p>
+                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
+                        <p class="note_time">10 часов назад</p>
+                    </div>
+                </div>
+            <div class="line_main"></div>
+            <div class="second_part_screen">
+                <div class="written_note">
+                    <div class="written_note_header">
+                        <div class="title_and_dots">
+                            <h2 class="written_note_title">Настя дура процедура дальше я не помню как </h2>
+                            <button id="note_menu">
+                                <i class="ph-dots-three-bold"></i>
+                            </button>
+                        </div>
+                        <p class="written_note_date">16 февраля 2024 г. в 20:00</p>
+                    </div>
+                    <p class="written_note_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+                        pretium
+                        bibendum massa, euismod suscipit lorem euismod id. Fusce feugiat eros aliquet nisi auctor, eget
+                        accumsan
+                        quam varius. Maecenas orci quam, elementum molestie erat ut, condimentum dignissim risus. Cras
+                        in
+                        libero
+                        vitae diam congue iaculis. Praesent finibus tellus eget urna pharetra ornare. Vivamus in
+                        vehicula
+                        mauris. Proin rhoncus turpis vel ipsum pretium, sit amet venenatis ante volutpat. <br> <br>
+                        Curabitur at feugiat ante. Aenean ipsum ligula, tempor ut efficitur mattis, eleifend ut lorem.
+                        Nunc
+                        nisl
+                        tellus, congue ut semper condimentum, dapibus vel arcu. Quisque bibendum a metus at dignissim.
+                        Nunc
+                        dolor justo, iaculis nec felis ac, dignissim volutpat mi. Aliquam ut consequat arcu. Phasellus
+                        rhoncus
+                        eleifend dui vitae egestas. <br> <br>
+                        Curabitur at feugiat ante. Aenean ipsum ligula, tempor ut efficitur mattis, eleifend ut lorem.
+                        Nunc
+                        nisl
+                        tellus, congue ut semper condimentum, dapibus vel arcu. Quisque bibendum a metus at dignissim.
+                        Nunc
+                        dolor justo, iaculis nec felis ac, dignissim volutpat mi. Aliquam ut consequat arcu. Phasellus
+                        rhoncus
+                        eleifend dui vitae egestas. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page_trash" class="page">
+
+    </div>
+
+    <div id="page_create" class="page">
+
+    </div>
+
+    <div id="page_help" class="page">
+
+    </div>
+
+    <div class="share_popup-bg">
+        <div class="share_popup">
+            <form action="">
+                <div class="close-popup"></div>
+                <h5 class="share_popup_title">Поделиться</h5>
+                <p class="share_popup_text">Скопируйте ссылку и поделитесь с друзьями</p>
+                <div class="copy_link">
+                    <p class="share_link">https://notes.com</p>
+                </div>
+                <button class="share_copy">Скопировать</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="delete_popup-bg">
+        <div class="delete_popup">
+            <form action="">
+                <div class="close-popup"></div>
+                <h5 class="delete_popup_title">Вы действительно хотите удалить заметку?</h5>
+                <input value="Да" type="submit">
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="menu_mobile">
+            <div class="first_part_mob_menu">
+                <img src="img/note_icon.svg" class="my_notes_icon">
+                <img src="img/trash_icon.svg" class="trash_icon">
+            </div>
+            <div class="new_note_icon">
+                <div class="plus radius"></div>
+            </div>
+            <div class="second_part_mob_menu">
+                <img src="img/share.svg" class="share_icon">
+                <img src="img/support.svg" class="help_icon">
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/nav_bar.js"></script>
+    <script src="js/master.js"></script>
+</body>
+
+</html>
