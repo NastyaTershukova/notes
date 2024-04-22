@@ -468,6 +468,7 @@ a {
     margin-left: 8px;
     height: 100%;
     width: 100%;
+    font-size: 14px;
 }
 
 .sorting {
@@ -647,7 +648,7 @@ a {
     text-align: left;
     gap: 8px;
     margin-bottom: 40px;
-    border-right: 1px solid rgb(196, 196, 196);
+    border-right: 2px solid #E8E8E8;
     padding-right: 32px;
     margin-left: 24px;
     /* max-height: 540px;
@@ -1244,8 +1245,8 @@ a {
     font-size: 24px;
   }
   .ui-side_nav > button:first-child > h2 {
-    font-weight: bold;
-    margin-left: 42px;
+    font-weight: 600;
+    margin-left: 16px;
   }
   .ui-side_nav > button.selected > p {
     font-weight: bold;
@@ -1264,6 +1265,8 @@ a {
     transition: .25s;
     margin: 8px auto 0 auto;
     border-radius: 12px;
+
+    cursor: pointer;
   }
   .ui-side_nav > button:nth-child(2) {
     margin-top: 32px;
@@ -1367,6 +1370,7 @@ a {
     margin-right: 0;
     cursor: pointer;
     transition: .2s ease-in background-color;
+    flex-shrink: 0;
   }
   #note_menu i {
     font-size: 36px;
