@@ -60,112 +60,89 @@
         
         <button class="phones_menu" onclick="toggle_navbar()"> <i class="ph-list"></i> </button>
     </div>
-
-    <div class="header_main">
-        <div class="search_and_sort">
-            <div class="search">
-                <i class="ph-magnifying-glass"></i>
-                <input type="text" placeholder="Поиск">
-            </div>
-
-            <button class="sorting">
-                <i class="ph-sort-ascending"></i>
-            </button>
-        </div>
-        <div class="user">
-        </div>
-    </div>
-
-    <div id="page_home" class="page">
-        <div class="container_notes">
-                
-
-                <div class="list_notes">
-                    <div class="note" id="list_note0">
-                        <p class="note_title">Заметка</p>
-                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
-                        <p class="note_time">10 часов назад</p>
-                    </div>
-                    <div class="note selected" id="list_note1">
-                        <p class="note_title selected">Заметка</p>
-                        <p class="note_text selected">Описание заметки описание заметки описание заметки</p>
-                        <p class="note_time selected">10 часов назад</p>
-                    </div>
-                    <div class="note" id="list_note2">
-                        <p class="note_title">Заметка</p>
-                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
-                        <p class="note_time">10 часов назад</p>
-                    </div>
-                    <div class="note" id="list_note3">
-                        <p class="note_title">Заметка</p>
-                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
-                        <p class="note_time">10 часов назад</p>
-                    </div>
-                    <div class="note" id="list_note4">
-                        <p class="note_title">Заметка</p>
-                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
-                        <p class="note_time">10 часов назад</p>
-                    </div>
-                    <div class="note" id="list_note5">
-                        <p class="note_title">Заметка</p>
-                        <p class="note_text">Описание заметки описание заметки описание заметки</p>
-                        <p class="note_time">10 часов назад</p>
-                    </div>
+    <div class="page_content">
+        <div class="header_main">
+            <div class="search_and_sort">
+                <div class="search">
+                    <i class="ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Поиск">
                 </div>
-            <div class="line_main"></div>
-            <div class="second_part_screen">
-                <div class="written_note">
-                    <div class="written_note_header">
-                        <div class="title_and_dots">
-                            <h2 class="written_note_title">Настя дура процедура дальше я не помню как </h2>
-                            <button id="note_menu">
-                                <i class="ph-dots-three-bold"></i>
-                            </button>
+    
+                <button class="sorting">
+                    <i class="ph-sort-ascending"></i>
+                </button>
+            </div>
+            <div class="user">
+            </div>
+        </div>
+    
+        <div id="page_home" class="page">
+            <div class="container_notes">
+                    
+    
+                    <div id="list_notes">
+                        <div class="note" id="list_note0" onclick="openNote(0)">
+                            <p class="note_title">Заметка</p>
+                            <p class="note_text">Пример заметки</p>
+                            <p class="note_time">10 часов назад</p>
                         </div>
-                        <p class="written_note_date">16 февраля 2024 г. в 20:00</p>
                     </div>
-                    <p class="written_note_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-                        pretium
-                        bibendum massa, euismod suscipit lorem euismod id. Fusce feugiat eros aliquet nisi auctor, eget
-                        accumsan
-                        quam varius. Maecenas orci quam, elementum molestie erat ut, condimentum dignissim risus. Cras
-                        in
-                        libero
-                        vitae diam congue iaculis. Praesent finibus tellus eget urna pharetra ornare. Vivamus in
-                        vehicula
-                        mauris. Proin rhoncus turpis vel ipsum pretium, sit amet venenatis ante volutpat. <br> <br>
-                        Curabitur at feugiat ante. Aenean ipsum ligula, tempor ut efficitur mattis, eleifend ut lorem.
-                        Nunc
-                        nisl
-                        tellus, congue ut semper condimentum, dapibus vel arcu. Quisque bibendum a metus at dignissim.
-                        Nunc
-                        dolor justo, iaculis nec felis ac, dignissim volutpat mi. Aliquam ut consequat arcu. Phasellus
-                        rhoncus
-                        eleifend dui vitae egestas. <br> <br>
-                        Curabitur at feugiat ante. Aenean ipsum ligula, tempor ut efficitur mattis, eleifend ut lorem.
-                        Nunc
-                        nisl
-                        tellus, congue ut semper condimentum, dapibus vel arcu. Quisque bibendum a metus at dignissim.
-                        Nunc
-                        dolor justo, iaculis nec felis ac, dignissim volutpat mi. Aliquam ut consequat arcu. Phasellus
-                        rhoncus
-                        eleifend dui vitae egestas. </p>
+                <div class="line_main"></div>
+                <div class="second_part_screen">
+                    <div class="written_note">
+                        <div class="written_note_header">
+                            <div class="title_and_dots">
+                                <h2 class="written_note_title">Настя дура процедура дальше я не помню как </h2>
+                                <button id="note_menu">
+                                    <i class="ph-dots-three-bold"></i>
+                                </button>
+                            </div>
+                            <p class="written_note_date">16 февраля 2024 г. в 20:00</p>
+                        </div>
+                        <p class="written_note_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+                            pretium
+                            bibendum massa, euismod suscipit lorem euismod id. Fusce feugiat eros aliquet nisi auctor, eget
+                            accumsan
+                            quam varius. Maecenas orci quam, elementum molestie erat ut, condimentum dignissim risus. Cras
+                            in
+                            libero
+                            vitae diam congue iaculis. Praesent finibus tellus eget urna pharetra ornare. Vivamus in
+                            vehicula
+                            mauris. Proin rhoncus turpis vel ipsum pretium, sit amet venenatis ante volutpat. <br> <br>
+                            Curabitur at feugiat ante. Aenean ipsum ligula, tempor ut efficitur mattis, eleifend ut lorem.
+                            Nunc
+                            nisl
+                            tellus, congue ut semper condimentum, dapibus vel arcu. Quisque bibendum a metus at dignissim.
+                            Nunc
+                            dolor justo, iaculis nec felis ac, dignissim volutpat mi. Aliquam ut consequat arcu. Phasellus
+                            rhoncus
+                            eleifend dui vitae egestas. <br> <br>
+                            Curabitur at feugiat ante. Aenean ipsum ligula, tempor ut efficitur mattis, eleifend ut lorem.
+                            Nunc
+                            nisl
+                            tellus, congue ut semper condimentum, dapibus vel arcu. Quisque bibendum a metus at dignissim.
+                            Nunc
+                            dolor justo, iaculis nec felis ac, dignissim volutpat mi. Aliquam ut consequat arcu. Phasellus
+                            rhoncus
+                            eleifend dui vitae egestas. </p>
+                    </div>
                 </div>
             </div>
         </div>
+    
+        <div id="page_trash" class="page">
+    
+        </div>
+    
+        <div id="page_create" class="page">
+    
+        </div>
+    
+        <div id="page_help" class="page">
+    
+        </div>
     </div>
-
-    <div id="page_trash" class="page">
-
-    </div>
-
-    <div id="page_create" class="page">
-
-    </div>
-
-    <div id="page_help" class="page">
-
-    </div>
+    
 
     <div class="share_popup-bg">
         <div class="share_popup">
@@ -207,6 +184,7 @@
     </footer>
 
     <script src="js/nav_bar.js"></script>
+    <script src="js/notes.js"></script>
     <script src="js/master.js"></script>
 </body>
 

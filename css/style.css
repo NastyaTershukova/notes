@@ -642,7 +642,7 @@ a {
     font-size: 16px;
 }
 
-.list_notes {
+#list_notes {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -661,16 +661,14 @@ a {
 } */
 
 
-.note,
-.note-selected {
-    width: 400px;
-    max-width: 30vw;
+.note {
+    width: 27vw;
+    height: 120px;
     border-radius: 24px;
     padding: 20px 32px 20px 32px;
-    color: #000;
-}
 
-.note {
+    color: rgb(102, 102, 102);
+
     background-color: #EFEFEF;
     cursor: pointer;
     transition: .3s ease-out background-color;
@@ -682,6 +680,7 @@ a {
 
 .note.selected {
     background-color: #020082;
+    color: white;
 }
 
 .note_title {
@@ -691,14 +690,14 @@ a {
     color: #000;
 }
 
-.note_title.selected {
+.note.selected .note_title {
     color: #fff;
 }
 
 .note_text,
 .note_time {
-    color: rgb(102, 102, 102);
     font-weight: 400;
+    color: inherit;
 }
 
 .note_text {
@@ -709,12 +708,6 @@ a {
 .note_time {
     font-size: 12px;
     text-align: right;
-}
-
-.note_text.selected,
-.note_time.selected,
-.note_title.selected {
-    color: #fff;
 }
 
 .container_notes {
