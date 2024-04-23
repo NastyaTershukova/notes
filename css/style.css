@@ -468,6 +468,7 @@ a {
     margin-left: 8px;
     height: 100%;
     width: 100%;
+    font-size: 14px;
 }
 
 .sorting {
@@ -641,13 +642,13 @@ a {
     font-size: 16px;
 }
 
-.list_notes {
+#list_notes {
     display: flex;
     flex-direction: column;
     text-align: left;
     gap: 8px;
     margin-bottom: 40px;
-    border-right: 1px solid rgb(196, 196, 196);
+    border-right: 2px solid #E8E8E8;
     padding-right: 32px;
     margin-left: 24px;
     /* max-height: 540px;
@@ -660,16 +661,14 @@ a {
 } */
 
 
-.note,
-.note-selected {
-    width: 400px;
-    max-width: 30vw;
+.note {
+    width: 27vw;
+    height: 120px;
     border-radius: 24px;
     padding: 20px 32px 20px 32px;
-    color: #000;
-}
 
-.note {
+    color: rgb(102, 102, 102);
+
     background-color: #EFEFEF;
     cursor: pointer;
     transition: .3s ease-out background-color;
@@ -681,6 +680,7 @@ a {
 
 .note.selected {
     background-color: #020082;
+    color: white;
 }
 
 .note_title {
@@ -690,14 +690,14 @@ a {
     color: #000;
 }
 
-.note_title.selected {
+.note.selected .note_title {
     color: #fff;
 }
 
 .note_text,
 .note_time {
-    color: rgb(102, 102, 102);
     font-weight: 400;
+    color: inherit;
 }
 
 .note_text {
@@ -708,12 +708,6 @@ a {
 .note_time {
     font-size: 12px;
     text-align: right;
-}
-
-.note_text.selected,
-.note_time.selected,
-.note_title.selected {
-    color: #fff;
 }
 
 .container_notes {
@@ -732,38 +726,55 @@ a {
 
 .second_part_screen {
     margin-left: 56px;
+    width: 100%;
 }
 
 .written_note {
-    text-align: left;
+    width: 100%;
+    padding-right: 64px;
 }
 
 .title_and_dots {
     display: flex;
-    margin-right: 64px;
 }
 
-.written_note_title {
+#note_content-title {
     font-weight: 500;
     font-size: 32px;
     color: #000;
-}
 
-.written_note_text {
+    outline: none;
+
+    flex: 1;
+    min-height: 44px;
+    word-break: break-all;
+
+    padding-bottom: 16px;
+}
+#note_content-text {
+    width: 100%;
+    padding: 0;
+    margin: 0 0 64px 0;
+    height: auto;
+
+    border: none;
+    outline: none;
+
     font-size: 16px;
     font-weight: 400;
-    color: #000;
-    margin-right: 64px;
     text-align: justify;
-    margin-top: 48px;
-    margin-bottom: 64px
+
+    word-break: break-word;
+
+    min-height: 256px;
 }
 
-.written_note_date {
-    color: rgb(102, 102, 102);
+.note_content-date {
+    color: rgb(152, 152, 152);
     font-weight: 400;
     font-size: 14px;
-    margin-top: 16px;
+    text-align: center;
+    margin-bottom: 16px;
 }
 
 .dot {
@@ -1244,8 +1255,8 @@ a {
     font-size: 24px;
   }
   .ui-side_nav > button:first-child > h2 {
-    font-weight: bold;
-    margin-left: 42px;
+    font-weight: 600;
+    margin-left: 16px;
   }
   .ui-side_nav > button.selected > p {
     font-weight: bold;
@@ -1264,6 +1275,8 @@ a {
     transition: .25s;
     margin: 8px auto 0 auto;
     border-radius: 12px;
+
+    cursor: pointer;
   }
   .ui-side_nav > button:nth-child(2) {
     margin-top: 32px;
@@ -1360,6 +1373,7 @@ a {
     width: 44px;
     height: 44px;
     display: flex;
+    margin-top: -3px;
     justify-content: center;
     align-items: center;
     background-color: none;
@@ -1367,6 +1381,7 @@ a {
     margin-right: 0;
     cursor: pointer;
     transition: .2s ease-in background-color;
+    flex-shrink: 0;
   }
   #note_menu i {
     font-size: 36px;
@@ -1376,3 +1391,73 @@ a {
   #note_menu:hover {
     background-color: rgba(0,0,0,0.05);
   }
+
+#context_menu {
+    position: fixed;
+
+    background-color: rgba(230,230,230,0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 10px;
+    padding: 5px;
+    top: 32px;
+    left: 32px;
+    min-width: 200px;
+    min-height: 40px;
+
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+    border: 1px solid rgb(180,180,180);
+    opacity: 1;
+
+    transition: .1s opacity ease-in;
+}
+#context_menu.hidden {
+    display: none;
+    opacity: 0;
+}
+#context_menu button {
+    border-radius: 5px;
+    padding: 5px 12px;
+
+    font-size: 12px;
+    background: none;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    cursor: pointer;
+}
+#context_menu button.red {
+    color: #ba000d;
+}
+#context_menu i {
+    font-size: 14px;
+}
+#context_menu button:hover, #context_menu button:focus {
+    background-color: #020082;
+    color: white;
+}
+#context_menu button.red:hover, #context_menu button.red:focus {
+    background-color: #ba000d;
+    color: white;
+}
+.top_row {
+    display: flex;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgb(180,180,180);
+}
+.top_row button {
+    height: 40px;
+    color: gray;
+    justify-content: center;
+}
+.top_row i {
+    font-size: 28px !important;
+}
+.top_row svg {
+    color: inherit;
+}

@@ -2,6 +2,7 @@ function toggle_navbar() {
 
   let nav_bar = document.getElementById('nav_bar');
   nav_bar.classList.toggle('opened');
+  document.getElementsByClassName('container_notes')[0].classList.toggle('navbar_opened');
   document.getElementsByTagName('body')[0].classList.toggle('page_width');
 
 }

@@ -27,4 +27,3 @@ if ($mysql->error) {
 }
 $mysql->close();
 header('Location: /');
-?>
