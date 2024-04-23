@@ -28,17 +28,19 @@
                 <h2 class="sign_up_logo">NOTES</h2>
                 <div class="create_account">
                     <h2 class="create_account_title">Войти в аккаунт</h2>
-                    <div class="email_and_password">
-                        <div class="email">
-                            <p class="email_title">Электронная почта</p>
-                            <input type="email" class="input_email">
+                    <form action="auth.php" method="post">
+                        <div class="email_and_password">
+                            <div class="email">
+                                <p class="email_title">Электронная почта</p>
+                                <input type="email" class="input_email" name="email" id="email">
+                            </div>
+                            <div class="password">
+                                <p class="password_title">Пароль</p>
+                                <input type="password" class="input_password" name="pass" id="pass">
+                            </div>
                         </div>
-                        <div class="password">
-                            <p class="password_title">Пароль</p>
-                            <input type="password" class="input_password">
-                        </div>
-                    </div>
-                    <button class="sign_up_button">Войти</button>
+                        <button class="sign_up_button">Войти</button>
+                    </form>
                     <a href="" class="sign_up_text3">Я забыл/а свой пароль</a>
                     <div class="sign_up_text_2">
                         <p class="sign_up_text1">У вас нет учетной записи?</p>
