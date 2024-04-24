@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <?php 
+    if($_COOKIE['user'] == ''):
+        ?>
     <div class="sign_up_container">
 
         <div class="photo_part">
@@ -28,7 +31,7 @@
                 <h2 class="sign_up_logo">NOTES</h2>
                 <div class="create_account">
                     <h2 class="create_account_title">Войти в аккаунт</h2>
-                    <form action="auth.php" method="post">
+                    <form action="php/auth.php" method="post">
                         <div class="email_and_password">
                             <div class="email">
                                 <p class="email_title">Электронная почта</p>
@@ -50,6 +53,7 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
     <footer>
 
     </footer>

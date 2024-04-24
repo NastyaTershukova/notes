@@ -14,14 +14,13 @@ $pass = filter_var(
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 
-$result = $mysql->query("SELECT * FROM `users` WHERE `email` = '$email' AND `pass` = '$pass'");
+$result = $mysql->query("SELECT * FROM `users` WHERE `email` = '$email' AND `pass` = '$hashed_password'");
 $user = $result->fetch_assoc();
-if (count($user) == 0) {
+if($user === null) {
     echo "Такой пользователь не найден";
     exit();
 }
-
-// setcookie('user', $user)
+setcookie('user', $user['email'], time() + 3600, "/");
 
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
