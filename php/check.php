@@ -16,7 +16,7 @@ if (mb_strlen($email) < 5 || mb_strlen($email) > 90) {
     exit();
 }
 
-$pass = md5($pass."ecbccdjcn3474");
+$pass = hash("sha256", $pass."ecbccdjcn3474");
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 $mysql->query("INSERT INTO `users` (`email`, `pass`)
