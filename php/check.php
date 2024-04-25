@@ -1,18 +1,18 @@
 <?php
 $email = filter_var(
     trim($_POST['email']),
-    FILTER_SANITIZE_STRING
+    FILTER_UNSAFE_RAW
 );
 $pass = filter_var(
     trim($_POST['pass']),
-    FILTER_SANITIZE_STRING
+    FILTER_UNSAFE_RAW
 );
 
 if (mb_strlen($email) < 5 || mb_strlen($email) > 90) {
     echo "Недопустимая длина почты";
     exit();
-} else if (mb_strlen($pass) < 2 || mb_strlen($pass) > 20) {
-    echo "Недопустимая длина пароля (от 2 до 20 символов)";
+} else if (mb_strlen($pass) < 6) {
+    echo "Недопустимая длина пароля (минимум 6 символов)";
     exit();
 }
 
