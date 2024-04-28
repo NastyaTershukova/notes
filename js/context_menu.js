@@ -7,6 +7,32 @@ function add_context_menus() {
         });
     }
 }
+
+function setCursorAtPosition(element, position) {
+    // Проверить, поддерживает ли браузер необходимые API
+    if (window.getSelection && document.createRange) {
+      // Создать новый диапазон
+      const range = document.createRange()
+  
+      // Установить начальную и конечную точки диапазона
+      range.setStart(element.childNodes[0], position)
+      range.setEnd(element.childNodes[0], position)
+  
+      // Получить текущий выбор
+      const selection = window.getSelection()
+  
+      // Очистить текущий выбор, если он существует
+      selection.removeAllRanges()
+  
+      // Добавить новый диапазон в выбор
+      selection.addRange(range)
+    }
+}
+
+function getParagraphLength(obj) {
+    return obj.innerText.replaceAll(/^\n/g, '').length;
+}
+
 function context_tab(name) {
     let tabs = ['sec', 'menu', 'basic', 'img'];
 
@@ -62,69 +88,10 @@ function get_object_count(obj) {
     return count;
 }
 
-function createImage() {
-    let obj = document.createElement("img");
-
-    let image_num = get_object_count("IMG");
-    obj.id = `image${image_num}`;
-    obj.src = `img/Cover.jpg`;
-    obj.tabIndex = "0";
-
-    note_content.appendChild(obj);
-    document.getElementById(`image${image_num}`).focus();
-    document.getElementById(`image${image_num}`).scrollIntoView(false);
-    document.getElementById(`image${image_num}`).addEventListener('contextmenu', (event) => {
-        summon_context_menu(event, "IMG")
-    });
-    document.getElementById(`image${image_num}`).addEventListener('focus', (event) => {
-        let obj = document.getElementById(`image${image_num}`);
-
-        if (event.key === 'Backspace') {
-            obj.remove();
-        }
-    });
-
-    createParagraph(false);
-}
-
-function createParagraph(doFocus) {
-    let obj = document.createElement("p");
-
-    let text_num = get_object_count("P");
-    obj.id = `paragraph${text_num}`;
-    obj.contentEditable = "true";
-    obj.role = "textbox";
-
-    note_content.appendChild(obj);
-
-    if (doFocus != false) {
-        document.getElementById(`paragraph${text_num}`).focus();
-        document.getElementById(`paragraph${text_num}`).scrollIntoView(false);
-        document.getElementById(`paragraph${text_num}`).addEventListener('contextmenu', (event) => {
-            summon_context_menu(event, "P")
-        });
-        document.getElementById(`paragraph${text_num}`).addEventListener('keydown', (event) => {
-            let obj = document.getElementById(`paragraph${text_num}`);
-            // const selection = window.getSelection();
-            // const range = selection.getRangeAt(0);
-            // const clonedRange = range.cloneRange();
-            // clonedRange.selectNodeContents(contentEle);
-            // clonedRange.setEnd(range.endContainer, range.endOffset);
-
-            // let cursor_pos = clonedRange.toString().length;
-            let text_length = obj.innerText.replaceAll(/^\n/g, '').length;
-            console.log(`Длина текста: ${text_length}`);
-
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                createParagraph();
-            } else if (event.key === 'Backspace' && text_length == 0) {
-                obj.remove();
-            }
-        });
-    }
-}
-
 document.getElementById('context_menu-image').addEventListener('click', createImage);
 
 document.getElementById('context_menu-paragraph').addEventListener('click', createParagraph);
+
+document.getElementById('context_menu-json').addEventListener('click', () => {
+    convert_to_json();
+});

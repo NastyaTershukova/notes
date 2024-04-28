@@ -91,7 +91,7 @@
                 <div class="second_part_screen">
                     <div class="written_note">
 
-                        <p class="note_content-date">16 февраля 2024 г. в 20:00</p>
+                        <p id="note_content-date">16 февраля 2024 г. в 20:00</p>
                         <div class="written_note_header">
                             <div class="title_and_dots">
                                 <h2 id="note_content-title" contenteditable="plaintext-only" role="textbox">Настя дура процедура дальше я не помню как </h2>
@@ -203,6 +203,7 @@
         <div id="context-menu">
             <button id="context_menu-save"><i class="ph-cloud-bold"></i> Сохранить заметку</button>
             <button id="context_menu-share"><i class="ph-export-bold"></i> Поделиться...</button>
+            <button id="context_menu-json"><i class="ph-cube-bold"></i> Перевести в JSON</button>
             <button id="context_menu-delete" class="red"><i class="ph-trash-simple-bold"></i> <b>Удалить заметку</b></button>
         </div>
     </div>
@@ -211,6 +212,7 @@
     <script src="js/notes.js"></script>
     <script src="js/json_convert.js"></script>
     <script src="js/context_menu.js"></script>
+    <script src="js/load_note.js"></script>
     <script src="js/master.js"></script>
 </body>
 

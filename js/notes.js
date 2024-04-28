@@ -8,7 +8,7 @@ function openNote(id) {
     document.getElementsByClassName("note")[id].classList.add("selected");
 }
 
-function loadNotes() {
+function loadNotesList() {
     let list = document.getElementById('list_notes');
 
     list.innerHTML = "";

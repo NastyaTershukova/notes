@@ -1,17 +1,14 @@
 tab('home')
-loadNotes();
+loadNotesList();
 openNote(0);
-
-convert_to_json();
-add_context_menus();
 
 let title_obj = document.getElementById('note_content-title');
 let note_content = document.getElementById('note_content');
 
 function performAction (command) {
-    if (!history.back.length || history.back[history.back.length - 1] != text_obj.innerHTML) {
-        history.back.push(text_obj.innerHTML);
-    }
+    // if (!history.back.length || history.back[history.back.length - 1] != text_obj.innerHTML) {
+    //     history.back.push(text_obj.innerHTML);
+    // }
     document.execCommand(command, false, null);
     //text_obj.focus();
 }
@@ -31,7 +28,19 @@ function insertTextAtCursor(text) {
         sel.removeAllRanges();
         sel.addRange(newRange);
     }
+}
+
+function addPasteListeners(num) {
+    for (let i=0; i<note_content.children.length; i++) {
+        if (note_content.children[i].tagName == "P") {
+            note_content.children[i].addEventListener("paste", function(e) {
+                e.preventDefault();
+                var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+                document.execCommand("insertHTML", false, text);
+            });
+        }
     }
+}
 
 function undo() {
     if (!history.back.length) {
@@ -136,4 +145,4 @@ document.getElementById('note_menu').addEventListener('click', function (event) 
     }
 });
 
-add_context_menus()
+load_note();

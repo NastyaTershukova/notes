@@ -784,7 +784,7 @@ a {
 #note_content img {
     border-radius: 4px;
     max-height: 320px;
-    margin: 16px auto;
+    margin: 0 auto;
     display: block;
 }
 #note_content img:focus {
@@ -792,7 +792,7 @@ a {
     padding: 2px;
 }
 
-.note_content-date {
+#note_content-date {
     color: rgb(152, 152, 152);
     font-weight: 400;
     font-size: 14px;
