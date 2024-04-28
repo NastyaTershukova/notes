@@ -2,15 +2,18 @@ tab('home')
 loadNotes();
 openNote(0);
 
+convert_to_json();
+add_context_menus();
+
 let title_obj = document.getElementById('note_content-title');
-let text_obj = document.getElementById('note_content-text');
+let note_content = document.getElementById('note_content');
 
 function performAction (command) {
     if (!history.back.length || history.back[history.back.length - 1] != text_obj.innerHTML) {
         history.back.push(text_obj.innerHTML);
     }
     document.execCommand(command, false, null);
-    text_obj.focus();
+    //text_obj.focus();
 }
 
 function insertTextAtCursor(text) {
@@ -34,27 +37,15 @@ function undo() {
     if (!history.back.length) {
         return;
     }
-    history.forward.push(text_obj.innerHTML);
-    text_obj.innerHTML = history.back.pop();
+    history.forward.push(note_content.innerHTML);
+    note_content.innerHTML = history.back.pop();
 }
 
 function redo() {
     if (!history.forward.length) {
         return;
-    } history.back.push(text_obj.innerHTML);
-    text_obj.innerHTML = history.forward.pop();
-}
-
-function contextmenu_click(event) {
-    event.preventDefault();
-
-    let x = Math.min(event.pageX, window.innerWidth - 216);
-    let y = Math.min(event.pageY - window.scrollY, window.innerHeight - context_menu.clientHeight - 16);
-
-    context_menu.style.top = `${y}px`;
-    context_menu.style.left = `${x}px`;
-
-    context_menu.classList.remove("hidden");
+    } history.back.push(note_content.innerHTML);
+    note_content.innerHTML = history.forward.pop();
 }
 
 const history = {
@@ -73,11 +64,11 @@ document.getElementById('context_menu-underline').addEventListener('click', func
 });
 document.getElementById('context_menu-undo').addEventListener('click', function () {
     undo();
-    text_obj.focus();
+    //text_obj.focus();
 });
 document.getElementById('context_menu-redo').addEventListener('click', function () {
     redo();
-    text_obj.focus();
+    //text_obj.focus();
 });
 document.getElementById('context_menu-paste').addEventListener('click', async () => {
     try {
@@ -88,7 +79,7 @@ document.getElementById('context_menu-paste').addEventListener('click', async ()
     }
 });
 
-text_obj.addEventListener('keydown', function (event) {
+document.getElementById('note_content').addEventListener('keydown', function (event) {
     if ((event.key === 'b' || event.key === 'B') && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         performAction('bold');
@@ -108,7 +99,7 @@ text_obj.addEventListener('keydown', function (event) {
         undo();
     } else {
         history.forward.length = [];
-        history.back.push(text_obj.innerHTML);
+        history.back.push(note_content.innerHTML);
     }
     
     
@@ -117,7 +108,7 @@ text_obj.addEventListener('keydown', function (event) {
 title_obj.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault();
-        text_obj.focus()
+        note_content.children[0].focus();
     }
 });
 title_obj.addEventListener('paste', (event) => {
@@ -130,14 +121,6 @@ title_obj.addEventListener('paste', (event) => {
     document.execCommand('insertText', false, cleanedText);
 });
 
-let context_menu = document.getElementById("context_menu");
-text_obj.addEventListener('contextmenu', (event) => {
-    contextmenu_click(event);
-    context_tab('sec');
-    document.addEventListener('click', () => {
-        context_menu.classList.add("hidden");
-    }, { once: true });
-});
 
 document.getElementById('note_menu').addEventListener('click', function (event) {
     if (!context_menu.classList.contains('hidden')) {
@@ -153,12 +136,4 @@ document.getElementById('note_menu').addEventListener('click', function (event) 
     }
 });
 
-function context_tab(name) {
-    let tabs = ['sec', 'menu'];
-
-    for (let i=0;i<tabs.length;i++) {
-        document.getElementById(`context-${tabs[i]}`).style.display = 'none';
-    }
-
-    document.getElementById(`context-${name}`).style.display = 'block';
-}
+add_context_menus()

@@ -752,10 +752,10 @@ a {
 
     padding-bottom: 16px;
 }
-#note_content-text {
-    width: 100%;
-    padding: 0;
-    margin: 0 0 0 0;
+#note_content p {
+    width: calc(100% + 6px);
+    padding: 8px 0 8px 4px;
+    margin: 0 0 0 -6px;
     height: auto;
 
     border: none;
@@ -767,7 +767,29 @@ a {
 
     word-break: break-word;
 
-    min-height: 256px;
+    min-height: 32px;
+
+    box-sizing: border-box;
+    border-left: 2px solid rgba(0,0,0,0);
+
+    transition: .15s border-color ease-in;
+}
+#note_content p:focus {
+    border-left: 2px solid #020082;
+    width: calc(100% + 6px);
+    margin-left: -6px;
+    padding-left: 4px;
+}
+
+#note_content img {
+    border-radius: 4px;
+    max-height: 320px;
+    margin: 16px auto;
+    display: block;
+}
+#note_content img:focus {
+    border: 2px solid #020082;
+    padding: 2px;
 }
 
 .note_content-date {
@@ -1408,7 +1430,7 @@ a {
     min-height: 40px;
 
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
-    border: 1px solid rgb(180,180,180);
+    border: 1px solid rgba(0,0,0,0.25);
     opacity: 1;
 
     transition: .1s opacity ease-in;
@@ -1449,7 +1471,7 @@ a {
     display: flex;
     padding-bottom: 5px;
     margin-bottom: 5px;
-    border-bottom: 1px solid rgb(180,180,180);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
 }
 .top_row button {
     height: 40px;
@@ -1463,9 +1485,3 @@ a {
     color: inherit;
 }
 
-.written_note img {
-    border-radius: 4px;
-    max-width: 420px;
-    margin: 16px auto;
-    display: block;
-}
