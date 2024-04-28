@@ -112,13 +112,13 @@ function createParagraph(doFocus) {
             // clonedRange.setEnd(range.endContainer, range.endOffset);
 
             // let cursor_pos = clonedRange.toString().length;
-            let text_length = obj.innerText.length;
+            let text_length = obj.innerText.replaceAll(/^\n/g, '').length;
             console.log(`Длина текста: ${text_length}`);
 
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
                 createParagraph();
-            } else if (event.key === 'Backspace' && obj.innerHTML == "") {
+            } else if (event.key === 'Backspace' && text_length == 0) {
                 obj.remove();
             }
         });
