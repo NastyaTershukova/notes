@@ -14,7 +14,8 @@ function pushToHistory() {
 function performAction (command) {
     pushToHistory();
     document.execCommand(command, false, null);
-    //text_obj.focus();
+    
+    document.getElementById(currentFocus).focus();
 }
 
 function undo() {
@@ -25,6 +26,7 @@ function undo() {
     note_content.innerHTML = history.back.pop();
 
     fixElementEvents();
+    document.getElementById(currentFocus).focus();
 }
 
 function redo() {
@@ -34,6 +36,7 @@ function redo() {
     note_content.innerHTML = history.forward.pop();
 
     fixElementEvents();
+    document.getElementById(currentFocus).focus();
 }
 
 document.addEventListener('keydown', function (event) {

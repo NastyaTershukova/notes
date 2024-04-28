@@ -113,6 +113,11 @@ function createParagraph(doFocus, content) {
 }
 
 function addEventsToImg(obj) {
+
+    obj.addEventListener('focus', function() {
+        currentFocus = obj.id;
+    });
+
     obj.addEventListener('keydown', (event) => {
 
         if (event.key === 'Backspace') {
@@ -133,6 +138,8 @@ function addEventsToImg(obj) {
                 setCursorAtPosition(prev_obj, getParagraphLength(prev_obj));
             }
             obj.remove();
+
+            pushToHistory();
         } else if (event.key === 'Enter') {
             event.preventDefault();
             createParagraph();
@@ -140,7 +147,12 @@ function addEventsToImg(obj) {
     });
 }
 
+var currentFocus = -1;
 function addEventsToText(obj) {
+
+    obj.addEventListener('focus', function() {
+        currentFocus = obj.id;
+    });
     
     obj.addEventListener("paste", function(e) {
         e.preventDefault();
@@ -183,6 +195,7 @@ function addEventsToText(obj) {
             if (previous_element >= 0) {
                 note_content.children[previous_element].focus();
                 obj.remove();
+                pushToHistory();
             }   
         }
     });
