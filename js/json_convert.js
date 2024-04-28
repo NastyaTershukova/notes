@@ -76,14 +76,6 @@ function createImage(doFocus, content) {
 
     note_content.appendChild(obj);
 
-    let previous_element = -1;
-
-    for (let i=0; i<note_content.children.length; i++) {
-        if (note_content.children[i].id == `image${image_num}` && i != 0) {
-            previous_element = i - 1;
-        }
-    }
-
     let img_obj = document.getElementById(`image${image_num}`);
 
     if (doFocus != false) {
@@ -93,24 +85,7 @@ function createImage(doFocus, content) {
         pushToHistory();
     }
 
-    img_obj.addEventListener('contextmenu', (event) => {
-        summon_context_menu(event, "IMG")
-    });
-
-    img_obj.addEventListener('keydown', (event) => {
-        let obj = img_obj;
-
-        if (event.key === 'Backspace') {
-            event.preventDefault();
-
-            let prev_obj = note_content.children[previous_element];
-            prev_obj.focus();
-            if (prev_obj.tagName == "P") {
-                setCursorAtPosition(prev_obj, getParagraphLength(prev_obj));
-            }
-            obj.remove();
-        }
-    });
+    addEventsToImg(img_obj);
 }
 
 function createParagraph(doFocus, content) {
@@ -134,18 +109,52 @@ function createParagraph(doFocus, content) {
         pushToHistory();
     }
 
-    par_obj.addEventListener("paste", function(e) {
+    addEventsToText(par_obj);
+}
+
+function addEventsToImg(obj) {
+    obj.addEventListener('keydown', (event) => {
+
+        if (event.key === 'Backspace') {
+            event.preventDefault();
+
+            let previous_element = -1;
+            let image_num = get_object_count("IMG") - 1;
+
+            for (let i=0; i<note_content.children.length; i++) {
+                if (note_content.children[i].id == `image${image_num}` && i != 0) {
+                    previous_element = i - 1;
+                }
+            }
+
+            let prev_obj = note_content.children[previous_element];
+            prev_obj.focus();
+            if (prev_obj.tagName == "P") {
+                setCursorAtPosition(prev_obj, getParagraphLength(prev_obj));
+            }
+            obj.remove();
+        } else if (event.key === 'Enter') {
+            event.preventDefault();
+            createParagraph();
+        }
+    });
+}
+
+function addEventsToText(obj) {
+    
+    obj.addEventListener("paste", function(e) {
         e.preventDefault();
         var text = (e.originalEvent || e).clipboardData.getData('text/plain');
         console.log(text);
         document.execCommand("insertText", false, text);
     });
 
-    par_obj.addEventListener('contextmenu', (event) => {
+    obj.addEventListener('contextmenu', (event) => {
         summon_context_menu(event, "P")
     });
-    par_obj.addEventListener('keydown', (event) => {
-        let obj = par_obj;
+    obj.addEventListener('keydown', (event) => {
+        let text_num = get_object_count("P") - 1;
+
         // const selection = window.getSelection();
         // const range = selection.getRangeAt(0);
         // const clonedRange = range.cloneRange();
@@ -154,6 +163,7 @@ function createParagraph(doFocus, content) {
 
         // let cursor_pos = clonedRange.toString().length;
         let text_length = getParagraphLength(obj);
+        
         //console.log(`Длина текста: ${text_length}`);
 
         if (event.key === 'Enter' && !event.shiftKey && text_length > 0) {
@@ -161,6 +171,7 @@ function createParagraph(doFocus, content) {
             createParagraph();
         } else if (event.key === 'Backspace' && text_length == 0) {
             event.preventDefault();
+            console.log(text_length);
 
             let previous_element = -1;
             for (let i=0; i<note_content.children.length; i++) {

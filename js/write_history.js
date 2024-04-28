@@ -24,7 +24,7 @@ function undo() {
     history.forward.push(note_content.innerHTML);
     note_content.innerHTML = history.back.pop();
 
-    add_context_menus();
+    fixElementEvents();
 }
 
 function redo() {
@@ -33,7 +33,7 @@ function redo() {
     } history.back.push(note_content.innerHTML);
     note_content.innerHTML = history.forward.pop();
 
-    add_context_menus();
+    fixElementEvents();
 }
 
 document.addEventListener('keydown', function (event) {
@@ -61,5 +61,14 @@ function handleKeydown(event) {
     } else {
         history.forward.length = [];
         history.back.push(note_content.innerHTML);
+    }
+}
+
+function fixElementEvents() {
+    add_context_menus();
+    for (let i in note_content.children) {
+        if (note_content.children[i].tagName == "P") {
+            addEventsToText(note_content.children[i]);
+        }
     }
 }
