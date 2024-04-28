@@ -71,6 +71,10 @@ header {
     align-items: center;
 }
 
+img {
+    -webkit-user-drag: none;
+}
+
 /*Главная страница до входа*/
 .header_icons {
     display: flex;

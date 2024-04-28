@@ -5,14 +5,6 @@ openNote(0);
 let title_obj = document.getElementById('note_content-title');
 let note_content = document.getElementById('note_content');
 
-function performAction (command) {
-    // if (!history.back.length || history.back[history.back.length - 1] != text_obj.innerHTML) {
-    //     history.back.push(text_obj.innerHTML);
-    // }
-    document.execCommand(command, false, null);
-    //text_obj.focus();
-}
-
 function insertTextAtCursor(text) {
     const sel = window.getSelection();
     if (sel.rangeCount) {
@@ -41,78 +33,6 @@ function addPasteListeners(num) {
         }
     }
 }
-
-function undo() {
-    if (!history.back.length) {
-        return;
-    }
-    history.forward.push(note_content.innerHTML);
-    note_content.innerHTML = history.back.pop();
-}
-
-function redo() {
-    if (!history.forward.length) {
-        return;
-    } history.back.push(note_content.innerHTML);
-    note_content.innerHTML = history.forward.pop();
-}
-
-const history = {
-    back: [],
-    forward: []
-};
-
-document.getElementById('context_menu-bold').addEventListener('click', function () {
-    performAction('bold');
-});
-document.getElementById('context_menu-italic').addEventListener('click', function () {
-    performAction('italic');
-});
-document.getElementById('context_menu-underline').addEventListener('click', function () {
-    performAction('underline');
-});
-document.getElementById('context_menu-undo').addEventListener('click', function () {
-    undo();
-    //text_obj.focus();
-});
-document.getElementById('context_menu-redo').addEventListener('click', function () {
-    redo();
-    //text_obj.focus();
-});
-document.getElementById('context_menu-paste').addEventListener('click', async () => {
-    try {
-        const text = await navigator.clipboard.readText();
-        insertTextAtCursor(text);
-    } catch (err) {
-        console.error('Ошибка при вставке текста: ', err);
-    }
-});
-
-document.getElementById('note_content').addEventListener('keydown', function (event) {
-    if ((event.key === 'b' || event.key === 'B') && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        performAction('bold');
-    } else if ((event.key === 'u' || event.key === 'U') && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        performAction('underline');
-    } else if ((event.key === 'i' || event.key === 'I') && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        performAction('italic');
-    }
-
-    if ((event.key === 'z' || event.key === 'Z') && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        undo();
-    } else if (((event.key === 'y' || event.key === 'Y') && (event.metaKey || event.ctrlKey)) || ((event.key === 'z' || event.key === 'Z') && (event.metaKey || event.ctrlKey) && (event.shiftKey))) {
-        event.preventDefault();
-        undo();
-    } else {
-        history.forward.length = [];
-        history.back.push(note_content.innerHTML);
-    }
-    
-    
-});
 
 title_obj.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {

@@ -95,3 +95,29 @@ document.getElementById('context_menu-paragraph').addEventListener('click', crea
 document.getElementById('context_menu-json').addEventListener('click', () => {
     convert_to_json();
 });
+
+document.getElementById('context_menu-bold').addEventListener('click', function () {
+    performAction('bold');
+});
+document.getElementById('context_menu-italic').addEventListener('click', function () {
+    performAction('italic');
+});
+document.getElementById('context_menu-underline').addEventListener('click', function () {
+    performAction('underline');
+});
+document.getElementById('context_menu-undo').addEventListener('click', function () {
+    undo();
+    //text_obj.focus();
+});
+document.getElementById('context_menu-redo').addEventListener('click', function () {
+    redo();
+    //text_obj.focus();
+});
+document.getElementById('context_menu-paste').addEventListener('click', async () => {
+    try {
+        const text = await navigator.clipboard.readText();
+        insertTextAtCursor(text);
+    } catch (err) {
+        console.error('Ошибка при вставке текста: ', err);
+    }
+});

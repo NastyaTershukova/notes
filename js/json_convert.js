@@ -89,6 +89,8 @@ function createImage(doFocus, content) {
     if (doFocus != false) {
         img_obj.focus();
         img_obj.scrollIntoView(false);
+
+        pushToHistory();
     }
 
     img_obj.addEventListener('contextmenu', (event) => {
@@ -128,13 +130,15 @@ function createParagraph(doFocus, content) {
     if (doFocus != false) {
         par_obj.focus();
         par_obj.scrollIntoView(false);
+
+        pushToHistory();
     }
 
     par_obj.addEventListener("paste", function(e) {
         e.preventDefault();
         var text = (e.originalEvent || e).clipboardData.getData('text/plain');
         console.log(text);
-        document.execCommand("insertHTML", false, text);
+        document.execCommand("insertText", false, text);
     });
 
     par_obj.addEventListener('contextmenu', (event) => {
@@ -152,7 +156,7 @@ function createParagraph(doFocus, content) {
         let text_length = getParagraphLength(obj);
         //console.log(`Длина текста: ${text_length}`);
 
-        if (event.key === 'Enter' && !event.shiftKey) {
+        if (event.key === 'Enter' && !event.shiftKey && text_length > 0) {
             event.preventDefault();
             createParagraph();
         } else if (event.key === 'Backspace' && text_length == 0) {
