@@ -7,6 +7,7 @@
     <title>Notes</title>
     <link rel="shortcut icon" href="img/browser_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/spinner.css">
     <link rel="stylesheet" href="css/media.css">
     <script src="https://unpkg.com/phosphor-icons"></script>
 </head>
@@ -89,6 +90,12 @@
                     </div>
                 <div class="line_main"></div>
                 <div class="second_part_screen">
+
+                    <div id="loading_note">
+                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        <p>Загрузка заметки...</p>
+                    </div>
+
                     <div class="written_note">
 
                         <p id="note_content-date">16 февраля 2024 г. в 20:00</p>
@@ -107,6 +114,8 @@
                         </div>
 
                     </div>
+
+                    
                 </div>
             </div>
         </div>
