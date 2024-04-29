@@ -79,6 +79,10 @@ function createImage(doFocus, content) {
         obj.src = content;
     }
 
+    if (doFocus != false) {
+        pushToHistory();
+    }
+
     note_content.appendChild(obj);
 
     let img_obj = document.getElementById(`image${image_num}`);
@@ -87,8 +91,6 @@ function createImage(doFocus, content) {
         setNoteChanged();
         img_obj.focus();
         img_obj.scrollIntoView(false);
-
-        pushToHistory();
     }
 
     addEventsToImg(img_obj);
@@ -106,6 +108,10 @@ function createParagraph(doFocus, content) {
         obj.innerHTML = content;
     }
 
+    if (doFocus != false) {
+        pushToHistory();
+    }
+
     note_content.appendChild(obj);
 
     let par_obj = document.getElementById(`paragraph${text_num}`);
@@ -113,8 +119,6 @@ function createParagraph(doFocus, content) {
         setNoteChanged();
         par_obj.focus();
         par_obj.scrollIntoView(false);
-
-        pushToHistory();
     }
 
     addEventsToText(par_obj);
@@ -146,9 +150,8 @@ function addEventsToImg(obj) {
             if (prev_obj.tagName == "P") {
                 setCursorAtPosition(prev_obj, getParagraphLength(prev_obj));
             }
-            obj.remove();
-
             pushToHistory();
+            obj.remove();
         } else if (event.key === 'Enter') {
             event.preventDefault();
             createParagraph();
@@ -208,9 +211,10 @@ function addEventsToText(obj) {
             }
 
             if (previous_element >= 0) {
+                pushToHistory();
                 note_content.children[previous_element].focus();
                 obj.remove();
-                pushToHistory();
+                
             }   
         }
     });

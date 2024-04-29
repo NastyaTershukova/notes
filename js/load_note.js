@@ -10,6 +10,8 @@ function load_note(id) {
     convert_from_json(JSON.parse(note_string));
 
     add_context_menus();
+    eraseHistory();
+    pushToHistory();
 
     setTimeout(() => {
         hideLoadingScreen();

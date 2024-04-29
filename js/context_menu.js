@@ -121,3 +121,16 @@ document.getElementById('context_menu-paste').addEventListener('click', async ()
         console.error('Ошибка при вставке текста: ', err);
     }
 });
+
+document.getElementById('context_menu-remove_img').addEventListener('click', async () => {
+    pushToHistory();
+    let previous_element = -1;
+    for (let i=0; i<note_content.children.length; i++) {
+        if (note_content.children[i].id == currentFocus && i != 0) {
+            previous_element = i - 1;
+        }
+    }
+
+    document.getElementById(currentFocus).remove();
+    note_content.children[previous_element].focus();
+});
