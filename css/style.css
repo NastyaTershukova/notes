@@ -681,6 +681,8 @@ a {
     padding: 20px 32px 20px 32px;
 
     color: rgb(102, 102, 102);
+    display: flex;
+    flex-direction: column;
 
     background-color: #EFEFEF;
     cursor: pointer;
@@ -721,11 +723,27 @@ a {
 .note_text {
     font-size: 14px;
     margin-bottom: 6px;
+
+    width: 100%;
+    height: 32px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
+.note .bottom_row {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+.note .bottom_row i {
+    display: none;
+    height: 14px;
+}
 .note_time {
     font-size: 12px;
-    text-align: right;
+    margin-left: auto;
 }
 
 .container_notes {

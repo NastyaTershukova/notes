@@ -24,6 +24,7 @@ function undo() {
     }
     history.forward.push(note_content.innerHTML);
     note_content.innerHTML = history.back.pop();
+    setNoteChanged();
 
     fixElementEvents();
     document.getElementById(currentFocus).focus();
@@ -34,6 +35,7 @@ function redo() {
         return;
     } history.back.push(note_content.innerHTML);
     note_content.innerHTML = history.forward.pop();
+    setNoteChanged();
 
     fixElementEvents();
     document.getElementById(currentFocus).focus();
@@ -47,12 +49,15 @@ function handleKeydown(event) {
     if ((event.key === 'b' || event.key === 'B') && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         performAction('bold');
+        setNoteChanged();
     } else if ((event.key === 'u' || event.key === 'U') && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         performAction('underline');
+        setNoteChanged();
     } else if ((event.key === 'i' || event.key === 'I') && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         performAction('italic');
+        setNoteChanged();
     }
 
     if ((event.key === 'z' || event.key === 'Z') && (event.metaKey || event.ctrlKey)) {

@@ -22,18 +22,6 @@ function insertTextAtCursor(text) {
     }
 }
 
-function addPasteListeners(num) {
-    for (let i=0; i<note_content.children.length; i++) {
-        if (note_content.children[i].tagName == "P") {
-            note_content.children[i].addEventListener("paste", function(e) {
-                e.preventDefault();
-                var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-                document.execCommand("insertHTML", false, text);
-            });
-        }
-    }
-}
-
 title_obj.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -41,6 +29,7 @@ title_obj.addEventListener('keydown', (event) => {
     }
 });
 title_obj.addEventListener('input', () => {
+    setNoteChanged();
     let value = "Новая заметка";
 
     if (getParagraphLength(title_obj) > 0) {
@@ -53,6 +42,7 @@ title_obj.addEventListener('input', () => {
     document.querySelector(`#list_note${currentNote}`).children[0].innerText = value;
 });
 title_obj.addEventListener('paste', (event) => {
+    setNoteChanged();
     event.preventDefault();
 
     const text = (event.clipboardData || window.clipboardData).getData('text');

@@ -66,6 +66,7 @@ function convert_from_json(object) {
 }
 
 function createImage(doFocus, content) {
+
     let note_content = document.getElementById('note_content');
     let obj = document.createElement("img");
 
@@ -83,6 +84,7 @@ function createImage(doFocus, content) {
     let img_obj = document.getElementById(`image${image_num}`);
 
     if (doFocus != false) {
+        setNoteChanged();
         img_obj.focus();
         img_obj.scrollIntoView(false);
 
@@ -108,6 +110,7 @@ function createParagraph(doFocus, content) {
 
     let par_obj = document.getElementById(`paragraph${text_num}`);
     if (doFocus != false) {
+        setNoteChanged();
         par_obj.focus();
         par_obj.scrollIntoView(false);
 
@@ -126,6 +129,7 @@ function addEventsToImg(obj) {
     obj.addEventListener('keydown', (event) => {
 
         if (event.key === 'Backspace') {
+            setNoteChanged();
             event.preventDefault();
 
             let previous_element = -1;
@@ -160,6 +164,7 @@ function addEventsToText(obj) {
     });
     
     obj.addEventListener("paste", function(e) {
+        setNoteChanged();
         e.preventDefault();
         var text = (e.originalEvent || e).clipboardData.getData('text/plain');
         console.log(text);
@@ -168,6 +173,9 @@ function addEventsToText(obj) {
 
     obj.addEventListener('contextmenu', (event) => {
         summon_context_menu(event, "P")
+    });
+    obj.addEventListener('input', () => {
+        setNoteChanged();
     });
     obj.addEventListener('keydown', (event) => {
         let text_num = get_object_count("P") - 1;
@@ -184,9 +192,11 @@ function addEventsToText(obj) {
         //console.log(`Длина текста: ${text_length}`);
 
         if (event.key === 'Enter' && !event.shiftKey && text_length > 0) {
+            setNoteChanged();
             event.preventDefault();
             createParagraph();
         } else if (event.key === 'Backspace' && text_length == 0) {
+            setNoteChanged();
             event.preventDefault();
             console.log(text_length);
 
