@@ -40,6 +40,10 @@ function loadNotesList() {
         card.id = `list_note${i}`;
         card.setAttribute("onclick", `openNote(${i})`);
 
+        card.addEventListener('contextmenu', (event, i) => {
+            summon_context_menu(event, "list", i)
+        });
+
         list.appendChild(card);
     }
 }

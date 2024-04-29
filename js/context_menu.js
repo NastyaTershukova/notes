@@ -34,7 +34,7 @@ function getParagraphLength(obj) {
 }
 
 function context_tab(name) {
-    let tabs = ['sec', 'menu', 'basic', 'img'];
+    let tabs = ['sec', 'menu', 'basic', 'img', 'list'];
 
     for (let i=0;i<tabs.length;i++) {
         document.getElementById(`context-${tabs[i]}`).style.display = 'none';
@@ -52,14 +52,20 @@ function context_tab(name) {
         case "menu":
             document.getElementById(`context-menu`).style.display = 'block';
             break;
+        case "list":
+            document.getElementById(`context-list`).style.display = 'block';
+            break;
     }
 }
 
-function summon_context_menu(event, tagName) {
+var contextMenuData = -1;
+function summon_context_menu(event, tagName, data) {
+    contextMenuData = data;
     contextmenu_click(event);
     context_tab(tagName);
     document.addEventListener('click', () => {
         context_menu.classList.add("hidden");
+        contextMenuData = -1;
     }, { once: true });
 } 
 

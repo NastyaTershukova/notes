@@ -1514,8 +1514,9 @@ a {
 #context_menu.hidden {
     pointer-events: none;
     opacity: 0;
+    transition-duration: .1s;
 }
-#context_menu button {
+#context_menu button:not(.tag) {
     border-radius: 5px;
     padding: 5px 12px;
 
@@ -1531,15 +1532,16 @@ a {
 }
 #context_menu button.red {
     color: #ba000d;
+    font-weight: bold;
 }
 #context_menu i {
     font-size: 14px;
 }
-#context_menu button:hover, #context_menu button:focus {
+#context_menu button:not(.tag):hover, #context_menu button:not(.tag):focus {
     background-color: #020082;
     color: white;
 }
-#context_menu button.red:hover, #context_menu button.red:focus {
+#context_menu button.red:not(.tag):hover, #context_menu button.red:not(.tag):focus {
     background-color: #ba000d;
     color: white;
 }
@@ -1561,3 +1563,48 @@ a {
     color: inherit;
 }
 
+.tags {
+    padding: 6px 12px 10px 12px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+.tags i {
+    margin-right: 8px;
+}
+.tag {
+    background: none;
+    cursor: pointer;
+    padding: 0 4px;
+}
+.tag div {
+    border-radius: 100%;
+    width: 16px;
+    height: 16px;
+    border: 0.75px solid var(--border);
+    background-color: var(--color);
+}
+.tag:hover div, .tag:focus div {
+    transform: scale(1.4);
+}
+.tag.red {
+    --color: #e11d48;
+    --border: #9f1239;
+}
+.tag.orange {
+    --color: #f97316;
+    --border: #c2410c;
+}
+.tag.yellow {
+    --color: #facc15;
+    --border: #ca8a04;
+}
+.tag.green {
+    --color: #16a34a;
+    --border: #166534;
+}
+.tag.blue {
+    --color: #2563eb;
+    --border: #1e40af;
+}
