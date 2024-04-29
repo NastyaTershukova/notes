@@ -72,6 +72,8 @@ function fixElementEvents() {
     for (let i in note_content.children) {
         if (note_content.children[i].tagName == "P") {
             addEventsToText(note_content.children[i]);
+        } else if (note_content.children[i].tagName == "IMG") {
+            addEventsToImg(note_content.children[i]);
         }
     }
 }
