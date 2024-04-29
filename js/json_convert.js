@@ -43,9 +43,12 @@ function convert_to_json() {
 }
 
 function convert_from_json(object) {
-    let note = document.getElementById('note_content');
+    let note_content = document.getElementById('note_content');
 
     document.getElementById('note_content-title').innerText = object.title;
+    if (getParagraphLength(document.getElementById('note_content-title')) > 0) {
+        document.getElementById('note_content-title_placeholder').style.display = "none";
+    }
     document.getElementById('note_content-date').innerText = `${object.date}г в ${object.time}`;
     for (let i in object.content) {
         switch (object.content[i].type) {
@@ -63,6 +66,7 @@ function convert_from_json(object) {
 }
 
 function createImage(doFocus, content) {
+    let note_content = document.getElementById('note_content');
     let obj = document.createElement("img");
 
     let image_num = get_object_count("IMG");
@@ -89,6 +93,7 @@ function createImage(doFocus, content) {
 }
 
 function createParagraph(doFocus, content) {
+    let note_content = document.getElementById('note_content');
     let obj = document.createElement("p");
 
     let text_num = get_object_count("P");

@@ -692,6 +692,11 @@ a {
     font-size: 20px;
     margin-bottom: 4px;
     color: #000;
+    text-wrap: nowrap;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .note.selected .note_title {
@@ -772,7 +777,12 @@ a {
     display: flex;
 }
 
-#note_content-title {
+.note_and_placeholder {
+    display: flex;
+    flex-direction: column;
+}
+
+#note_content-title, #note_content-title_placeholder {
     font-weight: 500;
     font-size: 32px;
     color: #000;
@@ -785,6 +795,12 @@ a {
 
     padding-bottom: 16px;
 }
+
+#note_content-title_placeholder {
+    color: gray;
+    margin-bottom: -54px;
+}
+
 #note_content p {
     width: calc(100% + 6px);
     padding: 8px 0 8px 4px;

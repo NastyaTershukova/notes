@@ -1,3 +1,4 @@
+var currentNote = -1;
 function openNote(id) {
 
     let note_num = document.getElementsByClassName("note").length;
@@ -6,6 +7,11 @@ function openNote(id) {
     }
 
     document.getElementsByClassName("note")[id].classList.add("selected");
+
+    currentNote = id;
+    console.log(`openNote ${currentNote}`);
+
+    load_note(id);
 }
 
 function loadNotesList() {

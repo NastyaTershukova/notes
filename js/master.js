@@ -40,6 +40,18 @@ title_obj.addEventListener('keydown', (event) => {
         note_content.children[0].focus();
     }
 });
+title_obj.addEventListener('input', () => {
+    let value = "Новая заметка";
+
+    if (getParagraphLength(title_obj) > 0) {
+        value = title_obj.innerText;
+        document.getElementById('note_content-title_placeholder').style.display = "none";
+    } else {
+        document.getElementById('note_content-title_placeholder').style.display = "block";
+    }
+
+    document.querySelector(`#list_note${currentNote}`).children[0].innerText = value;
+});
 title_obj.addEventListener('paste', (event) => {
     event.preventDefault();
 
