@@ -68,3 +68,17 @@ document.getElementById('note_menu').addEventListener('click', function (event) 
 });
 
 load_note();
+
+document.getElementById('sorting').addEventListener('click', (event) => {
+    if (!context_menu.classList.contains('hidden')) {
+        context_menu.classList.add("hidden");
+    } else {
+        contextmenu_click(event, undefined, 64);
+        context_tab('sort')
+        setTimeout(() => {
+            document.addEventListener('click', () => {
+                context_menu.classList.add("hidden");
+            }, { once: true });
+        }, 1);
+    }
+});

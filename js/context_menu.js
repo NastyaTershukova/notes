@@ -34,7 +34,7 @@ function getParagraphLength(obj) {
 }
 
 function context_tab(name) {
-    let tabs = ['sec', 'menu', 'basic', 'img', 'list'];
+    let tabs = ['sec', 'menu', 'basic', 'img', 'list', 'sort'];
 
     for (let i=0;i<tabs.length;i++) {
         document.getElementById(`context-${tabs[i]}`).style.display = 'none';
@@ -55,6 +55,9 @@ function context_tab(name) {
         case "list":
             document.getElementById(`context-list`).style.display = 'block';
             break;
+        case "sort":
+            document.getElementById(`context-sort`).style.display = 'block';
+            break;
     }
 }
 
@@ -69,12 +72,15 @@ function summon_context_menu(event, tagName, data) {
     }, { once: true });
 } 
 
-function contextmenu_click(event) {
+function contextmenu_click(event, xx, yy) {
     event.preventDefault();
     let context_menu = document.getElementById("context_menu");
 
     let x = Math.min(event.pageX, window.innerWidth - 216);
     let y = Math.min(event.pageY - window.scrollY, window.innerHeight - context_menu.clientHeight - 16);
+
+    if (xx != undefined) { x = xx; }
+    if (yy != undefined) { y = yy; }
 
     context_menu.style.top = `${y}px`;
     context_menu.style.left = `${x}px`;
@@ -128,7 +134,7 @@ document.getElementById('context_menu-paste').addEventListener('click', async ()
     }
 });
 
-document.getElementById('context_menu-remove_img').addEventListener('click', async () => {
+document.getElementById('context_menu-remove_img').addEventListener('click', () => {
     pushToHistory();
     let previous_element = -1;
     for (let i=0; i<note_content.children.length; i++) {

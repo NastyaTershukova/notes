@@ -69,7 +69,7 @@
                     <input type="text" placeholder="Поиск">
                 </div>
     
-                <button class="sorting">
+                <button id="sorting">
                     <i class="ph-sort-ascending"></i>
                 </button>
             </div>
@@ -184,11 +184,15 @@
                 <button id="context_menu-underline"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M208 32H48a16 16 0 0 0-16 16v160a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16M80 72a8 8 0 0 1 16 0v48a32 32 0 0 0 64 0V72a8 8 0 0 1 16 0v48a48 48 0 0 1-96 0Zm96 128H80a8 8 0 0 1 0-16h96a8 8 0 0 1 0 16"/></svg></button>
             </div>
 
+            <hr>
+
             <div class="top_row">
                 <button id="context_menu-image"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM156,88a12,12,0,1,1-12,12A12,12,0,0,1,156,88Zm60,112H40V160.69l46.34-46.35a8,8,0,0,1,11.32,0h0L165,181.66a8,8,0,0,0,11.32-11.32l-17.66-17.65L173,138.34a8,8,0,0,1,11.31,0L216,170.07V200Z"></path></svg></button>
                 <button id="context_menu-paragraph"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM193.66,169.66l-8,8a9,9,0,0,0,0,12.68l4,4a8,8,0,0,1-11.32,11.32l-4-4a25,25,0,0,1,0-35.32l8-8a9,9,0,0,0,0-12.68,9,9,0,0,0-12.68,0l-48,48a25,25,0,0,1-35.32-35.32l72-72a9,9,0,0,0,0-12.68,9,9,0,0,0-12.68,0l-48,48A25,25,0,0,1,62.34,86.34l28-28a8,8,0,0,1,11.32,11.32l-28,28a9,9,0,0,0,0,12.68,9,9,0,0,0,12.68,0l48-48a25,25,0,0,1,35.32,35.32l-72,72a9,9,0,0,0,0,12.68,9,9,0,0,0,12.68,0l48-48a25,25,0,0,1,35.32,35.32Z"></path></svg></button>
                 <button id="context_menu-code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM92.8,145.6a8,8,0,1,1-9.6,12.8l-32-24a8,8,0,0,1,0-12.8l32-24a8,8,0,0,1,9.6,12.8L69.33,128Zm58.89-71.4-32,112a8,8,0,1,1-15.38-4.4l32-112a8,8,0,0,1,15.38,4.4Zm53.11,60.2-32,24a8,8,0,0,1-9.6-12.8L186.67,128,163.2,110.4a8,8,0,1,1,9.6-12.8l32,24a8,8,0,0,1,0,12.8Z"></path></svg></button>
             </div>
+
+            <hr>
         </div>
 
         <div id="context-img">
@@ -197,6 +201,8 @@
                 <button id="context_menu-smaller"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM184,136H72a8,8,0,0,1,0-16H184a8,8,0,0,1,0,16Z"></path></svg></button>
                 <button id="context_menu-bigger"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM184,136H136v48a8,8,0,0,1-16,0V136H72a8,8,0,0,1,0-16h48V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"></path></svg></button>
             </div>
+
+            <hr>
 
             <button id="context_menu-upload_img"><i class="ph-file-image-bold"></i> Изменить фотографию...</button>
             <button id="context_menu-remove_img" class="red"><i class="ph-backspace-bold"></i> Удалить изображение</button>
@@ -225,7 +231,33 @@
                 <button class="tag blue"> <div></div> </button>
             </div>
 
+            <hr>
+
             <button id="context_menu-list_delete" class="red"><i class="ph-trash-simple-bold"></i> Удалить заметку</button>
+        </div>
+
+        <div id="context-sort">
+            <button id="context_menu-sort_date_edited"><i class="ph-check-bold"></i> По дате изменения</button>
+            <button id="context_menu-sort_date_added"><i></i> По дате добавления</button>
+            <button id="context_menu-sort_title"><i></i> По заголовку</button>
+            <hr>
+            <button id="context_menu-pin"><i class="ph-check-bold"></i> Сначала новые</button>
+            <button id="context_menu-pin"><i></i> Сначала старые</button>
+
+            <hr>
+
+            <div class="tags">
+                <i class="ph-tag-bold"></i>
+                <button class="tag red"> <div></div> </button>
+                <button class="tag orange"> <div></div> </button>
+                <button class="tag yellow"> <div></div> </button>
+                <button class="tag green"> <div></div> </button>
+                <button class="tag blue"> <div></div> </button>
+            </div>
+
+            <hr>
+
+            <button id="context_menu-list_delete" class="red"><i class="ph-sparkle-bold"></i> Сбросить</button>
         </div>
         
         <div id="context-menu">
