@@ -152,3 +152,18 @@ document.getElementById('context_menu-sort_ascending').addEventListener('click',
 document.getElementById('context_menu-sort_descending').addEventListener('click', () => {
     sortDescending();
 });
+document.getElementById('context_menu-sort_date_edited').addEventListener('click', () => {
+    sortTimeEdited();
+});
+document.getElementById('context_menu-sort_date_added').addEventListener('click', () => {
+    sortTimeAdded();
+});
+document.getElementById('context_menu-sort_title').addEventListener('click', () => {
+    sortTitle();
+});
+document.getElementById('context_menu-sort_reset').addEventListener('click', () => {
+    sortAscending();
+    sortTimeEdited();
+    color_tags = [];
+    checkSortTags();
+});

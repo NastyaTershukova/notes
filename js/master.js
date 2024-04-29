@@ -69,16 +69,33 @@ document.getElementById('note_menu').addEventListener('click', function (event) 
 
 load_note();
 
+var clickedOnTagSort = false;
 document.getElementById('sorting').addEventListener('click', (event) => {
     if (!context_menu.classList.contains('hidden')) {
         context_menu.classList.add("hidden");
+        clickedOnTagSort = false;
     } else {
         contextmenu_click(event, undefined, 64);
         context_tab('sort')
         setTimeout(() => {
-            document.addEventListener('click', () => {
-                context_menu.classList.add("hidden");
-            }, { once: true });
+            eventSortingExit();
         }, 1);
     }
 });
+
+eventsSortTags();
+
+function eventSortingExit() {
+    document.addEventListener('click', () => {
+        if (!clickedOnTagSort) {
+            context_menu.classList.add("hidden");
+            clickedOnTagSort = false;
+        } else {
+            setTimeout(() => {
+                eventSortingExit();
+                clickedOnTagSort = false;
+            }, 1);
+        }
+        
+    }, { once: true });
+}
