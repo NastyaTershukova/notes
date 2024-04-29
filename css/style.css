@@ -39,10 +39,19 @@
     --tenstore_circle: var(--tenstore_accent_light);
   }
 
+  ::-moz-selection {
+    background: rgba(4, 2, 156,0.2);
+  }
+  
+  ::selection {
+    background: rgba(4, 2, 156,0.2);
+  }
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    caret-color: rgba(4, 2, 156,1);
 }
 
 button {
