@@ -55,6 +55,7 @@ function setNoteChanged() {
     isNoteSynced = false;
     document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-bold"></i> Синхронизировать`;
     document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "block";
+    document.getElementById('note_content-date').innerText = note_date + ` • Изменено`;
 
     let first_paragraph = "[Пустая заметка]";
 
@@ -65,12 +66,23 @@ function setNoteChanged() {
         }
     }
     document.querySelector(`#list_note${currentNote}`).children[1].innerText = first_paragraph;
+    handleNewParagraph();
+    
+}
+
+function handleNewParagraph() {
+    if (note_content.children[note_content.children.length - 1].tagName != "P") {
+        document.getElementById('new_paragraph').classList = 'show';
+    } else {
+        document.getElementById('new_paragraph').classList = 'hide';
+    }
 }
 
 function syncNote() {
     isNoteChanged = false;
     isNoteSynced = true;
     document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
+    document.getElementById('note_content-date').innerText = note_date;
     document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "none";
 }
 document.querySelector('#context_menu-save').addEventListener('click', () => {

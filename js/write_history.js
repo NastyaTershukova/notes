@@ -36,6 +36,7 @@ function undo() {
 
     fixElementEvents();
     document.getElementById(currentFocus).focus();
+    handleNewParagraph();
 }
 
 function redo() {
@@ -47,6 +48,7 @@ function redo() {
 
     fixElementEvents();
     document.getElementById(currentFocus).focus();
+    handleNewParagraph();
 }
 
 document.addEventListener('keydown', function (event) {

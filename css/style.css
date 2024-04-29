@@ -3,29 +3,20 @@
 :root {
     --list_width: 27vw;
 }
-  [dark-theme='true'] {
-    --bg: black;
-    --bg_absolute: #171717;
-    --bg_userblock: #0f0f0f;
-    --bg_blocks_nav: rgba(25, 25, 25, 0.7);
-    --bg_popup: rgba(20, 20, 20, 0.9);
-    --bg_hover: rgba(255, 255, 255, 0.08);
-    --text_color: white;
-    --gray_lightest: #1c1c1c;
-    --gray_light: #404040;
-    --gray_darken: #919191;
-    --bg_nav: rgba(16, 16, 16, 0.88);
-    --transparency_hover_light: 0.1;
-    --tenstore_circle: var(--tenstore_accent_light);
-  }
+[dark-theme='true'] {
+    
+}
+[nav_bar_shown='true'] {
+    --list_width: 20vw;
+}
 
-  ::-moz-selection {
+::-moz-selection {
     background: rgba(4, 2, 156,0.2);
-  }
+}
   
-  ::selection {
+::selection {
     background: rgba(4, 2, 156,0.2);
-  }
+}
 
 * {
     box-sizing: border-box;
@@ -437,6 +428,9 @@ a {
     height: 56px;
     gap: 4px;
     width: var(--list_width);
+    min-width: 320px;
+
+    transition: .2s width;
     
     margin-left: 24px;
 }
@@ -648,6 +642,8 @@ a {
 
 .note {
     width: var(--list_width);
+    min-width: 320px;
+
     height: 120px;
     border-radius: 24px;
     padding: 20px 32px 20px 32px;
@@ -658,7 +654,7 @@ a {
 
     background-color: #EFEFEF;
     cursor: pointer;
-    transition: .3s ease-out background-color;
+    transition: .3s ease-out background-color, .2s width;
 }
 .note:hover {
     background-color: #dbdbdb;
@@ -800,7 +796,7 @@ a {
     margin-bottom: -54px;
 }
 
-#note_content p {
+#note_content p, #new_paragraph {
     width: calc(100% + 6px);
     padding: 8px 0 8px 4px;
     margin: 0 0 0 -6px;
@@ -829,10 +825,27 @@ a {
     padding-left: 4px;
 }
 
+#new_paragraph {
+    background: none;
+    color: rgba(0,0,0,0.25);
+    cursor: pointer;
+    
+    transition: .3s opacity ease-in;
+}
+#new_paragraph.show {
+    opacity: 1;
+}
+#new_paragraph.hide {
+    opacity: 0;
+}
+#new_paragraph:focus, #new_paragraph:hover {
+    text-decoration: underline;
+}
+
 #note_content img {
     border-radius: 4px;
     max-height: 320px;
-    margin: 0 auto;
+    margin: 8px auto;
     display: block;
 }
 #note_content img:focus {
@@ -1304,9 +1317,10 @@ a {
     flex-direction: column;
     transition: width .2s ease-in-out;
     overflow-x: clip;
+    flex-shrink: 0;
   }
   .ui-side_nav.opened {
-    width: 295px;
+    width: 270px;
   }
   .ui-side_nav.opened > button {
     margin: 8px 0 0 8px;
@@ -1346,6 +1360,8 @@ a {
     transition: .25s;
     margin: 8px auto 0 auto;
     border-radius: 12px;
+
+    flex-shrink: 0;
 
     cursor: pointer;
   }
@@ -1435,8 +1451,8 @@ a {
     width: calc(100% - 50px);
   }
   .page_width {
-    width: calc(100% - 303px);
-    margin-left: 270px;
+    width: calc(100% - 260px);
+    margin-left: 250px;
   }
   #note_menu {
     background: none;

@@ -127,6 +127,7 @@ document.getElementById('context_menu-redo').addEventListener('click', function 
 });
 document.getElementById('context_menu-paste').addEventListener('click', async () => {
     try {
+        setNoteChanged();
         const text = await navigator.clipboard.readText();
         insertTextAtCursor(text);
     } catch (err) {
@@ -145,6 +146,8 @@ document.getElementById('context_menu-remove_img').addEventListener('click', () 
 
     document.getElementById(currentFocus).remove();
     note_content.children[previous_element].focus();
+
+    handleNewParagraph();
 });
 document.getElementById('context_menu-sort_ascending').addEventListener('click', () => {
     sortAscending();

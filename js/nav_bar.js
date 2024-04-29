@@ -4,7 +4,12 @@ function toggle_navbar() {
   nav_bar.classList.toggle('opened');
   document.getElementsByClassName('container_notes')[0].classList.toggle('navbar_opened');
   document.getElementsByTagName('body')[0].classList.toggle('page_width');
-
+  if (nav_bar.classList.contains('opened')) {
+    document.documentElement.setAttribute('nav_bar_shown', 'true');
+  } else {
+    document.documentElement.setAttribute('nav_bar_shown', 'false');
+  }
+  
 }
 
 function tab(tab) {
