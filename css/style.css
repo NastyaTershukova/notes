@@ -664,14 +664,7 @@ a {
     border-right: 2px solid #E8E8E8;
     padding-right: 32px;
     margin-left: 24px;
-    /* max-height: 540px;
-    overflow-y: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none; */
 }
-/* .list_notes::-webkit-scrollbar {
-    display: none;
-} */
 
 
 .note {

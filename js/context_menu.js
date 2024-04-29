@@ -146,3 +146,9 @@ document.getElementById('context_menu-remove_img').addEventListener('click', () 
     document.getElementById(currentFocus).remove();
     note_content.children[previous_element].focus();
 });
+document.getElementById('context_menu-sort_ascending').addEventListener('click', () => {
+    sortAscending();
+});
+document.getElementById('context_menu-sort_descending').addEventListener('click', () => {
+    sortDescending();
+});
