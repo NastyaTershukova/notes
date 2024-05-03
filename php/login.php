@@ -1,5 +1,5 @@
 <?php
-
+    include "session.php";
     function login($email, $pass) {
         $salt = "ecbccdjcn3474";
         $hashed_password = hash('sha256', $pass . $salt);
@@ -25,6 +25,7 @@
         
         $user = $result->fetch_assoc();
         $token = bin2hex(random_bytes(16));
+        $refresh_token = bin2hex(random_bytes(16));
 
         if ($user === null) {
             echo "error_user_not_found";
@@ -33,15 +34,14 @@
 
         $user = (string) $user['id'];
         
-        $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date) VALUES (?, ?, FROM_UNIXTIME(?))");
+        $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date, refresh_token) VALUES (?, ?, FROM_UNIXTIME(?), ?)");
         
         if ($token_result === false) {
             die("MySQL prepare error: " . $mysqli->error);
         }
         
-        // Привязываем параметры для маркера
-        $time = time() + (86400 * 180);
-        $token_result->bind_param("sis", $token, $user, $time);
+        $time = time() + 1800; //30 минут для обычного токена
+        $token_result->bind_param("siss", $token, $user, $time, $refresh_token);
         
         // Выполнение подготовленного запроса
         if ($token_result->execute()) {
@@ -53,8 +53,18 @@
         // Закрытие выражения
         $token_result->close();
 
-        setcookie('token', $token, time() + (86400 * 180), '/');
+        $refresh_key = 'fsqA1!fmsd-2OW94msdfA012gmkWQ)$f,sdf';
+
+        session_set_cookie_params(86400 * 180);
+        ini_set('session.gc_maxlifetime', 86400 * 180);
+        session_start();
+        $_SESSION['refresh_token'] = encryptToken($refresh_token, $refresh_key);
+        $_SESSION['user_id'] = $user;
+
+        setcookie('token', $token, time() + 1800, '/');
         setcookie('is_authorised', 'true', time() + (86400 * 180), '/');
+
+
         
         $mysql->close();
 

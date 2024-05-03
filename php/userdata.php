@@ -1,7 +1,13 @@
 <?php
 
 include "checktoken.php";
+include "session.php";
 
+if (!isset($_COOKIE['token'])) {
+    refreshToken();
+    echo "token_reloaded";
+    exit;
+}
 $token = $_COOKIE['token'];
 
 $id = checkToken($token);
