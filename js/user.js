@@ -19,15 +19,12 @@ function getCookie(name) {
 }
 
 function login() {
+    // Получение основной информации о пользователе
     let xhr = new XMLHttpRequest();
-
-    let requestData = {
-        email: email,
-        pass: pass
-    };
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
+        console.log(xhr.responseText);
         let responseData = JSON.parse(xhr.responseText);
         console.log(responseData);
 
@@ -36,9 +33,9 @@ function login() {
     }
     };
 
-    let url = 'php/login.php';
-    xhr.open('POST', url);
+    let url = 'php/userdata.php';
+    xhr.open('GET', url);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.send(JSON.stringify(requestData));
+    xhr.send();
 }
