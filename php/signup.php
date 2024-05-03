@@ -1,4 +1,5 @@
 <?php
+include "login.php";
 
 function generateRandomString($length = 32) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -49,17 +50,33 @@ function encryptPassword($password, $key) {
 
 $contents_key = encryptPassword(generateRandomString(), $pass_raw);
 
+$name = 'Добавь Поле для имени';
+$lastname = 'Добавь Поле для фамилии';
+$picture = '/userpictures/devio.jpg';
+
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-echo $contents_key;
-$mysql->query("INSERT INTO `users` (`email`, `pass`, `contents_key`, `name`, `lastname`, `picture`)
-VALUES('$email', '$pass', '$contents_key', 'Добавь Поле для имени', 'Добавь Поле для фамилии', '/userpictures/devio.jpg')");
+$request = $mysql->prepare("INSERT INTO `users` (`email`, `pass`, `contents_key`, `name`, `lastname`, `picture`)
+VALUES(?, ?, ?, ?, ?, ?)");
+
+if ($request === false) {
+    die("MySQL prepare error: " . $mysqli->error);
+}
+$request->bind_param("ssssss", $email, $pass, $contents_key, $name, $lastname, $picture);
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();
 }
+if(!$request->execute()) {
+    echo "error_not_executable";
+    exit();
+}
+$result = $request->get_result();
 
-setcookie("user_id", $email, time() + (86400 * 180), "/");
-setcookie("password", $pass, time() + (86400 * 180), "/");
+$login_result = login($email, $pass_raw);
+echo $login_result;
+
+if ($login_result == "login_successful") {
+    header('Location: /');
+}
 
 $mysql->close();
-header('Location: /');
