@@ -51,23 +51,15 @@ $contents_key = encryptPassword(generateRandomString(), $pass_raw);
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 echo $contents_key;
-$mysql->query("INSERT INTO `users` (`email`, `pass`, `contents_key`)
-VALUES('$email', '$pass', '$contents_key')");
+$mysql->query("INSERT INTO `users` (`email`, `pass`, `contents_key`, `name`, `lastname`, `picture`)
+VALUES('$email', '$pass', '$contents_key', 'Добавь Поле для имени', 'Добавь Поле для фамилии', '/userpictures/devio.jpg')");
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();
 }
 
-session_start();
-$_SESSION['user_id'] = $email;
-$_SESSION['password'] = $pass;
+setcookie("user_id", $email, time() + (86400 * 180), "/");
+setcookie("password", $pass, time() + (86400 * 180), "/");
 
-setcookie(session_name(), session_id(), [
-  'expires' => time() + 15552000, // Куки действительны 180 дней
-  'path' => '/',
-  'secure' => true,
-  'httponly' => false, //для доступности куки с помощью JS
-  'samesite' => 'Lax'
-]);
 $mysql->close();
 header('Location: /');

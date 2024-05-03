@@ -104,3 +104,5 @@ document.querySelector('#new_paragraph').addEventListener('click', () => {
     note_content.children[note_content.children.length - 1].focus();
     createParagraph();
 });
+
+login();
