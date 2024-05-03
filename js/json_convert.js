@@ -84,7 +84,7 @@ function createImage(doFocus, content) {
 
     let image_num = get_object_count("IMG");
     obj.id = `image${image_num}`;
-    obj.src = `img/Cover.jpg`;
+    obj.src = `/img/Cover.jpg`;
     obj.tabIndex = "0";
     
     if (content != undefined) {
