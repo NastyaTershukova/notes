@@ -19,9 +19,6 @@ function getCookie(name) {
 }
 
 function login() {
-    let email = decodeURIComponent(getCookie('user_id'));
-    let pass = decodeURIComponent(getCookie('password'));
-
     let xhr = new XMLHttpRequest();
 
     let requestData = {
