@@ -22,19 +22,15 @@ if ($id == "error_not_executable") {
 }
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `contents`, `preview`)
-VALUES(?, ?, ?)");
+$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `contents`, `preview`, `time_edited`, `time_created`, `tags`)
+VALUES(?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?)");
 
 $data = array(
-    'title' => '',
-    'time' => time(),
-    'date' => 0,
-    'content' => []
+    'content' => [],
 );
 $preview = array(
     'title' => '',
-    'time' => time(),
-    'text' => ''
+    'text' => '',
 );
 
 // Преобразование массива в строку JSON
@@ -50,7 +46,9 @@ $encryptedPreview = encryptNote($preview_encode, $contents_key);
 if ($request === false) {
     die("MySQL prepare error: " . $mysqli->error);
 }
-$request->bind_param("iss", $_SESSION['user_id'], $encryptedNote, $encryptedPreview);
+$tags = json_encode([]);
+$cur_time = time();
+$request->bind_param("issiis", $_SESSION['user_id'], $encryptedNote, $encryptedPreview, $cur_time, $cur_time, $tags);
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();

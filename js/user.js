@@ -27,7 +27,6 @@ function login() {
 
         xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
-            console.log(xhr.responseText);
             if (xhr.responseText == "token_reloaded") {
                 setTimeout(() => {
                     login();
@@ -36,7 +35,6 @@ function login() {
                 return;
             }
             let responseData = JSON.parse(xhr.responseText);
-            console.log(responseData);
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
             document.querySelector('#user_photo').src = responseData.picture;
 

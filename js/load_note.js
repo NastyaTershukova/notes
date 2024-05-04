@@ -5,18 +5,40 @@ function load_note(id) {
 
     let content = document.getElementById('note_content');
     content.innerHTML = '';
-    let note_string = '{"title":"Тестирование загрузки заметок из JSON","date":"16.01.2024","time":"10:11","content":[{"type":"paragraph","value":"Тут идет первый параграф..."},{"type":"image","value":"http://localhost:9000/img/Cover.jpg"},{"type":"paragraph","value":"Тут идет второй параграф..."},{"type":"paragraph","value":"Ну а тут третий. LOL Ha-Ha"}]}';
+    //let note_string = '{"title":"Тестирование загрузки заметок из JSON","date":"16.01.2024","time":"10:11","content":[{"type":"paragraph","value":"Тут идет первый параграф..."},{"type":"image","value":"http://localhost:9000/img/Cover.jpg"},{"type":"paragraph","value":"Тут идет второй параграф..."},{"type":"paragraph","value":"Ну а тут третий. LOL Ha-Ha"}]}';
 
-    convert_from_json(JSON.parse(note_string));
+    let xhr = new XMLHttpRequest();
 
-    add_context_menus();
-    eraseHistory();
-    pushToHistory();
+    xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        if (xhr.responseText == "token_reloaded") {
+            setTimeout(() => {
+                newNote();
+                console.log('Token is reloaded. Retry in 300ms...');
+            }, 300);
+            return;
+        }
+        let data = JSON.parse(xhr.responseText);
+        convert_from_json(data);
+        note_date = formatRelativeDate(data.date)
 
-    setTimeout(() => {
-        hideLoadingScreen();
-    }, 500);
-    document.getElementsByClassName('written_note')[0].style.display = "block";
+        add_context_menus();
+        eraseHistory();
+        pushToHistory();
+
+        setTimeout(() => {
+            hideLoadingScreen();
+        }, 500);
+        document.getElementsByClassName('written_note')[0].style.display = "block";
+    } else {
+        console.error('Request failed with status ', xhr.status);
+    }
+    };
+
+    let url = 'php/getnote.php';
+    xhr.open('POST', url);
+    xhr.send(`id=${id}`);
+
 }
 
 function hideLoadingScreen() {
@@ -114,8 +136,15 @@ function loadNotesList(selectNote) {
             return;
         }
 
-        let data = JSON.parse(xhr.responseText).map(item => JSON.parse(item));
-        console.log(data);
+        let data = JSON.parse(xhr.responseText).map(item => {
+            // item[0] - строка JSON, которую нужно разобрать
+            let note = JSON.parse(item[0]);
+            // Добавим даты создания и обновления как свойства объекта note
+            note.date_edited = item[1];
+            note.date_created = item[2];
+            return note;
+          });
+
         
         let list = document.getElementById('list_notes');
 
@@ -123,21 +152,23 @@ function loadNotesList(selectNote) {
 
         for (let i=0;i<data.length;i++) {
             let card = document.createElement("div");
-            let title = data[i].title;
+            let preview = data[i];
+            let title = preview.title;
             if (title == "") {
                 title = "Новая заметка";
             }
-            let text = data[i].text;
+            let text = preview.text;
             if (text == "") {
                 text = "[Пустая заметка]";
             }
+            let date = new Date(preview.date_edited);
 
             card.innerHTML = `
                 <p class="note_title">${title}</p>
                 <p class="note_text">${text}</p>
                 <div class="bottom_row">
                     <i id="list_notes${i}-edit_icon" class="ph-pencil-simple-line-bold"></i>
-                    <p class="note_time">${formatRelativeDate(data[i].time)}</p>
+                    <p id='list_notes${i}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
                 </div>
                 
             `;

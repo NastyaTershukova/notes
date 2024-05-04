@@ -64,6 +64,10 @@ function convert_from_json(object) {
                 console.error(`Произошла ошибка при загрузке элемента типа ${object.content[i].content_type}.`);
         }
     }
+
+    if (object.content.length == 0) {
+        createParagraph(false);
+    }
     
 }
 

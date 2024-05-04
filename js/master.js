@@ -1,6 +1,5 @@
 tab('home')
 //loadNotesList();
-openNote(0);
 
 let title_obj = document.getElementById('note_content-title');
 let note_content = document.getElementById('note_content');
@@ -66,8 +65,6 @@ document.getElementById('note_menu').addEventListener('click', function (event) 
         }, 1);
     }
 });
-
-load_note();
 
 var clickedOnTagSort = false;
 document.getElementById('sorting').addEventListener('click', (event) => {

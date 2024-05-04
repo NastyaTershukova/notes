@@ -27,6 +27,7 @@ function setNoteChanged() {
     isNoteSynced = false;
     document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-bold"></i> Синхронизировать`;
     document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "block";
+    document.querySelector(`#list_notes${currentNote}-edit_date`).innerText = "Сейчас";
     document.getElementById('note_content-date').innerText = note_date + ` • Изменено`;
 
     let first_paragraph = "[Пустая заметка]";
