@@ -25,7 +25,7 @@ $note_id = isset($_POST['id']) ? $_POST['id'] : null;
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("SELECT id, contents from `notes` WHERE owner = ? LIMIT ?, 1");
+$request = $mysql->prepare("SELECT id, contents, preview from `notes` WHERE owner = ? LIMIT ?, 1");
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);

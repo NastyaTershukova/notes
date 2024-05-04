@@ -139,9 +139,10 @@ function loadNotesList(selectNote) {
         let data = JSON.parse(xhr.responseText).map(item => {
             // item[0] - строка JSON, которую нужно разобрать
             let note = JSON.parse(item[0]);
-            // Добавим даты создания и обновления как свойства объекта note
+            // Добавим теги, даты создания и обновления как свойства объекта note
             note.date_edited = item[1];
             note.date_created = item[2];
+            note.tags = item[3];
             return note;
           });
 
