@@ -1,5 +1,5 @@
 tab('home')
-loadNotesList();
+//loadNotesList();
 openNote(0);
 
 let title_obj = document.getElementById('note_content-title');

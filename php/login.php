@@ -1,5 +1,6 @@
 <?php
     include "session.php";
+    include "note_encrypt.php";
     function login($email, $pass) {
         $salt = "ecbccdjcn3474";
         $hashed_password = hash('sha256', $pass . $salt);
@@ -8,7 +9,7 @@
         // $result = $mysql->query("SELECT `id` FROM `users` WHERE `email` = '$email' AND `pass` = '$hashed_password'");
         // $user = $result->fetch_assoc();
 
-        $result = $mysql->prepare("SELECT id FROM users WHERE email = (?) AND pass = (?)");
+        $result = $mysql->prepare("SELECT id, contents_key FROM users WHERE email = (?) AND pass = (?)");
         
         if ($result === false) {
             die("MySQL prepare error: " . $mysqli->error);
@@ -32,6 +33,7 @@
             exit();
         }
 
+        $contents_key = (string) $user['contents_key'];
         $user = (string) $user['id'];
         
         $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date, refresh_token, refresh_expiration_date) VALUES (?, ?, FROM_UNIXTIME(?), ?, FROM_UNIXTIME(?))");
@@ -55,12 +57,15 @@
         $token_result->close();
 
         $refresh_key = 'fsqA1!fmsd-2OW94msdfA012gmkWQ)$f,sdf';
+        $contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
 
         session_set_cookie_params(86400 * 180);
         ini_set('session.gc_maxlifetime', 86400 * 180);
         session_start();
         $_SESSION['refresh_token'] = encryptToken($refresh_token, $refresh_key);
         $_SESSION['user_id'] = $user;
+        $_SESSION['contents_key'] = encryptToken($contents_key, $contents_encrypt_key);
+
 
         setcookie('token', $token, time() + 1800, '/');
         setcookie('is_authorised', 'true', time() + (86400 * 180), '/');

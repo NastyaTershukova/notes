@@ -20,34 +20,6 @@ function openNote(id) {
     load_note(id);
 }
 
-function loadNotesList() {
-    let list = document.getElementById('list_notes');
-
-    list.innerHTML = "";
-
-    for (let i=0;i<6;i++) {
-        let card = document.createElement("div");
-        card.innerHTML = `
-            <p class="note_title">Очень крутой тайтл заметки.</p>
-            <p class="note_text">Это описание заметки. Fr? Чай не к чаю, а спех к чаю блинЭто описание заметки. Fr? Чай не к чаю, а спех к чаю блин...</p>
-            <div class="bottom_row">
-                <i id="list_notes${i}-edit_icon" class="ph-pencil-simple-line-bold"></i>
-                <p class="note_time">Вчера</p>
-            </div>
-            
-        `;
-        card.className = "note";
-        card.id = `list_note${i}`;
-        card.setAttribute("onclick", `openNote(${i})`);
-
-        card.addEventListener('contextmenu', (event, i) => {
-            summon_context_menu(event, "list", i)
-        });
-
-        list.appendChild(card);
-    }
-}
-
 function setNoteChanged() {
     let note_content = document.getElementById('note_content');
 

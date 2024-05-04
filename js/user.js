@@ -38,6 +38,9 @@ function login() {
             let responseData = JSON.parse(xhr.responseText);
             console.log(responseData);
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
+            document.querySelector('#user_photo').src = responseData.picture;
+
+            //loadNotesList();
 
         } else {
             console.error('Request failed with status ', xhr.status);

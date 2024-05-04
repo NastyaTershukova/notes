@@ -517,7 +517,7 @@ a {
     gap: 24px;
 }
 
-.user_photo {
+#user_photo {
     width: 40px;
     height: 40px;
     object-fit: cover;
