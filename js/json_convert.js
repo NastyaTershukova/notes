@@ -43,14 +43,20 @@ function convert_to_json() {
 }
 
 var note_date = 0;
-function convert_from_json(object) {
+function convert_from_json(data) {
     let note_content = document.getElementById('note_content');
 
-    document.getElementById('note_content-title').innerText = object.title;
+    let object = data[0];
+    let preview = data[1];
+    let date_edited = formatFullDate(data[2]);
+
+    note_date = formatRelativeDate(data.date);
+
+    document.getElementById('note_content-title').innerText = preview.title;
     if (getParagraphLength(document.getElementById('note_content-title')) > 0) {
         document.getElementById('note_content-title_placeholder').style.display = "none";
     }
-    note_date = `${object.date} г. в ${object.time}`;
+    note_date = date_edited;
     document.getElementById('note_content-date').innerText = note_date;
     for (let i in object.content) {
         switch (object.content[i].type) {
@@ -197,7 +203,6 @@ function addEventsToText(obj) {
     });
 
     obj.addEventListener('focusout', function() {
-        console.log('focusout');
         if (getParagraphLength(obj) == 0 && getElementOrder(obj) + 1 == note_content.children.length && getElementOrder(obj) > 0) {
             obj.remove();
         }

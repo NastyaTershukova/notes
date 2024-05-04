@@ -22,6 +22,9 @@ if ($id == "error_not_executable") {
 }
 
 $note_id = $_POST['id'];
+$note_contents = $_POST['contents'];
+$note_preview = $_POST['preview'];
+$note_tags = $_POST['tags'];
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');

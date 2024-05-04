@@ -1,3 +1,17 @@
+function formatFullDate(dateString) {
+    const date = new Date(dateString);
+    
+    const day = date.toLocaleString('ru-RU', { day: 'numeric' });
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    const month = months[date.getMonth()];
+    const year = date.toLocaleString('ru-RU', { year: 'numeric' });
+    const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    // Формирование итоговой строки
+    return `${day} ${month} ${year}г. в ${hours}:${minutes}`;
+  }
+
 function load_note(id) {
 
     document.getElementById('loading_note').style.display = "flex";
@@ -5,8 +19,6 @@ function load_note(id) {
 
     let content = document.getElementById('note_content');
     content.innerHTML = '';
-    //let note_string = '{"title":"Тестирование загрузки заметок из JSON","date":"16.01.2024","time":"10:11","content":[{"type":"paragraph","value":"Тут идет первый параграф..."},{"type":"image","value":"http://localhost:9000/img/Cover.jpg"},{"type":"paragraph","value":"Тут идет второй параграф..."},{"type":"paragraph","value":"Ну а тут третий. LOL Ha-Ha"}]}';
-
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() {
@@ -18,17 +30,22 @@ function load_note(id) {
             }, 300);
             return;
         }
-        let data = JSON.parse(xhr.responseText);
+        console.log(xhr.responseText);
+        let data = JSON.parse(xhr.responseText).map(item => {
+            try {
+              return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
+            } catch (e) {
+              return item; // Если не получается, возвращаем исходный элемент
+            }
+          });
+        console.log(data);
         convert_from_json(data);
-        note_date = formatRelativeDate(data.date)
 
         add_context_menus();
         eraseHistory();
         pushToHistory();
 
-        setTimeout(() => {
-            hideLoadingScreen();
-        }, 500);
+        hideLoadingScreen();
         document.getElementsByClassName('written_note')[0].style.display = "block";
     } else {
         console.error('Request failed with status ', xhr.status);
@@ -37,6 +54,7 @@ function load_note(id) {
 
     let url = 'php/getnote.php';
     xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(`id=${id}`);
 
 }
@@ -144,7 +162,7 @@ function loadNotesList(selectNote) {
             note.date_created = item[2];
             note.tags = item[3];
             return note;
-          });
+        });
 
         
         let list = document.getElementById('list_notes');
