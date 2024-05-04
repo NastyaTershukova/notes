@@ -34,14 +34,15 @@
 
         $user = (string) $user['id'];
         
-        $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date, refresh_token) VALUES (?, ?, FROM_UNIXTIME(?), ?)");
+        $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date, refresh_token, refresh_expiration_date) VALUES (?, ?, FROM_UNIXTIME(?), ?, FROM_UNIXTIME(?))");
         
         if ($token_result === false) {
             die("MySQL prepare error: " . $mysqli->error);
         }
         
         $time = time() + 1800; //30 минут для обычного токена
-        $token_result->bind_param("siss", $token, $user, $time, $refresh_token);
+        $refresh_time = time() + (86400 * 180); //180 дней для refresh токена
+        $token_result->bind_param("sisss", $token, $user, $time, $refresh_token, $refresh_time);
         
         // Выполнение подготовленного запроса
         if ($token_result->execute()) {

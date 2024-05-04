@@ -16,7 +16,7 @@ function decryptToken($encryptedToken, $key) {
 }
 
 function checkRefreshToken($mysql, $userId, $refresh_token) {
-    $sql = "SELECT token, expiration_date FROM tokens WHERE refresh_token = ?";
+    $sql = "SELECT token, refresh_expiration_date FROM tokens WHERE refresh_token = ?";
     $req = $mysql->prepare($sql);
     $req->bind_param("s", $refresh_token);
     if(!$req->execute()) {
@@ -27,7 +27,7 @@ function checkRefreshToken($mysql, $userId, $refresh_token) {
 
     $tokenData = $req->get_result()->fetch_assoc();
 
-    if ($tokenData && new DateTime() < new DateTime($tokenData['expiration_date'])) {
+    if ($tokenData && new DateTime() < new DateTime($tokenData['refresh_expiration_date'])) {
         return true;
     }
     return false;
@@ -61,7 +61,6 @@ function refreshToken() {
         echo "error_not_executable";
         exit();
     }
-    
     setcookie('token', $new_token, time() + 1800, '/');
     setcookie('is_authorised', 'true', time() + (86400 * 180), '/');
 
