@@ -42,8 +42,10 @@ $json_string = json_encode($data);
 $preview_encode = json_encode($preview);
 
 session_start();
-$encryptedNote = encryptNote($json_string, $_SESSION['contents_key']);
-$encryptedPreview = encryptNote($preview_encode, $_SESSION['contents_key']);
+$contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
+$contents_key = decryptToken($_SESSION['contents_key'], $contents_encrypt_key);
+$encryptedNote = encryptNote($json_string, $contents_key);
+$encryptedPreview = encryptNote($preview_encode, $contents_key);
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysqli->error);

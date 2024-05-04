@@ -40,7 +40,7 @@ function newNote() {
             }, 300);
             return;
         }
-        //loadNotesList();
+        loadNotesList();
 
     } else {
         console.error('Request failed with status ', xhr.status);
@@ -53,12 +53,59 @@ function newNote() {
     xhr.send();
 }
 
-function loadNotesList() {
+function convertTimestamp(timestamp) {
+    const date = new Date(timestamp * 1000);
+    return date;
+}
+
+function pluralize(n, forms) {
+    return forms[(n % 10 === 1 && n % 100 !== 11) ? 0 : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? 1 : 2];
+}
+
+function formatRelativeDate(timestamp) {
+    const now = new Date();
+    const date = convertTimestamp(timestamp);
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+  
+    const diff = now - date; // Разница в миллисекундах
+    const diffMinutes = Math.round(diff / 60000); // Разница в минутах
+    const diffHours = Math.round(diff / 3600000); // Разница в часах
+  
+    if (diff < 60000) {
+      return "Только что";
+    } else if (diff < 3600000) {
+      return `${diffMinutes} ${pluralize(diffMinutes, ['минуту', 'минуты', 'минут'])} назад`;
+    } else if (diff < 86400000 && now.getDate() === date.getDate()) {
+      return `${diffHours} ${pluralize(diffHours, ['час', 'часа', 'часов'])} назад`;
+    } else if (yesterday.getDate() === date.getDate() &&
+               yesterday.getMonth() === date.getMonth() &&
+               yesterday.getFullYear() === date.getFullYear()) {
+      return "Вчера";
+    } else {
+      return formatDate(date, now.getFullYear());
+    }
+  }
+  
+  function formatDate(date, currentYear) {
+    const day = date.getDate();
+    const month = date.toLocaleString('ru-RU', { month: 'long' });
+    const year = date.getFullYear();
+    
+    if (year === currentYear) {
+      return `${day} ${month}`;
+    } else {
+      return `${day} ${month} ${year}г.`;
+    }
+  }
+  
+
+function loadNotesList(selectNote) {
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.responseText);
+        //console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             setTimeout(() => {
                 newNote();
@@ -67,19 +114,20 @@ function loadNotesList() {
             return;
         }
 
-        let data = JSON.parse(xhr.responseText);
+        let data = JSON.parse(xhr.responseText).map(item => JSON.parse(item));
+        console.log(data);
         
         let list = document.getElementById('list_notes');
 
         list.innerHTML = "";
 
-        for (let i=0;i<6;i++) {
+        for (let i=0;i<data.length;i++) {
             let card = document.createElement("div");
-            let title = data[i].preview.title;
+            let title = data[i].title;
             if (title == "") {
                 title = "Новая заметка";
             }
-            let text = data[i].preview.text;
+            let text = data[i].text;
             if (text == "") {
                 text = "[Пустая заметка]";
             }
@@ -89,7 +137,7 @@ function loadNotesList() {
                 <p class="note_text">${text}</p>
                 <div class="bottom_row">
                     <i id="list_notes${i}-edit_icon" class="ph-pencil-simple-line-bold"></i>
-                    <p class="note_time">${data[i].preview.time}</p>
+                    <p class="note_time">${formatRelativeDate(data[i].time)}</p>
                 </div>
                 
             `;
@@ -102,6 +150,10 @@ function loadNotesList() {
             });
 
             list.appendChild(card);
+        }
+
+        if (selectNote != undefined) {
+            openNote(selectNote);
         }
 
     } else {

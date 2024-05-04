@@ -20,7 +20,7 @@ function encryptNote($contents, $key) {
 function decryptNote($encryptedContents, $key) {
     // Разбиваем зашифрованный пароль и соль, разделенные символом ";"
     $parts = explode(';', $encryptedContents);
-    $encryptedContents = $parts[0];
+    $encodedContents = $parts[0];
     $encodedSalt = $parts[1];
     
     // Декодируем зашифрованный пароль и соль из base64

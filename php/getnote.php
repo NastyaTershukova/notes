@@ -23,7 +23,7 @@ if ($id == "error_not_executable") {
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("SELECT id, preview from `notes` WHERE owner = ?");
+$request = $mysql->prepare("SELECT id, contents from `notes` WHERE owner = ?");
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);
@@ -44,9 +44,7 @@ $decryptedArray = [];
 $contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
 $contents_key = decryptToken($_SESSION['contents_key'], $contents_encrypt_key);
 
-while ($row = $result->fetch_assoc()) {
-    $decryptedArray[] = decryptNote($row['preview'], $contents_key);
-}
+$result_note = decryptNote($result[$note_id]['contents'], $contents_key);
 // Возвращаем JSON как ответ на запрос
 header('Content-Type: application/json');
 echo json_encode($decryptedArray);

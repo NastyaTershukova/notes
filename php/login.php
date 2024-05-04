@@ -34,6 +34,7 @@
         }
 
         $contents_key = (string) $user['contents_key'];
+        $contents_key = decryptToken($contents_key, $pass);
         $user = (string) $user['id'];
         
         $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date, refresh_token, refresh_expiration_date) VALUES (?, ?, FROM_UNIXTIME(?), ?, FROM_UNIXTIME(?))");
