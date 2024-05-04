@@ -1,15 +1,16 @@
 function convert_to_json() {
     let note = document.getElementById('note_content');
-    let json_struct = {
-        title: document.getElementById('note_content-title').innerText,
-        date: "16.01.2024",
-        time: "10:11",
+    let json_contents = {
         content: []
+    }
+    let json_preview = {
+        title: document.getElementById('note_content-title').innerText,
+        text: ""
     }
 
     for (let i=0; i<note.children.length; i++) {
 
-        let c = json_struct.content.length;
+        let c = json_contents.content.length;
 
         let content_type = null;
         let content_value = null;
@@ -17,6 +18,9 @@ function convert_to_json() {
             case "P":
                 content_type = "paragraph";
                 content_value = note.children[i].innerHTML;
+                if (json_preview.text == "") {
+                    json_preview.text = note.children[i].innerText;
+                }
                 break;
             case "IMG":
                 content_type = "image";
@@ -30,7 +34,7 @@ function convert_to_json() {
         }
     
         if (content_type != null) {
-            json_struct.content[c] = {
+            json_contents.content[c] = {
                 type: content_type,
                 value: content_value
             }
@@ -39,7 +43,11 @@ function convert_to_json() {
         }
     }
 
-    console.log(JSON.stringify(json_struct));
+    let result = {
+        contents : JSON.stringify(json_contents),
+        preview : JSON.stringify(json_preview),
+    };
+    return result;
 }
 
 var note_date = 0;

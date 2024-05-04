@@ -43,6 +43,7 @@ function setNoteChanged() {
             break;
         }
     }
+    console.log(currentNote);
     document.querySelector(`#list_note${currentNote}`).children[1].innerText = first_paragraph;
     handleNewParagraph();
     
@@ -57,13 +58,40 @@ function handleNewParagraph() {
 }
 
 function syncNote() {
+    let note = convert_to_json();
+    let xhr = new XMLHttpRequest();
 
+    xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        console.log(xhr.responseText);
+        if (xhr.responseText == "token_reloaded") {
+            setTimeout(() => {
+                syncNote();
+                console.log('Token is reloaded. Retry in 300ms...');
+            }, 300);
+            return "token_reloaded";
+        }
 
-    isNoteChanged = false;
-    isNoteSynced = true;
-    document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
-    document.getElementById('note_content-date').innerText = note_date;
-    //document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "none";
+        document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
+        document.getElementById('note_content-date').innerText = note_date;
+        document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "none";
+
+        isNoteChanged = false;
+        isNoteSynced = true;
+        return true;
+        
+    } else {
+        console.error('Request failed with status ', xhr.status);
+        return 'error';
+    }
+    };
+
+    let url = 'php/updatenote.php';
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(`id=${currentNote}&contents=${note.contents}&preview=${note.preview}`);
+
+    
 }
 document.querySelector('#context_menu-save').addEventListener('click', () => {
     syncNote();

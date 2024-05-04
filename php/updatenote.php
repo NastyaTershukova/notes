@@ -21,14 +21,17 @@ if ($id == "error_not_executable") {
     exit();
 }
 
-$note_id = $_POST['id'];
-$note_contents = $_POST['contents'];
-$note_preview = $_POST['preview'];
-$note_tags = $_POST['tags'];
-
 session_start();
+
+$contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
+$contents_key = decryptToken($_SESSION['contents_key'], $contents_encrypt_key);
+
+$note_id = $_POST['id'];
+$note_contents = encryptNote($_POST['contents'], $contents_key);
+$note_preview = encryptNote($_POST['preview'], $contents_key);
+
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("UPDATE notes");
+$request = $mysql->prepare("UPDATE notes SET contents = ?, preview = ?, time_edited = NOW() WHERE owner = ? AND uuid = ?");
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);
@@ -37,20 +40,16 @@ if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();
 }
-$request->bind_param("ii", $_SESSION['user_id'], $note_id);
+$request->bind_param("ssis", $note_contents, $note_preview, $_SESSION['user_id'], $note_id);
 
 if(!$request->execute()) {
     echo "error_not_executable";
     exit();
 }
-$result = $request->get_result()->fetch_assoc();
+$result = $request->get_result();
 
-$contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
-$contents_key = decryptToken($_SESSION['contents_key'], $contents_encrypt_key);
-
-$result_note = Array(decryptNote($result['contents'], $contents_key), decryptNote($result['preview'], $contents_key), $result['time_edited'], $result['time_created'], $result['tags']);
-// Возвращаем JSON как ответ на запрос
-header('Content-Type: application/json');
-echo json_encode($result_note);
+if ($result) {
+    echo "successful";
+}
 
 $mysql->close();

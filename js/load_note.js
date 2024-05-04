@@ -6,7 +6,7 @@ function formatFullDate(dateString) {
     const month = months[date.getMonth()];
     const year = date.toLocaleString('ru-RU', { year: 'numeric' });
     const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
 
     // Формирование итоговой строки
     return `${day} ${month} ${year}г. в ${hours}:${minutes}`;
@@ -25,7 +25,7 @@ function load_note(id) {
     if (xhr.status >= 200 && xhr.status < 300) {
         if (xhr.responseText == "token_reloaded") {
             setTimeout(() => {
-                newNote();
+                load_note(id);
                 console.log('Token is reloaded. Retry in 300ms...');
             }, 300);
             return;
@@ -148,7 +148,7 @@ function loadNotesList(selectNote) {
         //console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             setTimeout(() => {
-                newNote();
+                loadNotesList(selectNote);
                 console.log('Token is reloaded. Retry in 300ms...');
             }, 300);
             return;
@@ -187,13 +187,13 @@ function loadNotesList(selectNote) {
                 <p class="note_title">${title}</p>
                 <p class="note_text">${text}</p>
                 <div class="bottom_row">
-                    <i id="list_notes${i}-edit_icon" class="ph-pencil-simple-line-bold"></i>
-                    <p id='list_notes${i}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
+                    <i id="list_notes${preview.uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
+                    <p id='list_notes${preview.uuid}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
                 </div>
                 
             `;
             card.className = "note";
-            card.id = `list_note-${preview.uuid}`;
+            card.id = `list_note${preview.uuid}`;
             card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
 
             card.addEventListener('contextmenu', (event, i) => {
@@ -204,7 +204,13 @@ function loadNotesList(selectNote) {
         }
 
         if (selectNote != undefined) {
-            openNote(selectNote);
+
+            if (typeof selectNote == "number") {
+                openNote(data[selectNote].uuid);
+            } else {
+                openNote(selectNote);
+            }
+            
         }
 
     } else {
