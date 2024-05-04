@@ -23,7 +23,7 @@ if ($id == "error_not_executable") {
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("SELECT id, preview, time_edited, time_created, tags from `notes` WHERE owner = ?");
+$request = $mysql->prepare("SELECT uuid, preview, time_edited, time_created, tags from `notes` WHERE owner = ?");
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);
@@ -45,7 +45,7 @@ $contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
 $contents_key = decryptToken($_SESSION['contents_key'], $contents_encrypt_key);
 
 while ($row = $result->fetch_assoc()) {
-    $decryptedArray[] = Array(decryptNote($row['preview'], $contents_key), $row['time_edited'], $row['time_created'], $row['tags']);
+    $decryptedArray[] = Array(decryptNote($row['preview'], $contents_key), $row['time_edited'], $row['time_created'], $row['tags'], $row['uuid']);
 }
 // Возвращаем JSON как ответ на запрос
 header('Content-Type: application/json');

@@ -1,7 +1,7 @@
 var currentNote = -1;
 var isNoteChanged = false;
 var isNoteSynced = false;
-function openNote(id) {
+function openNote(id, object) {
     if (currentNote != -1) {
         syncNote();
     }
@@ -11,7 +11,12 @@ function openNote(id) {
         document.getElementsByClassName("note")[i].classList.remove("selected");
     }
 
-    document.getElementsByClassName("note")[id].classList.add("selected");
+    if (object != undefined) {
+        object.classList.add("selected");
+    } else {
+        document.getElementsByClassName("note")[id].classList.add("selected");
+    }
+    
 
     currentNote = id;
     isNoteChanged = false;
@@ -52,11 +57,13 @@ function handleNewParagraph() {
 }
 
 function syncNote() {
+
+
     isNoteChanged = false;
     isNoteSynced = true;
     document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
     document.getElementById('note_content-date').innerText = note_date;
-    document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "none";
+    //document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "none";
 }
 document.querySelector('#context_menu-save').addEventListener('click', () => {
     syncNote();

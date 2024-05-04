@@ -25,7 +25,14 @@ $note_id = $_POST['id'];
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("SELECT * from `notes` WHERE owner = ? LIMIT ?, 1");
+
+if (!is_numeric($note_id)) {
+    $request = $mysql->prepare("SELECT * from `notes` WHERE owner = ? AND uuid = ?");
+    $type = "s";
+} else {
+    $request = $mysql->prepare("SELECT * from `notes` WHERE owner = ? LIMIT ?, 1");
+    $type = "i";
+}
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);
@@ -34,7 +41,9 @@ if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();
 }
-$request->bind_param("ii", $_SESSION['user_id'], $note_id);
+
+
+$request->bind_param("i".$type, $_SESSION['user_id'], $note_id);
 
 if(!$request->execute()) {
     echo "error_not_executable";

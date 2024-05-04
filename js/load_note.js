@@ -161,6 +161,7 @@ function loadNotesList(selectNote) {
             note.date_edited = item[1];
             note.date_created = item[2];
             note.tags = item[3];
+            note.uuid = item[4];
             return note;
         });
 
@@ -192,8 +193,8 @@ function loadNotesList(selectNote) {
                 
             `;
             card.className = "note";
-            card.id = `list_note${i}`;
-            card.setAttribute("onclick", `openNote(${i})`);
+            card.id = `list_note-${preview.uuid}`;
+            card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
 
             card.addEventListener('contextmenu', (event, i) => {
                 summon_context_menu(event, "list", i)

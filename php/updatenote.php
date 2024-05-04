@@ -28,7 +28,7 @@ $note_tags = $_POST['tags'];
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("SELECT * from `notes` WHERE owner = ? LIMIT ?, 1");
+$request = $mysql->prepare("UPDATE notes");
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);

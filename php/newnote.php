@@ -22,8 +22,8 @@ if ($id == "error_not_executable") {
 }
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `contents`, `preview`, `time_edited`, `time_created`, `tags`)
-VALUES(?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?)");
+$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `uuid`, `contents`, `preview`, `time_edited`, `time_created`, `tags`)
+VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?)");
 
 $data = array(
     'content' => [],
@@ -32,6 +32,17 @@ $preview = array(
     'title' => '',
     'text' => '',
 );
+
+function generateUUIDv4() {
+    return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000,  // версия 4
+        mt_rand(0, 0x3fff) | 0x8000,  // вариант 1
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+    );
+}
+$uuid = generateUUIDv4();
 
 // Преобразование массива в строку JSON
 $json_string = json_encode($data);
@@ -48,7 +59,7 @@ if ($request === false) {
 }
 $tags = json_encode([]);
 $cur_time = time();
-$request->bind_param("issiis", $_SESSION['user_id'], $encryptedNote, $encryptedPreview, $cur_time, $cur_time, $tags);
+$request->bind_param("isssiis", $_SESSION['user_id'], $uuid, $encryptedNote, $encryptedPreview, $cur_time, $cur_time, $tags);
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();
