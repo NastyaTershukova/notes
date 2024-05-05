@@ -1,29 +1,36 @@
 var currentNote = -1;
 var isNoteChanged = false;
 var isNoteSynced = false;
-function openNote(id, object) {
-    if (currentNote != -1) {
-        syncNote();
-    }
-    eraseHistory();
-
-    let note_num = document.getElementsByClassName("note").length;
-    for (let i=0;i<note_num;i++) {
-        document.getElementsByClassName("note")[i].classList.remove("selected");
-    }
-
-    if (object != undefined) {
-        object.classList.add("selected");
-    } else {
-        document.getElementsByClassName("note")[id].classList.add("selected");
-    }
+async function openNote(id, object) {
+    let result = 'synced';
     
+    if (currentNote != -1) {
+        result = await syncNote(); // Вызывать и ждать syncNote только если это нужно
+    }
 
-    currentNote = id;
-    isNoteChanged = false;
-    isNoteSynced = true;
+    if (result == 'synced') {
+        eraseHistory();
 
-    load_note(id);
+        let notes = document.getElementsByClassName("note");
+        let note_num = document.getElementsByClassName("note").length;
+        for (let i=0;i<note_num;i++) {
+            notes[i].classList.remove("selected");
+        }
+
+        if (object != undefined) {
+            object.classList.add("selected");
+        } else {
+            notes[id].classList.add("selected");
+        }
+
+        currentNote = id;
+        isNoteChanged = false;
+        isNoteSynced = true;
+
+        load_note(id);
+    } else if (result == 'error') {
+        console.log('Не получилось сохранить заметку. Пожалуйста, попробуйте еще раз.');
+    }
 }
 
 function setNoteChanged() {
@@ -62,39 +69,40 @@ function handleNewParagraph() {
 }
 
 function syncNote() {
-    let note = convert_to_json();
-    let xhr = new XMLHttpRequest();
+    return new Promise((resolve, reject) => {
+        let note = convert_to_json();
+        let xhr = new XMLHttpRequest();
 
-    xhr.onload = function() {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        if (xhr.responseText == "token_reloaded") {
-            setTimeout(() => {
-                syncNote();
+        xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            if (xhr.responseText == "token_reloaded") {
                 console.log('Token is reloaded. Retry in 300ms...');
-            }, 300);
-            return "token_reloaded";
+                setTimeout(() => {
+                    syncNote();
+                }, 300);
+                return "token_reloaded";
+            }
+
+            document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
+            document.getElementById('note_content-date').innerText = note_date;
+            document.getElementById(`list_notes${currentNote}-edit_icon`).style.display = "none";
+
+
+            isNoteChanged = false;
+            isNoteSynced = true;
+            resolve('synced');
+            
+        } else {
+            console.error('Request failed with status ', xhr.status);
+            reject('error');
         }
+        };
 
-        document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
-        document.getElementById('note_content-date').innerText = note_date;
-        document.querySelector(`#list_notes${currentNote}-edit_icon`).style.display = "none";
-
-        isNoteChanged = false;
-        isNoteSynced = true;
-        return true;
-        
-    } else {
-        console.error('Request failed with status ', xhr.status);
-        return 'error';
-    }
-    };
-
-    let url = 'php/updatenote.php';
-    xhr.open('POST', url);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(`id=${currentNote}&contents=${note.contents}&preview=${note.preview}`);
-
-    
+        let url = 'php/updatenote.php';
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(`id=${currentNote}&contents=${note.contents}&preview=${note.preview}`);
+    });
 }
 document.querySelector('#context_menu-save').addEventListener('click', () => {
     syncNote();

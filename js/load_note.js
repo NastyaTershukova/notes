@@ -174,6 +174,11 @@ function loadNotesList(selectNote, doUpdate) {
 
         if (doUpdate) {
             document.getElementById(`list_note${currentNote}`).classList.add('selected');
+            if (isNoteChanged) {
+                document.getElementById(`list_notes${currentNote}-edit_date`).innerText = 'Сейчас';
+                document.getElementById(`list_notes${currentNote}-edit_icon`).style.display = 'block';
+            }
+            list.prepend(document.getElementById(`list_note${currentNote}`));
         }
 
         if (selectNote != undefined) {
