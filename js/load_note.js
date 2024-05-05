@@ -1,16 +1,3 @@
-function formatFullDate(dateString) {
-    const date = new Date(dateString);
-    
-    const day = date.toLocaleString('ru-RU', { day: 'numeric' });
-    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-    const month = months[date.getMonth()];
-    const year = date.toLocaleString('ru-RU', { year: 'numeric' });
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-
-    // Формирование итоговой строки
-    return `${day} ${month} ${year}г. в ${hours}:${minutes}`;
-  }
 
 function load_note(id) {
 
@@ -58,14 +45,6 @@ function load_note(id) {
 
 }
 
-function hideLoadingScreen() {
-    document.getElementById('loading_note').style.opacity = "0";
-    setTimeout(() => {
-        document.getElementById('loading_note').style.display = "none";
-        document.getElementById('loading_note').style.opacity = "1";
-    }, 250);
-}
-
 async function newNote() {
     let url = 'php/newnote.php';
 
@@ -84,59 +63,12 @@ async function newNote() {
     }
 }
 
-function convertTimestamp(timestamp) {
-    const date = new Date(timestamp * 1000);
-    return date;
-}
-
-function pluralize(n, forms) {
-    return forms[(n % 10 === 1 && n % 100 !== 11) ? 0 : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? 1 : 2];
-}
-
-function formatRelativeDate(timestamp) {
-    const now = new Date();
-    const date = convertTimestamp(timestamp);
-    const yesterday = new Date(now);
-    yesterday.setDate(yesterday.getDate() - 1);
-  
-    const diff = now - date; // Разница в миллисекундах
-    const diffMinutes = Math.round(diff / 60000); // Разница в минутах
-    const diffHours = Math.round(diff / 3600000); // Разница в часах
-  
-    if (diff < 60000) {
-      return "Только что";
-    } else if (diff < 3600000) {
-      return `${diffMinutes} ${pluralize(diffMinutes, ['минуту', 'минуты', 'минут'])} назад`;
-    } else if (diff < 86400000 && now.getDate() === date.getDate()) {
-      return `${diffHours} ${pluralize(diffHours, ['час', 'часа', 'часов'])} назад`;
-    } else if (yesterday.getDate() === date.getDate() &&
-               yesterday.getMonth() === date.getMonth() &&
-               yesterday.getFullYear() === date.getFullYear()) {
-      return "Вчера";
-    } else {
-      return formatDate(date, now.getFullYear());
-    }
-  }
-  
-  function formatDate(date, currentYear) {
-    const day = date.getDate();
-    const month = date.toLocaleString('ru-RU', { month: 'long' });
-    const year = date.getFullYear();
-    
-    if (year === currentYear) {
-      return `${day} ${month}`;
-    } else {
-      return `${day} ${month} ${year}г.`;
-    }
-  }
-  
-
 function loadNotesList(selectNote, doUpdate) {
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        //console.log(xhr.responseText);
+        console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             setTimeout(() => {
                 loadNotesList(selectNote);
@@ -169,8 +101,8 @@ function loadNotesList(selectNote, doUpdate) {
             if (isNoteChanged) {
                 document.getElementById(`list_notes${currentNote}-edit_date`).innerText = 'Сейчас';
                 document.getElementById(`list_notes${currentNote}-edit_icon`).style.display = 'block';
+                list.prepend(document.getElementById(`list_note${currentNote}`));
             }
-            list.prepend(document.getElementById(`list_note${currentNote}`));
         }
 
         if (selectNote != undefined) {
@@ -192,7 +124,13 @@ function loadNotesList(selectNote, doUpdate) {
     }
     };
 
-    let url = 'php/noteslist.php';
+    let sortby = "time_edited";
+    let settings_sortby = localStorage.getItem('sort-by')
+    if (settings_sortby != undefined) {
+        sortby = settings_sortby;
+    }
+
+    let url = 'php/noteslist.php?sortby='+sortby;
     xhr.open('GET', url);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -234,4 +172,72 @@ function addListCard(preview, place) {
     } else {
         list.appendChild(card);
     }
+}
+
+function pluralize(n, forms) {
+    return forms[(n % 10 === 1 && n % 100 !== 11) ? 0 : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? 1 : 2];
+}
+
+function formatRelativeDate(timestamp) {
+    const now = new Date();
+    const date = convertTimestamp(timestamp);
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+  
+    const diff = now - date; // Разница в миллисекундах
+    const diffMinutes = Math.round(diff / 60000); // Разница в минутах
+    const diffHours = Math.round(diff / 3600000); // Разница в часах
+  
+    if (diff < 60000) {
+      return "Только что";
+    } else if (diff < 3600000) {
+      return `${diffMinutes} ${pluralize(diffMinutes, ['минуту', 'минуты', 'минут'])} назад`;
+    } else if (diff < 86400000 && now.getDate() === date.getDate()) {
+      return `${diffHours} ${pluralize(diffHours, ['час', 'часа', 'часов'])} назад`;
+    } else if (yesterday.getDate() === date.getDate() &&
+               yesterday.getMonth() === date.getMonth() &&
+               yesterday.getFullYear() === date.getFullYear()) {
+      return "Вчера";
+    } else {
+      return formatDate(date, now.getFullYear());
+    }
+}
+  
+function formatDate(date, currentYear) {
+    const day = date.getDate();
+    const month = date.toLocaleString('ru-RU', { month: 'long' });
+    const year = date.getFullYear();
+
+    if (year === currentYear) {
+        return `${day} ${month}`;
+    } else {
+        return `${day} ${month} ${year}г.`;
+    }
+}
+
+function convertTimestamp(timestamp) {
+    const date = new Date(timestamp * 1000);
+    return date;
+}
+
+function hideLoadingScreen() {
+    document.getElementById('loading_note').style.opacity = "0";
+    setTimeout(() => {
+        document.getElementById('loading_note').style.display = "none";
+        document.getElementById('loading_note').style.opacity = "1";
+    }, 250);
+}
+
+function formatFullDate(dateString) {
+    const date = new Date(dateString);
+    
+    const day = date.toLocaleString('ru-RU', { day: 'numeric' });
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    const month = months[date.getMonth()];
+    const year = date.toLocaleString('ru-RU', { year: 'numeric' });
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    // Формирование итоговой строки
+    return `${day} ${month} ${year}г. в ${hours}:${minutes}`;
 }

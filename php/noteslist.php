@@ -23,7 +23,7 @@ if ($id == "error_not_executable") {
 
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("SELECT uuid, preview, time_edited, time_created, tags from `notes` WHERE owner = ? ORDER BY time_edited DESC");
+$request = $mysql->prepare("SELECT uuid, preview, time_edited, time_created, tags from `notes` WHERE owner = ? ORDER BY ".$_GET['sortby']." DESC");
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysql->error);

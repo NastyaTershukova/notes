@@ -151,15 +151,21 @@ document.getElementById('context_menu-remove_img').addEventListener('click', () 
 });
 document.getElementById('context_menu-sort_ascending').addEventListener('click', () => {
     sortAscending();
+    localStorage.setItem('sort-order', 'ascending');
 });
 document.getElementById('context_menu-sort_descending').addEventListener('click', () => {
     sortDescending();
+    localStorage.setItem('sort-order', 'descending');
 });
 document.getElementById('context_menu-sort_date_edited').addEventListener('click', () => {
+    localStorage.setItem('sort-by', 'time_edited');
     sortTimeEdited();
+    loadNotesList(undefined, true);
 });
 document.getElementById('context_menu-sort_date_added').addEventListener('click', () => {
+    localStorage.setItem('sort-by', 'time_created');
     sortTimeAdded();
+    loadNotesList(undefined, true);
 });
 document.getElementById('context_menu-sort_title').addEventListener('click', () => {
     sortTitle();

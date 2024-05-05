@@ -103,3 +103,12 @@ document.querySelector('#new_paragraph').addEventListener('click', () => {
 });
 
 login();
+
+let settings_sortby = localStorage.getItem('sort-by');
+if (settings_sortby == 'time_created') {
+    sortTimeAdded();
+}
+let settings_order = localStorage.getItem('sort-order');
+if (settings_order == 'descending') {
+    sortDescending();
+}
