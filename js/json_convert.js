@@ -18,7 +18,7 @@ function convert_to_json() {
             case "P":
                 content_type = "paragraph";
                 content_value = note.children[i].innerHTML;
-                if (json_preview.text == "") {
+                if (json_preview.text == "" && getParagraphLength(note.children[i]) > 0) {
                     json_preview.text = note.children[i].innerText;
                 }
                 break;

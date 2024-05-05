@@ -4,10 +4,8 @@ const history = {
 };
 
 function eraseHistory() {
-    const history = {
-        back: [],
-        forward: []
-    };
+    history.back = [];
+    history.forward = [];
 }
 
 // let note_content = document.getElementById('note_content');

@@ -5,6 +5,7 @@ function openNote(id, object) {
     if (currentNote != -1) {
         syncNote();
     }
+    eraseHistory();
 
     let note_num = document.getElementsByClassName("note").length;
     for (let i=0;i<note_num;i++) {

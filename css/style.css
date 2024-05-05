@@ -837,6 +837,7 @@ a {
 }
 #new_paragraph.hide {
     opacity: 0;
+    pointer-events: none;
 }
 #new_paragraph:focus, #new_paragraph:hover {
     text-decoration: underline;
