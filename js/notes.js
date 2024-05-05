@@ -4,7 +4,7 @@ var isNoteSynced = false;
 async function openNote(id, object) {
     let result = 'synced';
     
-    if (currentNote != -1) {
+    if (currentNote != -1 && !isNoteSynced) {
         result = await syncNote(); // Вызывать и ждать syncNote только если это нужно
     }
 
