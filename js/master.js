@@ -4,6 +4,14 @@ tab('home')
 let title_obj = document.getElementById('note_content-title');
 let note_content = document.getElementById('note_content');
 
+function loadingSpinner(state) {
+    if (state == true) {
+        document.getElementById('nav_bar-loading').classList.add('show');
+    } else {
+        document.getElementById('nav_bar-loading').classList.remove('show');
+    }
+}
+
 function insertTextAtCursor(text) {
     const sel = window.getSelection();
     if (sel.rangeCount) {

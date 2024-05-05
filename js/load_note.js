@@ -47,6 +47,7 @@ function load_note(id) {
 
 async function newNote() {
     let url = 'php/newnote.php';
+    loadingSpinner(true);
 
     try {
         const response = await fetch(url);
@@ -56,6 +57,7 @@ async function newNote() {
             console.log('Token is reloaded. Retry in 300ms...');
             setTimeout(newNote, 300);
         } else {
+            loadingSpinner(false);
             loadNotesList(0);
         }
     } catch (error) {
@@ -64,6 +66,7 @@ async function newNote() {
 }
 
 function loadNotesList(selectNote, doUpdate) {
+    loadingSpinner(true);
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() {
@@ -114,6 +117,7 @@ function loadNotesList(selectNote, doUpdate) {
             }
             
         }
+        loadingSpinner(false);
 
         setTimeout(() => {
             loadNotesList(undefined, true);

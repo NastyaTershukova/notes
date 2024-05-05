@@ -21,6 +21,8 @@ function getCookie(name) {
 
 function login() {
 
+    loadingSpinner(true);
+
     if (getCookie('is_authorised') == 'true') {
         // Получение основной информации о пользователе
         let xhr = new XMLHttpRequest();
@@ -38,6 +40,7 @@ function login() {
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
             document.querySelector('#user_photo').src = responseData.picture;
 
+            loadingSpinner(false);
             loadNotesList(0);
 
         } else {

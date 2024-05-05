@@ -69,6 +69,7 @@ function handleNewParagraph() {
 }
 
 function syncNote() {
+    loadingSpinner(true);
     return new Promise((resolve, reject) => {
         let note = convert_to_json();
         let xhr = new XMLHttpRequest();
@@ -91,6 +92,7 @@ function syncNote() {
             isNoteChanged = false;
             isNoteSynced = true;
             resolve('synced');
+            loadingSpinner(false);
             
         } else {
             console.error('Request failed with status ', xhr.status);

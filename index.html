@@ -52,6 +52,9 @@
 
         <button onclick="tab('home')" id="btn_home"> <i class="ph-compass"></i> <p>Главная</p> </button>
         <button onclick="tab('trash')" id="btn_trash"> <i class="ph-trash"></i> <p>Корзина</p> </button>
+        <div id="nav_bar-loading">
+            <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
         <button onclick="" id="btn_user"> <img src="img/user_photo.jpg" id="user_photo"> <p id="nav_bar-name"> Нет аккаунта</p></button>
         <button onclick="newNote()" id="btn_create"> <i class="ph-note-pencil"></i> <p>Новая заметка...</p> </button>
         <button onclick="tab('help')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
@@ -94,8 +97,8 @@
                 <div class="second_part_screen">
 
                     <div id="loading_note">
-                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                        <p>Загрузка заметки...</p>
+                        <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        <p>Загрузка заметки</p>
                     </div>
 
                     <div class="written_note">
