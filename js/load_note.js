@@ -66,30 +66,22 @@ function hideLoadingScreen() {
     }, 250);
 }
 
-function newNote() {
-    let xhr = new XMLHttpRequest();
-
-    xhr.onload = function() {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.responseText);
-        if (xhr.responseText == "token_reloaded") {
-            setTimeout(() => {
-                newNote();
-                console.log('Token is reloaded. Retry in 300ms...');
-            }, 300);
-            return;
-        }
-        loadNotesList();
-
-    } else {
-        console.error('Request failed with status ', xhr.status);
-    }
-    };
-
+async function newNote() {
     let url = 'php/newnote.php';
-    xhr.open('GET', url);
 
-    xhr.send();
+    try {
+        const response = await fetch(url);
+        const text = await response.text();
+
+        if (text == "token_reloaded") {
+            console.log('Token is reloaded. Retry in 300ms...');
+            setTimeout(newNote, 300);
+        } else {
+            loadNotesList(0);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+    }
 }
 
 function convertTimestamp(timestamp) {
@@ -190,6 +182,10 @@ function loadNotesList(selectNote, doUpdate) {
             }
             
         }
+
+        setTimeout(() => {
+            loadNotesList(undefined, true);
+        }, 60000);
 
     } else {
         console.error('Request failed with status ', xhr.status);

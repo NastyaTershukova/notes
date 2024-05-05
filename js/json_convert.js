@@ -63,6 +63,8 @@ function convert_from_json(data) {
     document.getElementById('note_content-title').innerText = preview.title;
     if (getParagraphLength(document.getElementById('note_content-title')) > 0) {
         document.getElementById('note_content-title_placeholder').style.display = "none";
+    } else {
+        document.getElementById('note_content-title_placeholder').style.display = "block";
     }
     note_date = date_edited;
     document.getElementById('note_content-date').innerText = note_date;

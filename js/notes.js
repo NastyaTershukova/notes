@@ -20,7 +20,7 @@ async function openNote(id, object) {
         if (object != undefined) {
             object.classList.add("selected");
         } else {
-            notes[id].classList.add("selected");
+            document.getElementById(`list_note${id}`).classList.add("selected");
         }
 
         currentNote = id;
