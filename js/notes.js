@@ -36,6 +36,9 @@ function setNoteChanged() {
     document.querySelector(`#list_notes${currentNote}-edit_date`).innerText = "Сейчас";
     document.getElementById('note_content-date').innerText = note_date + ` • Изменено`;
 
+    let card = document.querySelector(`#list_note${currentNote}`);
+    card.parentNode.insertBefore(card, card.parentNode.firstChild);
+
     let first_paragraph = "[Пустая заметка]";
 
     for (let i in note_content.children) {
@@ -64,7 +67,6 @@ function syncNote() {
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             setTimeout(() => {
                 syncNote();

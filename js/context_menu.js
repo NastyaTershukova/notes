@@ -170,3 +170,7 @@ document.getElementById('context_menu-sort_reset').addEventListener('click', () 
     color_tags = [];
     checkSortTags();
 });
+
+document.getElementById('context_menu-list_update').addEventListener('click', () => {
+    loadNotesList(undefined, true);
+});

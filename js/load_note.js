@@ -38,7 +38,6 @@ function load_note(id) {
               return item; // Если не получается, возвращаем исходный элемент
             }
           });
-        console.log(data);
         convert_from_json(data);
 
         add_context_menus();
@@ -140,7 +139,7 @@ function formatRelativeDate(timestamp) {
   }
   
 
-function loadNotesList(selectNote) {
+function loadNotesList(selectNote, doUpdate) {
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() {
@@ -167,40 +166,14 @@ function loadNotesList(selectNote) {
 
         
         let list = document.getElementById('list_notes');
-
         list.innerHTML = "";
-
         for (let i=0;i<data.length;i++) {
-            let card = document.createElement("div");
             let preview = data[i];
-            let title = preview.title;
-            if (title == "") {
-                title = "Новая заметка";
-            }
-            let text = preview.text;
-            if (text == "") {
-                text = "[Пустая заметка]";
-            }
-            let date = new Date(preview.date_edited);
+            addListCard(preview);
+        }
 
-            card.innerHTML = `
-                <p class="note_title">${title}</p>
-                <p class="note_text">${text}</p>
-                <div class="bottom_row">
-                    <i id="list_notes${preview.uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
-                    <p id='list_notes${preview.uuid}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
-                </div>
-                
-            `;
-            card.className = "note";
-            card.id = `list_note${preview.uuid}`;
-            card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
-
-            card.addEventListener('contextmenu', (event, i) => {
-                summon_context_menu(event, "list", i)
-            });
-
-            list.appendChild(card);
+        if (doUpdate) {
+            document.getElementById(`list_note${currentNote}`).classList.add('selected');
         }
 
         if (selectNote != undefined) {
@@ -223,4 +196,41 @@ function loadNotesList(selectNote) {
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.send();
+}
+
+function addListCard(preview, place) {
+    let list = document.getElementById('list_notes');
+    let card = document.createElement("div");
+    let title = preview.title;
+    if (title == "") {
+        title = "Новая заметка";
+    }
+    let text = preview.text;
+    if (text == "") {
+        text = "[Пустая заметка]";
+    }
+    let date = new Date(preview.date_edited);
+
+    card.innerHTML = `
+        <p class="note_title">${title}</p>
+        <p class="note_text">${text}</p>
+        <div class="bottom_row">
+            <i id="list_notes${preview.uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
+            <p id='list_notes${preview.uuid}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
+        </div>
+        
+    `;
+    card.className = "note";
+    card.id = `list_note${preview.uuid}`;
+    card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
+
+    card.addEventListener('contextmenu', (event, i) => {
+        summon_context_menu(event, "list", i)
+    });
+
+    if (place != undefined) {
+        list.insertBefore(card, list.children[place+1]);
+    } else {
+        list.appendChild(card);
+    }
 }
