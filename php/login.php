@@ -76,7 +76,6 @@
         $mysql->close();
 
         return "login_successful";
-        //header('Location: /');
     }
 
 ?>

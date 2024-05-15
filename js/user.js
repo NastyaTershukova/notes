@@ -36,6 +36,10 @@ function login() {
                 }, 300);
                 return;
             }
+            console.log(xhr.responseText);
+            if (xhr.responseText == "error_old_session") {
+                window.open('login.html', '_self');
+            }
             let responseData = JSON.parse(xhr.responseText);
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
             document.querySelector('#user_photo').src = responseData.picture;

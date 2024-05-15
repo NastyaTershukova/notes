@@ -11,5 +11,7 @@
         FILTER_UNSAFE_RAW
     );
 
-    login($email_post, $pass_post);
+    if (login($email_post, $pass_post) == 'login_successful') {
+        header('Location: /');
+    }
 ?>

@@ -36,6 +36,11 @@ function checkRefreshToken($mysql, $userId, $refresh_token) {
 function refreshToken() {
     session_start();
 
+    if (!isset($_SESSION['refresh_token']) || is_empty($_SESSION['refresh_token'])) {
+        echo "error_old_session";
+        exit;
+    }
+
     $mysql = new mysqli('localhost', 'root', '', 'register-bd');
     $refresh_key = 'fsqA1!fmsd-2OW94msdfA012gmkWQ)$f,sdf';
     $refresh_token = decryptToken($_SESSION['refresh_token'], $refresh_key);
