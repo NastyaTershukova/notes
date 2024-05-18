@@ -65,27 +65,23 @@
         <button class="phones_menu" onclick="toggle_navbar()"> <i class="ph-list"></i> </button>
     </div>
     <div class="page_content">
-        <div class="header_main">
-            <div class="search_and_sort">
-                <div class="search">
-                    <i class="ph-magnifying-glass"></i>
-                    <input type="text" placeholder="Поиск">
-                    <div id="search_tags">
-                    </div>
-                </div>
-    
-                <button id="sorting">
-                    <i class="ph-sort-ascending"></i>
-                </button>
-            </div>
-            <div class="user">
-            </div>
-        </div>
     
         <div id="page_home" class="page">
             <div class="container_notes">
-                    
-    
+                <div class="first_part_screen">
+                    <div class="search_and_sort">
+                        <div class="search">
+                            <i class="ph-magnifying-glass"></i>
+                            <input type="text" placeholder="Поиск">
+                            <div id="search_tags">
+                            </div>
+                        </div>
+            
+                        <button id="sorting">
+                            <i class="ph-sort-ascending"></i>
+                        </button>
+                    </div>
+
                     <div id="list_notes">
                         <div class="note" id="list_note0" onclick="openNote(0)">
                             <p class="note_title">Заметка</p>
@@ -93,7 +89,10 @@
                             <p class="note_time">10 часов назад</p>
                         </div>
                     </div>
+                </div>
+
                 <div class="line_main"></div>
+
                 <div class="second_part_screen">
 
                     <div id="loading_note">

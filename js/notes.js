@@ -54,7 +54,6 @@ function setNoteChanged() {
             break;
         }
     }
-    console.log(currentNote);
     document.querySelector(`#list_note${currentNote}`).children[1].innerText = first_paragraph;
     handleNewParagraph();
     
