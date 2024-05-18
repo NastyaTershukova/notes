@@ -22,8 +22,8 @@ if ($id == "error_not_executable") {
 }
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `uuid`, `contents`, `preview`, `time_edited`, `time_created`, `tags`)
-VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?)");
+$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `uuid`, `contents`, `preview`, `time_edited`, `time_created`, `tags`, `is_deleted`)
+VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, 0)");
 
 $data = array(
     'content' => [],

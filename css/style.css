@@ -657,6 +657,7 @@ a {
     transition: .3s ease-out background-color, .2s width;
 
     user-select: none;
+    -webkit-user-select: none;
 }
 .note:hover {
     background-color: #dbdbdb;
@@ -680,6 +681,7 @@ a {
     white-space: nowrap;
 
     user-select: none;
+    -webkit-user-select: none;
 }
 
 .note.selected .note_title {
@@ -693,6 +695,7 @@ a {
     line-height: 1.2;
 
     user-select: none;
+    -webkit-user-select: none;
 }
 
 .note_text {

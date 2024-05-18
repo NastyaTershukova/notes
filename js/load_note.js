@@ -51,6 +51,7 @@ async function newNote() {
     try {
         const response = await fetch(url);
         const text = await response.text();
+        console.log(text);
 
         if (text == "token_reloaded") {
             console.log('Token is reloaded. Retry in 300ms...');
