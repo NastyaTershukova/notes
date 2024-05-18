@@ -36,7 +36,7 @@ function checkRefreshToken($mysql, $userId, $refresh_token) {
 function refreshToken() {
     session_start();
 
-    if (!isset($_SESSION['refresh_token']) || is_empty($_SESSION['refresh_token'])) {
+    if (!isset($_SESSION['refresh_token']) || empty($_SESSION['refresh_token'])) {
         echo "error_old_session";
         exit;
     }

@@ -33,7 +33,7 @@ function getParagraphLength(obj) {
     return obj.innerText.replaceAll(/^\n/g, '').length;
 }
 
-function context_tab(name) {
+function context_tab(name, data) {
     let tabs = ['sec', 'menu', 'basic', 'img', 'list', 'sort'];
 
     for (let i=0;i<tabs.length;i++) {
@@ -54,6 +54,10 @@ function context_tab(name) {
             break;
         case "list":
             document.getElementById(`context-list`).style.display = 'block';
+            document.getElementById('context_menu-list_delete').addEventListener('click', function() {
+                deleteNote(data);
+                console.log(data);
+            });
             break;
         case "sort":
             document.getElementById(`context-sort`).style.display = 'block';
@@ -65,7 +69,7 @@ var contextMenuData = -1;
 function summon_context_menu(event, tagName, data) {
     contextMenuData = data;
     contextmenu_click(event);
-    context_tab(tagName);
+    context_tab(tagName, data);
     document.addEventListener('click', () => {
         context_menu.classList.add("hidden");
         contextMenuData = -1;
@@ -179,4 +183,8 @@ document.getElementById('context_menu-sort_reset').addEventListener('click', () 
 
 document.getElementById('context_menu-list_update').addEventListener('click', () => {
     loadNotesList(undefined, true);
+});
+
+document.getElementById('context_menu-delete').addEventListener('click', () => {
+    deleteNote(0);
 });

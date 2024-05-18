@@ -109,3 +109,46 @@ function syncNote() {
 document.querySelector('#context_menu-save').addEventListener('click', () => {
     syncNote();
 });
+
+function deleteNote(uuid) {
+    loadingSpinner(true);
+    let note = convert_to_json();
+    let xhr = new XMLHttpRequest();
+
+    if (uuid == 0) {
+        uuid = currentNote;
+    }
+
+    xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        console.log(xhr.responseText);
+        if (xhr.responseText == "token_reloaded") {
+            console.log('Token is reloaded. Retry in 300ms...');
+            setTimeout(() => {
+                deleteNote(uuid);
+            }, 300);
+            return "token_reloaded";
+        }
+
+        let doUpdate = true;
+        let loadNote = undefined;
+        if (uuid == currentNote) {
+            loadNote = 0;
+            doUpdate = false;
+        }
+
+        loadNotesList(loadNote, doUpdate);
+        
+    } else {
+        console.error('Request failed with status ', xhr.status);
+    }
+    };
+
+    let url = 'php/delete.php';
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(`uuid=${uuid}`);
+}
+document.querySelector('#context_menu-save').addEventListener('click', () => {
+    syncNote();
+});

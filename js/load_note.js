@@ -17,7 +17,6 @@ function load_note(id) {
             }, 300);
             return;
         }
-        console.log(xhr.responseText);
         let data = JSON.parse(xhr.responseText).map(item => {
             try {
               return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
@@ -71,7 +70,6 @@ function loadNotesList(selectNote, doUpdate) {
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             setTimeout(() => {
                 loadNotesList(selectNote);
@@ -134,7 +132,7 @@ function loadNotesList(selectNote, doUpdate) {
         sortby = settings_sortby;
     }
 
-    let url = 'php/noteslist.php?sortby='+sortby;
+    let url = `php/noteslist.php?sortby=${sortby}&is_deleted=${isTrashBinOpened}`;
     xhr.open('GET', url);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -167,8 +165,10 @@ function addListCard(preview, place) {
     card.id = `list_note${preview.uuid}`;
     card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
 
-    card.addEventListener('contextmenu', (event, i) => {
-        summon_context_menu(event, "list", i)
+    let uuid = preview.uuid;
+
+    card.addEventListener('contextmenu', (event) => {
+        summon_context_menu(event, "list", uuid);
     });
 
     if (place != undefined) {
