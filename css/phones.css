@@ -19,7 +19,7 @@
         transition: .3s ease-out transform,
         .3s ease-in opacity;
         pointer-events: none;
-        background-color: white;
+        background-color: var(--page_bg);
         width: 100%;
 
         position: fixed;
@@ -60,12 +60,15 @@
         padding: 16px;
         padding-bottom: 148px;
     }
+    .note_hint {
+        display: none !important;
+    }
 
     .menu_mobile {
         width: 100%;
         height: 56px;
-        background: rgba(0, 0, 0, 0.03);
-        border-top: 1px solid rgba(0,0,0,0.08);
+        background-color: var(--mobile_nav);
+        border-top: 1px solid var(--mobile_nav-border);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
 
@@ -93,14 +96,15 @@
         transition: .3s ease-in background-color;
     }
     .menu_mobile button:hover {
-        background-color: rgba(0,0,0,0.2);
+        background-color: (--hover);
     }
     #mobile_newnote {
         width: 56px;
         height: 56px;
         margin: 0 0 32px 0;
-        background-color: rgb(2, 0, 130);
-
+        background-color: var(--accent-dark);
+    }
+    #mobile_newnote i {
         color: white;
     }
     #mobile_userphoto {
@@ -136,6 +140,7 @@
 
     .mobile_note_topnav {
         display: flex;
+        margin-bottom: 16px;
     }
     .mobile_note_topnav button {
         background: none;
@@ -145,12 +150,13 @@
         align-items: center;
         gap: 2px;
 
-        color: rgb(2, 0, 130);
+        color: var(--accent);
 
         cursor: pointer;
     }
     .mobile_note_topnav i {
         font-size: 22px;
+        color: inherit;
     }
 
     #note_menu_mobile {

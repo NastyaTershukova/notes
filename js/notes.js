@@ -168,10 +168,13 @@ function isNoteOpened(status) {
         document.querySelector('.menu_note').classList.add('opened');
         document.querySelector('.menu_mainpage').classList.add('hidden');
         document.querySelector('.note_hint').classList.add('hidden');
+        document.querySelector('.written_note').classList.remove('hidden');
+        document.querySelector('.written_note').classList.remove('hidden');
     } else {
         document.querySelector('.second_part_screen').classList.remove('opened');
         document.querySelector('.menu_note').classList.remove('opened');
         document.querySelector('.menu_mainpage').classList.remove('hidden');
         document.querySelector('.note_hint').classList.remove('hidden');
+        document.querySelector('.written_note').classList.add('hidden');
     }
 }
