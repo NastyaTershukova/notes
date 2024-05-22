@@ -1,6 +1,15 @@
 var currentNote = -1;
 var isNoteChanged = false;
 var isNoteSynced = false;
+
+function closeNote() {
+    if (currentNote != -1 && !isNoteSynced) {
+        syncNote();
+    }
+    eraseHistory();
+    isNoteOpened(false);
+}
+
 async function openNote(id, object) {
     let result = 'synced';
     

@@ -779,6 +779,9 @@ a {
     transition: .25s opacity ease-in;
 }
 
+.mobile_note_topnav {
+    display: none;
+}
 .written_note {
     width: 100%;
     padding-right: 64px;

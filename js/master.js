@@ -60,7 +60,10 @@ title_obj.addEventListener('paste', (event) => {
 });
 
 
-document.getElementById('note_menu').addEventListener('click', function (event) {
+document.getElementById('note_menu').addEventListener('click', (event) => {note_menu_button(event) });
+document.getElementById('note_menu_mobile').addEventListener('click', (event) => {note_menu_button(event) });
+
+function note_menu_button(event) {
     if (!context_menu.classList.contains('hidden')) {
         context_menu.classList.add("hidden");
     } else {
@@ -72,7 +75,7 @@ document.getElementById('note_menu').addEventListener('click', function (event) 
             }, { once: true });
         }, 1);
     }
-});
+}
 
 var clickedOnTagSort = false;
 document.getElementById('sorting').addEventListener('click', (event) => {
