@@ -23,6 +23,8 @@
     --mobile_nav: rgba(0, 0, 0, 0.03);
     --mobile_nav-border: rgba(0,0,0,0.08);
 
+    --note_preview: rgb(102, 102, 102);
+
     --red: #ba000d;
 }
 [dark-theme='true'] {
@@ -45,6 +47,8 @@
 
     --context_bg: rgba(30,30,30,0.85);
     --light_gray: rgba(255,255,255,0.25);
+
+    --note_preview: rgb(140, 140, 140);
 
     --red: #ef4d58;
 }
@@ -700,7 +704,7 @@ a {
     border-radius: 24px;
     padding: 20px 32px 20px 32px;
 
-    color: rgb(102, 102, 102);
+    color: var(--note_preview);
     display: flex;
     flex-direction: column;
 
