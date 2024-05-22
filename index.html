@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Notes</title>
-    <link rel="shortcut icon" href="img/browser_icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/spinner.css">
-    <link rel="stylesheet" href="css/phones.css">
-    <script src="https://unpkg.com/phosphor-icons"></script>
+    <link rel="shortcut icon" href="/img/browser_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/spinner.css">
+    <link rel="stylesheet" href="/css/phones.css">
+    
+    <link rel="stylesheet" href="/fonts/icons.css">
 </head>
 
 <body class="menu-shrinkable">
@@ -100,6 +102,13 @@
                         <p>Загрузка заметки</p>
                     </div>
 
+                    <div class="note_hint">
+                        <div class="note_hint-block">
+                            <i class="ph-notebook-light"></i>
+                            <p>Откройте заметку из списка справа или создайте новую.</p>
+                        </div>
+                    </div>
+
                     <div class="written_note">
 
                         <p id="note_content-date">16 февраля 2024 г. в 20:00</p>
@@ -167,16 +176,30 @@
     </div>
     <footer>
         <div class="menu_mobile">
-            <div class="first_part_mob_menu">
-                <img src="img/note_icon.svg" class="my_notes_icon">
-                <img src="img/trash_icon.svg" class="trash_icon">
+            <div class="menu_mainpage">
+                <button>
+                    <i class="ph-trash"></i>
+                </button>
+                <button id="mobile_newnote" onclick="newNote()">
+                    <i class="ph-note-pencil"></i>
+                </button>
+                <button>
+                    <img src="userpictures/devio.jpeg" id="mobile_userphoto">
+                </button>
             </div>
-            <div class="new_note_icon">
-                <div class="plus radius"></div>
-            </div>
-            <div class="second_part_mob_menu">
-                <img src="img/share.svg" class="share_icon">
-                <img src="img/support.svg" class="help_icon">
+            <div class="menu_note">
+                <button>
+                    <i class="ph-cursor-text"></i>
+                </button>
+                <button>
+                    <i class="ph-image-square"></i>
+                </button>
+                <button>
+                    <i class="ph-marker-circle"></i>
+                </button>
+                <button>
+                    <i class="ph-code"></i>
+                </button>
             </div>
         </div>
     </footer>

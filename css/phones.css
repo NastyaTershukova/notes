@@ -1,3 +1,125 @@
-@media screen and (max-width: 600px) {
-    
+@media screen and (max-width: 767px) {
+    html, body {
+        margin: 0;
+        height: fit-content;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .ui-side_nav {
+        display: none;
+    }
+
+    .first_part_screen {
+        width: 100%;
+    }
+    .second_part_screen {
+        transform: translateX(100%);
+        opacity: 0;
+        transition: .3s ease-out transform,
+        .3s ease-in opacity;
+        pointer-events: none;
+        background-color: white;
+        margin-left: -100%;
+    }
+    .written_note {
+        padding: 0 24px 24px 24px;
+    }
+    .second_part_screen.opened {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: all;
+    }
+    .line_main {
+        display: none;
+    }
+
+    .search_and_sort {
+        width: 100%;
+        margin: 0;
+        padding: 32px 24px;
+        min-width: none;
+    }
+
+    .note {
+        width: 100%;
+        min-width: none;
+    }
+
+    #list_notes {
+        margin: 0;
+        padding: 16px;
+        padding-bottom: 148px;
+    }
+
+    .menu_mobile {
+        width: 100%;
+        height: 56px;
+        background: rgba(0, 0, 0, 0.03);
+        border-top: 1px solid rgba(0,0,0,0.08);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+
+        position: fixed;
+        bottom: 0;
+    }
+
+    .menu_mobile button {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 100%;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        font-size: 24px;
+        color: black;
+        background: none;
+
+        transition: .3s ease-in background-color;
+    }
+    .menu_mobile button:hover {
+        background-color: rgba(0,0,0,0.2);
+    }
+    #mobile_newnote {
+        width: 56px;
+        height: 56px;
+        margin: 0 0 32px 0;
+        background-color: rgb(2, 0, 130);
+
+        color: white;
+    }
+    #mobile_userphoto {
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        object-fit: cover;
+    }
+
+    .menu_note, .menu_mainpage {
+        width: 100%;
+        height: 56px;
+        opacity: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        transition: .3s opacity, .3s transform;
+        transition-timing-function: ease-out;
+    }
+    .menu_note {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    .menu_note.opened {
+        opacity: 1;
+        transform: translateY(-100%);
+    }
+    .menu_mainpage.hidden {
+        opacity: 0;
+    }
 }

@@ -9,6 +9,7 @@ async function openNote(id, object) {
     }
 
     if (result == 'synced') {
+        isNoteOpened(true);
         eraseHistory();
 
         let notes = document.getElementsByClassName("note");
@@ -151,3 +152,17 @@ function deleteNote(uuid) {
 document.querySelector('#context_menu-save').addEventListener('click', () => {
     syncNote();
 });
+
+function isNoteOpened(status) {
+    if (status == true) {
+        document.querySelector('.second_part_screen').classList.add('opened');
+        document.querySelector('.menu_note').classList.add('opened');
+        document.querySelector('.menu_mainpage').classList.add('hidden');
+        document.querySelector('.note_hint').classList.add('hidden');
+    } else {
+        document.querySelector('.second_part_screen').classList.remove('opened');
+        document.querySelector('.menu_note').classList.remove('opened');
+        document.querySelector('.menu_mainpage').classList.remove('hidden');
+        document.querySelector('.note_hint').classList.remove('hidden');
+    }
+}

@@ -24,6 +24,7 @@ function load_note(id) {
               return item; // Если не получается, возвращаем исходный элемент
             }
           });
+        console.log(xhr.responseText);
         convert_from_json(data);
 
         add_context_menus();
@@ -110,7 +111,7 @@ function loadNotesList(selectNote, doUpdate) {
         if (selectNote != undefined) {
 
             if (typeof selectNote == "number") {
-                openNote(data[selectNote].uuid);
+                //openNote(data[selectNote].uuid);
             } else {
                 openNote(selectNote);
             }
