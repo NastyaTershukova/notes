@@ -99,7 +99,7 @@ function loadNotesList(selectNote, doUpdate) {
             addListCard(preview);
         }
 
-        if (doUpdate) {
+        if (doUpdate && currentNote != -1) {
             document.getElementById(`list_note${currentNote}`).classList.add('selected');
             if (isNoteChanged) {
                 document.getElementById(`list_notes${currentNote}-edit_date`).innerText = 'Сейчас';

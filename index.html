@@ -52,8 +52,8 @@
     <nav id="nav_bar" class="ui-side_nav">
         <button onclick="toggle_navbar()"> <i class="ph-list"></i> <h2>NOTES</h2> </button>
 
-        <button onclick="tab('home')" id="btn_home"> <i class="ph-compass"></i> <p>Главная</p> </button>
-        <button onclick="tab('trash')" id="btn_trash"> <i class="ph-trash"></i> <p>Корзина</p> </button>
+        <button onclick="openTrash(0)" id="btn_home"> <i class="ph-compass"></i> <p>Главная</p> </button>
+        <button onclick="openTrash(1)" id="btn_trash"> <i class="ph-trash"></i> <p>Корзина</p> </button>
         <div id="nav_bar-loading">
             <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
@@ -105,7 +105,7 @@
                     <div class="note_hint">
                         <div class="note_hint-block">
                             <i class="ph-notebook-light"></i>
-                            <p>Откройте заметку из списка справа или создайте новую.</p>
+                            <p>Откройте заметку из списка слева или создайте новую.</p>
                         </div>
                     </div>
 
@@ -188,8 +188,11 @@
     <footer>
         <div class="menu_mobile">
             <div class="menu_mainpage">
-                <button>
+                <button onclick="openTrash(1)" id="mobile-trash_btn">
                     <i class="ph-trash"></i>
+                </button>
+                <button onclick="openTrash(0)" id="mobile-home_btn" style="display: none">
+                    <i class="ph-compass"></i>
                 </button>
                 <button id="mobile_newnote" onclick="newNote()">
                     <i class="ph-note-pencil"></i>

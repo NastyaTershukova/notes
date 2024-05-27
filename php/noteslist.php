@@ -28,6 +28,7 @@ if (!isset($_GET['is_deleted'])) {
     echo "error_is_deleted_notset";
 }
 
+
 session_start();
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 $request = $mysql->prepare("SELECT uuid, preview, time_edited, time_created, tags from `notes` WHERE owner = ? AND is_deleted = ? ORDER BY ".$_GET['sortby']." DESC");

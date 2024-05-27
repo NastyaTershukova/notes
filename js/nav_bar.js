@@ -25,3 +25,25 @@ function tab(tab) {
   document.getElementById(`page_${tab}`).style.display='block';
 
 }
+
+function openTrash(status) {
+  let tabs = ['home', 'trash', 'create', 'help'];
+
+  for (var i = 0; i < tabs.length; i++) {
+    document.getElementById(`btn_${tabs[i]}`).className='';
+  }
+  let tab = 'trash'
+  if (status == 0) {
+    tab = 'home';
+    document.getElementById('mobile-trash_btn').style.display = 'flex';
+    document.getElementById('mobile-home_btn').style.display = 'none';
+  } else {
+    document.getElementById('mobile-trash_btn').style.display = 'none';
+    document.getElementById('mobile-home_btn').style.display = 'flex';
+  }
+  document.getElementById(`btn_${tab}`).className='selected';
+
+  isTrashBinOpened = status;
+
+  loadNotesList();
+}

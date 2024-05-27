@@ -1,5 +1,5 @@
 tab('home')
-isTrashBinOpened = 0;
+var isTrashBinOpened = 0;
 
 let title_obj = document.getElementById('note_content-title');
 let note_content = document.getElementById('note_content');

@@ -48,7 +48,7 @@
     }
 
     .note {
-        width: 100%;
+        width: calc(100vw - 32px);
         min-width: none;
     }
     .note_title {
