@@ -689,6 +689,7 @@ a {
     flex-direction: column;
     text-align: left;
     gap: 8px;
+    line-height: 1.2;
     margin-bottom: 40px;
     padding-right: 32px;
     padding-top: 16px;
