@@ -107,6 +107,7 @@ function loadNotesList(selectNote, doUpdate) {
                 list.prepend(document.getElementById(`list_note${currentNote}`));
             }
         }
+        document.getElementById('loading-screen').classList.add('hidden');
 
         if (selectNote != undefined) {
 

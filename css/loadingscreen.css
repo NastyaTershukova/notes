@@ -1,0 +1,46 @@
+:root {
+    --page_bg: #fff;
+    --text: #000;
+    --spinner: rgba(0,0,0,0.3);
+}
+[dark-theme='true'] {
+    --page_bg: #000;
+    --text: #dddddd;
+    --spinner: #393939;
+}
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: var(--page_bg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+
+    transform: scale(1);
+    transition: .5s transform, .5s opacity;
+}
+#loading-screen h1 {
+    font-size: 72px;
+    margin-top: 76px;
+    color: var(--spinner);
+}
+#loading-screen > .spinner {
+    width: 64px;
+}
+#loading-screen > .spinner > div {
+    background-color: var(--spinner);
+}
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+
+    transform: scale(1.5);
+}
