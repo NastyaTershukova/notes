@@ -34,7 +34,7 @@ function getParagraphLength(obj) {
 }
 
 function context_tab(name, data) {
-    let tabs = ['sec', 'menu', 'basic', 'img', 'list', 'sort'];
+    let tabs = ['sec', 'menu', 'basic', 'img', 'list', 'sort', 'list_trash'];
 
     for (let i=0;i<tabs.length;i++) {
         document.getElementById(`context-${tabs[i]}`).style.display = 'none';
@@ -53,11 +53,17 @@ function context_tab(name, data) {
             document.getElementById(`context-menu`).style.display = 'block';
             break;
         case "list":
-            document.getElementById(`context-list`).style.display = 'block';
-            document.getElementById('context_menu-list_delete').addEventListener('click', function() {
-                deleteNote(data);
-                console.log(data);
-            });
+            if (isTrashBinOpened == 0) {
+                document.getElementById(`context-list`).style.display = 'block';
+                document.getElementById('context_menu-list_delete').addEventListener('click', function() {
+                    deleteNote(data);
+                });
+            } else {
+                document.getElementById(`context-list_trash`).style.display = 'block';
+                document.getElementById('context_menu-delete_forever').addEventListener('click', function() {
+                    deleteNoteForever(data);
+                });
+            }
             break;
         case "sort":
             document.getElementById(`context-sort`).style.display = 'block';
@@ -187,4 +193,11 @@ document.getElementById('context_menu-list_update').addEventListener('click', ()
 
 document.getElementById('context_menu-delete').addEventListener('click', () => {
     deleteNote(0);
+});
+
+document.getElementById('context_menu-trash_list_update').addEventListener('click', () => {
+    loadNotesList(undefined, true);
+});
+document.getElementById('context_menu-delete_forever').addEventListener('click', () => {
+    deleteNoteForever(0);
 });

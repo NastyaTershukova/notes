@@ -6,6 +6,8 @@
     --accent-02: rgba(4, 2, 156,0.2);
     --accent-dark: rgb(2, 0, 130);
 
+    --note-card: var(--accent-dark);
+
     --border: rgba(0,0,0,0.1);
     --dark_gray: rgb(146,146,146);
     --hover: rgba(0,0,0,0.05);
@@ -36,6 +38,8 @@
     --accent: rgb(167, 166, 231);
     --accent-02: rgba(167, 166, 231, 0.2);
     --accent-dark: rgb(179, 178, 238);
+
+    --note-card: rgb(135, 134, 207);
 
     --hover: rgba(255,255,255,0.1);
     --note_hover: rgba(45,45,45);
@@ -722,11 +726,11 @@ a {
 }
 
 .note.selected {
-    background-color: var(--accent);
+    background-color: var(--note-card);
     color: white;
 }
 .note.selected:hover {
-    background-color: var(--accent-dark);
+    background-color: var(--accent);
 }
 
 .note_title {
@@ -778,6 +782,7 @@ a {
 .note .bottom_row i {
     display: none;
     height: 14px;
+    color: inherit;
 }
 .note_time {
     font-size: 12px;
@@ -805,7 +810,6 @@ a {
     min-width: max-content;
 }
 .second_part_screen {
-    margin-left: 64px;
     flex: 1;
     height: 100%;
     position: relative;
@@ -814,7 +818,6 @@ a {
 }
 
 #loading_note {
-    margin-left: -32px;
     width: 100%;
     height: 100%;
 
@@ -837,14 +840,16 @@ a {
     opacity: 1;
     transition: .25s opacity ease-in;
 }
+#loading_note p {
+    color: var(--spinner);
+}
 
 .mobile_note_topnav {
     display: none;
 }
 .written_note {
     width: 100%;
-    padding-right: 64px;
-    padding-bottom: 64px;
+    padding: 0 64px 64px 64px;
     z-index: 9;
     margin-top: 66px;
 
@@ -909,7 +914,7 @@ a {
     transition: .15s border-color ease-in;
 }
 #note_content p:focus {
-    border-left: 2px solid #020082;
+    border-left: 2px solid var(--accent);
     width: calc(100% + 6px);
     margin-left: -6px;
     padding-left: 4px;
@@ -976,7 +981,6 @@ a {
     position: absolute;
     pointer-events: none;
     transition: .3s opacity;
-    margin-left: -32px;
 }
 .note_hint.hidden {
     opacity: 0;
