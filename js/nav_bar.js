@@ -45,5 +45,7 @@ function openTrash(status) {
 
   isTrashBinOpened = status;
 
+  closeNote();
+
   loadNotesList();
 }
