@@ -33,6 +33,9 @@ function openTrash(status) {
     document.getElementById(`btn_${tabs[i]}`).className='';
   }
   let tab = 'trash'
+
+  document.getElementById('hint_home').style.display = 'none';
+  document.getElementById('hint_trash').style.display = 'none';
   if (status == 0) {
     tab = 'home';
     document.getElementById('mobile-trash_btn').style.display = 'flex';
@@ -42,6 +45,7 @@ function openTrash(status) {
     document.getElementById('mobile-home_btn').style.display = 'flex';
   }
   document.getElementById(`btn_${tab}`).className='selected';
+  document.getElementById(`hint_${tab}`).style.display = 'flex';
 
   isTrashBinOpened = status;
 

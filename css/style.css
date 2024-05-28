@@ -982,6 +982,9 @@ a {
     pointer-events: none;
     transition: .3s opacity;
 }
+#hint_trash {
+    display: none;
+}
 .note_hint.hidden {
     opacity: 0;
     pointer-events: none;
