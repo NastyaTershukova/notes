@@ -25,6 +25,8 @@ if (!isset($_POST['uuid'])) {
     exit;
 }
 
+echo $_POST['uuid'];
+
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 $request = $mysql->prepare("UPDATE `notes` SET is_deleted = 1, delete_time = DATE_ADD(NOW(), INTERVAL 14 DAY) WHERE owner = ? AND uuid = ?");
 

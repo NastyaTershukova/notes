@@ -55,11 +55,44 @@ function context_tab(name, data) {
         case "list":
             if (isTrashBinOpened == 0) {
                 document.getElementById(`context-list`).style.display = 'block';
+                document.getElementById('context-list').innerHTML = '';
+                document.getElementById('context-list').innerHTML = `
+                    <button id="context_menu-select"><i class="ph-check-circle-bold"></i> Выбрать</button>
+                    <button id="context_menu-list_share"><i class="ph-export-bold"></i> Поделиться...</button>
+                    <button id="context_menu-duplicate"><i class="ph-copy-bold"></i> Дублировать</button>
+                    <button id="context_menu-list_update"><i class="ph-arrows-clockwise-bold"></i> Обновить список</button>
+                    <button id="context_menu-pin"><i class="ph-push-pin-bold"></i> Закрепить</button>
+        
+                    <div class="tags">
+                        <i class="ph-tag-bold"></i>
+                        <button class="tag red"> <div></div> </button>
+                        <button class="tag orange"> <div></div> </button>
+                        <button class="tag yellow"> <div></div> </button>
+                        <button class="tag green"> <div></div> </button>
+                        <button class="tag blue"> <div></div> </button>
+                    </div>
+        
+                    <hr>
+        
+                    <button id="context_menu-list_delete" class="red"><i class="ph-trash-simple-bold"></i> Удалить заметку</button>    
+                `;
+
                 document.getElementById('context_menu-list_delete').addEventListener('click', function() {
                     deleteNote(data);
                 });
             } else {
                 document.getElementById(`context-list_trash`).style.display = 'block';
+
+                document.getElementById('context-list_trash').innerHTML = '';
+                document.getElementById('context-list_trash').innerHTML = `
+                    <button id="context_menu-trash_select"><i class="ph-check-circle-bold"></i> Выбрать</button>
+                    <button id="context_menu-trash_list_update"><i class="ph-arrows-clockwise-bold"></i> Обновить список</button>
+                    <button id="context_menu-trash_recover"><i class="ph-file-arrow-up-bold"></i> Восстановить заметку</button>
+        
+                    <hr>
+        
+                    <button id="context_menu-delete_forever" class="red"><i class="ph-trash-simple-bold"></i> Удалить окончательно</button>
+                `;
                 document.getElementById('context_menu-delete_forever').addEventListener('click', function() {
                     deleteNoteForever(data);
                 });
