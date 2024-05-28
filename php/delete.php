@@ -29,7 +29,7 @@ $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 $request = $mysql->prepare("UPDATE `notes` SET is_deleted = 1, delete_time = DATE_ADD(NOW(), INTERVAL 14 DAY) WHERE owner = ? AND uuid = ?");
 
 if (isset($_POST['recover'])) {
-    $request = $mysql->prepare("UPDATE `notes` SET is_deleted = 0, delete_time = 0 WHERE owner = ? AND uuid = ?");
+    $request = $mysql->prepare("UPDATE `notes` SET is_deleted = 0, delete_time = NULL WHERE owner = ? AND uuid = ?");
 }
 
 session_start();

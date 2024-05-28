@@ -119,7 +119,7 @@ document.querySelector('#context_menu-save').addEventListener('click', () => {
     syncNote();
 });
 
-function deleteNote(uuid) {
+function deleteNote(uuid, isRecover) {
     loadingSpinner(true);
     let note = convert_to_json();
     let xhr = new XMLHttpRequest();
@@ -156,7 +156,13 @@ function deleteNote(uuid) {
     let url = 'php/delete.php';
     xhr.open('POST', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(`uuid=${uuid}`);
+    
+    if (isRecover == true) {
+        xhr.send(`uuid=${uuid}&recover=1`);
+    } else {
+        xhr.send(`uuid=${uuid}`);
+    }
+    
 }
 function deleteNoteForever(uuid) {
     loadingSpinner(true);

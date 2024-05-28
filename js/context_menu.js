@@ -63,6 +63,9 @@ function context_tab(name, data) {
                 document.getElementById('context_menu-delete_forever').addEventListener('click', function() {
                     deleteNoteForever(data);
                 });
+                document.getElementById('context_menu-trash_recover').addEventListener('click', function() {
+                    deleteNote(data, true);
+                });
             }
             break;
         case "sort":
@@ -200,4 +203,7 @@ document.getElementById('context_menu-trash_list_update').addEventListener('clic
 });
 document.getElementById('context_menu-delete_forever').addEventListener('click', () => {
     deleteNoteForever(0);
+});
+document.getElementById('context_menu-trash_recover').addEventListener('click', () => {
+    deleteNote(0, true);
 });
