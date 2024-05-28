@@ -12,7 +12,7 @@
         $result = $mysql->prepare("SELECT id, contents_key FROM users WHERE email = (?) AND pass = (?)");
         
         if ($result === false) {
-            die("MySQL prepare error: " . $mysqli->error);
+            die("MySQL prepare error: " . $mysql->error);
         }
 
         $result->bind_param("ss", $email, $hashed_password);
@@ -40,7 +40,7 @@
         $token_result = $mysql->prepare("INSERT INTO tokens (token, user_id, expiration_date, refresh_token, refresh_expiration_date) VALUES (?, ?, FROM_UNIXTIME(?), ?, FROM_UNIXTIME(?))");
         
         if ($token_result === false) {
-            die("MySQL prepare error: " . $mysqli->error);
+            die("MySQL prepare error: " . $mysql->error);
         }
         
         $time = time() + 1800; //30 минут для обычного токена
