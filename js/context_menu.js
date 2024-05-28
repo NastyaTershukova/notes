@@ -96,6 +96,9 @@ function context_tab(name, data) {
                 document.getElementById('context_menu-delete_forever').addEventListener('click', function() {
                     deleteNoteForever(data);
                 });
+                document.getElementById('context_menu-trash_list_update').addEventListener('click', () => {
+                    loadNotesList(undefined, true);
+                });
                 document.getElementById('context_menu-trash_recover').addEventListener('click', function() {
                     deleteNote(data, true);
                 });
@@ -221,10 +224,6 @@ document.getElementById('context_menu-sort_reset').addEventListener('click', () 
     sortTimeEdited();
     color_tags = [];
     checkSortTags();
-});
-
-document.getElementById('context_menu-list_update').addEventListener('click', () => {
-    loadNotesList(undefined, true);
 });
 
 document.getElementById('context_menu-delete').addEventListener('click', () => {

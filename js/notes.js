@@ -144,6 +144,7 @@ function deleteNote(uuid, isRecover) {
         if (uuid == currentNote) {
             loadNote = 0;
             doUpdate = false;
+            closeNote();
         }
 
         loadNotesList(loadNote, doUpdate);

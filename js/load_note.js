@@ -98,15 +98,19 @@ function loadNotesList(selectNote, doUpdate) {
             let preview = data[i];
             addListCard(preview);
         }
-
-        if (doUpdate && currentNote != -1) {
-            document.getElementById(`list_note${currentNote}`).classList.add('selected');
-            if (isNoteChanged) {
-                document.getElementById(`list_notes${currentNote}-edit_date`).innerText = 'Сейчас';
-                document.getElementById(`list_notes${currentNote}-edit_icon`).style.display = 'block';
-                list.prepend(document.getElementById(`list_note${currentNote}`));
+        try {
+            if (doUpdate && currentNote != -1) {
+                document.getElementById(`list_note${currentNote}`).classList.add('selected');
+                if (isNoteChanged) {
+                    document.getElementById(`list_notes${currentNote}-edit_date`).innerText = 'Сейчас';
+                    document.getElementById(`list_notes${currentNote}-edit_icon`).style.display = 'block';
+                    list.prepend(document.getElementById(`list_note${currentNote}`));
+                }
             }
+        } catch(e) {
+            console.log(e);
         }
+        
         document.getElementById('loading-screen').classList.add('hidden');
 
         if (selectNote != undefined) {
