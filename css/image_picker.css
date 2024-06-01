@@ -1,0 +1,35 @@
+#picture__input {
+    display: none;
+}
+  
+.picture {
+    width: 100%;
+    margin-top: 16px;
+    aspect-ratio: 16/9;
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--border);
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+}
+
+.picture:hover {
+    color: var(--light_gray);
+    background-color: var(--hover);
+}
+
+.picture:active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--page_bg);
+}
+
+
+.picture__img {
+    max-width: 100%;
+}

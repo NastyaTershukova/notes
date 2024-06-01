@@ -1789,3 +1789,48 @@ a {
     --color: #2563eb;
     --border: #1e40af;
 }
+
+.new_image_popup {
+    position: fixed;
+    top: 0;
+    left: 0px;
+
+    background-color: rgba(0,0,0,0.5);
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup_window {
+    width: 420px;
+    height: auto;
+    padding: 24px;
+    background-color: var(--side_nav);
+    border-radius: 16px;
+}
+.popup_window h3 {
+    text-align: center;
+}
+.popup_buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 16px;
+}
+.popup_buttons button {
+    background: none;
+    background-color: var(--light_gray);
+    padding: 10px 28px;
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.popup_buttons button.accent {
+    background-color: var(--accent);
+    color: var(--page_bg);
+}

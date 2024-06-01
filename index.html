@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/loadingscreen.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/spinner.css">
+    <link rel="stylesheet" href="/css/image_picker.css">
     <link rel="stylesheet" href="/css/phones.css">
     
     <link rel="stylesheet" href="/fonts/icons.css">
@@ -326,6 +327,25 @@
         </div>
     </div>
 
+    <div class="new_image_popup">
+        <div class="popup_window">
+            <h3>Новое изображение</h3>
+
+            <div class="image_picker-container">
+                <label class="picture" for="picture__input" tabIndex="0">
+                    <span class="picture__image"></span>
+                  </label>
+                  
+                  <input type="file" name="picture__input" id="picture__input">
+            </div>
+
+            <div class="popup_buttons">
+                <button class="accent">Готово</button>
+                <button>Отмена</button>
+            </div>
+        </div>
+    </div>
+
     <div id="loading-screen">
         <h1>NOTES</h1>
         <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -340,6 +360,7 @@
     <script src="js/json_convert.js"></script>
     <script src="js/context_menu.js"></script>
     <script src="js/load_note.js"></script>
+    <script src="js/images.js"></script>
     <script src="js/master.js"></script>
 </body>
 
