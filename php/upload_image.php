@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Проверка MIME-типа файла
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $mimeType = $finfo->buffer($decodedImageData);
-    $allowedMimeTypes = ['image/jpeg', 'image/png'];
+    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/gif', 'image/bmp', 'image/webp'];
     if (!in_array($mimeType, $allowedMimeTypes)) {
         echo json_encode(['error' => 'Invalid file type']);
         exit;

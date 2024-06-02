@@ -10,6 +10,11 @@ inputFile.addEventListener("change", function (e) {
   const file = inputTarget.files[0];
 
   if (file) {
+
+    if (!validateFile(file)) {
+      return;
+    }
+
     const reader = new FileReader();
 
     reader.addEventListener("load", function (e) {
@@ -72,6 +77,10 @@ async function uploadImage() {
       displayImage(document.getElementById(lastCreatedImage), result.success);
 
       newImagePopup(false);
+    } else if (result.error) {
+      console.log(result.error);
+      //TODO ВЫВОДИТЬ ОШИБКУ
+      newImagePopup(false);
     }
   } catch (error) {
     console.error('Error: ', error)
@@ -101,4 +110,27 @@ async function displayImage(obj, filename) {
   } catch (error) {
     console.error('Error:', error)
   }
+}
+
+function validateFile(file) {
+  if (!file) {
+    alert('No file selected.');
+    return false;
+  }
+
+  const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+  const maxFileSize = 15 * 1024 * 1024; // 15 MB
+
+  const fileExtension = file.name.split('.').pop().toLowerCase();
+  if (!allowedExtensions.includes(fileExtension)) {
+    alert('Unsupported file type.');
+    return false;
+  }
+
+  if (file.size > maxFileSize) {
+    alert('File is too large.');
+    return false;
+  }
+
+  return true;
 }

@@ -20,6 +20,7 @@ async function openNote(id, object) {
     if (result == 'synced') {
         isNoteOpened(true);
         eraseHistory();
+        imagePaths = {};
 
         let notes = document.getElementsByClassName("note");
         let note_num = document.getElementsByClassName("note").length;

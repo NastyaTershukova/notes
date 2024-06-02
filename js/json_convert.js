@@ -55,7 +55,7 @@ function convert_to_json() {
 var note_date = 0;
 function convert_from_json(data) {
     let note_content = document.getElementById('note_content');
-    imagePaths = {};
+    console.log('cleared imagePaths');
 
     let object = data[0];
     let preview = data[1];
@@ -119,10 +119,9 @@ function createImage(doFocus, content) {
     
     if (content != undefined) {
         displayImage(obj, content);
-    } else {
-        let img_id = obj.id;
-        imagePaths[img_id] = content;
     }
+    let img_id = obj.id;
+    imagePaths[img_id] = content;
 
     if (doFocus != false) {
         pushToHistory();
