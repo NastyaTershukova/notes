@@ -231,7 +231,29 @@ document.querySelector('#search-field').addEventListener('input', () => {
 
     let list = document.getElementById('list_notes');
 
+    let value = document.querySelector('#search-field').value.trim().toLowerCase();
+
+    let clear_btn = document.querySelector('#search_clear');
+    if (value != '') {
+        clear_btn.classList.remove('hidden');
+    } else {
+        clear_btn.classList.add('hidden');
+    }
+
     for (let i=0; i<list.children.length; i++) {
-        
+        if (list.children[i].querySelector('.note_title').innerText.toLowerCase().includes(value)) {
+            list.children[i].classList.remove('search-hidden');
+        } else {
+            list.children[i].classList.add('search-hidden');
+        }
+    }
+});
+document.querySelector('#search_clear').addEventListener('click', () => {
+
+    document.querySelector('#search-field').value = '';
+    document.querySelector('#search_clear').classList.add('hidden');
+
+    for (let i=0; i<list.children.length; i++) {
+        list.children[i].classList.remove('search-hidden');
     }
 });

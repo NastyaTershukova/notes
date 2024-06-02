@@ -759,6 +759,10 @@ a {
     background-color: var(--accent);
 }
 
+.note.search-hidden {
+    display: none;
+}
+
 .note_title {
     font-weight: 500;
     font-size: 20px;
@@ -1885,4 +1889,38 @@ a {
 .popup_buttons button .spinner {
     margin: 0;
     width: 32px;
+}
+
+.left_side_hints {
+    width: var(--list_width);
+    min-width: 320px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.left_side_hints.hidden {
+    display: none;
+}
+.left_side_hints div {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    gap: 16px;
+}
+.left_side_hints div.hidden {
+    display: none;
+}
+.left_side_hints div i {
+    font-size: 64px;
+    color: var(--light_gray);
+}
+.left_side_hints div p {
+    font-size: 14px;
+    text-align: center;
+
+    color: var(--light_gray);
 }
