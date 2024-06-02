@@ -91,7 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Генерация имени файла
-    $filename = __DIR__ . '/../uploads/encrypted_image_' . time() . '.enc';
+    $filename_raw = 'encrypted_image_' . time() . '.enc';
+    $filename = __DIR__ . '/../uploads/' . $filename_raw;
     if (!saveImage($encryptedImage, $filename)) {
         echo json_encode(['error' => 'Failed to save image']);
         exit;
@@ -111,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt->bind_param('s', $filename);
+    $stmt->bind_param('s', $filename_raw);
     if (!$stmt->execute()) {
         echo json_encode(['error' => 'Execute statement failed: ' . $stmt->error]);
         exit;
@@ -120,6 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $mysqli->close();
 
-    echo json_encode(['success' => $filename]);
+    echo json_encode(['success' => $filename_raw]);
 }
 ?>

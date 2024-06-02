@@ -1833,17 +1833,30 @@ a {
     align-items: center;
     margin-top: 16px;
 }
+.popup_buttons.disabled {
+    pointer-events: none;
+}
 .popup_buttons button {
     background: none;
     background-color: var(--light_gray);
-    padding: 10px 28px;
+    padding: 0 28px;
     border-radius: 4px;
+    height: 36px;
 
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .popup_buttons button.accent {
     background-color: var(--accent);
     color: var(--page_bg);
+}
+
+.popup_buttons button .spinner {
+    margin: 0;
+    width: 32px;
 }

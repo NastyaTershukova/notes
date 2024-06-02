@@ -39,21 +39,37 @@ function newImagePopup(status) {
     return true;
   }
 
+  document.querySelector('.popup_buttons').children[0].innerHTML = `Готово`;
+  document.querySelector('.popup_buttons').classList.remove('disabled');
+  document.querySelector('#picture__input').disabled = false;
+  pictureImage.innerHTML = pictureImageTxt;
+  file = 0;
+  
   popup.classList.remove('hidden');
 }
 
 async function uploadImage() {
-  const form = document.getElementById('uploadForm');
 
   try {
+
+    document.querySelector('.popup_buttons').children[0].innerHTML = `<div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
+    document.querySelector('.popup_buttons').classList.add('disabled');
+    document.querySelector('#picture__input').disabled = true;
+
     const response = await fetch('php/upload_image.php', {
       method: 'POST',
       body: JSON.stringify({
         image: loadedImage
       })
     })
-    const result = await response.text();
-    console.log(result);
+    const result = await response.json();
+    //console.log(result);
+
+    if (result.success) {
+      console.log(result.success);
+
+      newImagePopup(false);
+    }
   } catch (error) {
     console.error('Error: ', error)
   }
