@@ -76,9 +76,12 @@
                     <div class="search_and_sort">
                         <div class="search">
                             <i class="ph-magnifying-glass"></i>
-                            <input type="text" placeholder="Поиск">
+                            <input type="text" id="search-field" placeholder="Поиск">
                             <div id="search_tags">
                             </div>
+                            <button id="search_clear" class="hidden">
+                                <i class="ph-backspace-bold"></i>
+                            </button>
                         </div>
             
                         <button id="sorting">
@@ -204,7 +207,7 @@
                     <i class="ph-note-pencil"></i>
                 </button>
                 <button>
-                    <img src="userpictures/devio.jpeg" id="mobile_userphoto">
+                    <img id="mobile_userphoto">
                 </button>
             </div>
             <div class="menu_note">
@@ -322,7 +325,6 @@
         <div id="context-menu">
             <button id="context_menu-save"><i class="ph-cloud-check-bold"></i> Синхронизировано</button>
             <button id="context_menu-share"><i class="ph-export-bold"></i> Поделиться...</button>
-            <button id="context_menu-json"><i class="ph-cube-bold"></i> Перевести в JSON</button>
             <button id="context_menu-delete" class="red"><i class="ph-trash-simple-bold"></i> Удалить заметку</button>
         </div>
     </div>

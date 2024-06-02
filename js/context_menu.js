@@ -153,10 +153,6 @@ document.getElementById('context_menu-image').addEventListener('click', createIm
 
 document.getElementById('context_menu-paragraph').addEventListener('click', createParagraph);
 
-document.getElementById('context_menu-json').addEventListener('click', () => {
-    convert_to_json();
-});
-
 document.getElementById('context_menu-bold').addEventListener('click', function () {
     performAction('bold');
 });

@@ -226,3 +226,12 @@ function isNoteOpened(status) {
         document.querySelector('.written_note').classList.add('hidden');
     }
 }
+
+document.querySelector('#search-field').addEventListener('input', () => {
+
+    let list = document.getElementById('list_notes');
+
+    for (let i=0; i<list.children.length; i++) {
+        
+    }
+});
