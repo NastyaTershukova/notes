@@ -1,6 +1,8 @@
 
 function load_note(id) {
 
+    loadingSpinner(true);
+
     document.getElementById('loading_note').style.display = "flex";
     document.getElementsByClassName('written_note')[0].style.display = "none";
 

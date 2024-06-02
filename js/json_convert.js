@@ -84,6 +84,8 @@ function convert_from_json(data) {
     if (object.content.length == 0) {
         createParagraph(false);
     }
+
+    loadingSpinner(false);
     
 }
 
@@ -95,7 +97,7 @@ function insertAfter(newNode, referenceNode) {
       // Если нет следующего элемента, значит referenceNode последний, и мы добавляем в конец
       referenceNode.parentNode.appendChild(newNode);
     }
-  }
+}
 
 function createImage(doFocus, content) {
 
@@ -116,6 +118,10 @@ function createImage(doFocus, content) {
         insertAfter(obj, document.getElementById(currentFocus));
     } else {
         note_content.appendChild(obj);
+    }
+
+    if (content == undefined && doFocus != false) {
+        newImagePopup();
     }
 
     let img_obj = document.getElementById(`image${image_num}`);

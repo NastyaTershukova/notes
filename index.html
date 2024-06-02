@@ -327,10 +327,9 @@
         </div>
     </div>
 
-    <div class="new_image_popup">
+    <div class="new_image_popup hidden">
         <div class="popup_window">
             <h3>Новое изображение</h3>
-
             <div class="image_picker-container">
                 <label class="picture" for="picture__input" tabIndex="0">
                     <span class="picture__image"></span>
@@ -338,10 +337,9 @@
                   
                   <input type="file" name="picture__input" id="picture__input">
             </div>
-
             <div class="popup_buttons">
-                <button class="accent">Готово</button>
-                <button>Отмена</button>
+                <button onclick="uploadImage()" class="accent">Готово</button>
+                <button onclick="newImagePopup(false)">Отмена</button>
             </div>
         </div>
     </div>
