@@ -98,29 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Сохранение пути к изображению в базе данных
-    $mysqli = new mysqli('localhost', 'root', '', 'register-bd', 8000);
-
-    if ($mysqli->connect_error) {
-        echo json_encode(['error' => 'Database connection failed: ' . $mysqli->connect_error]);
-        exit;
-    }
-
-    $stmt = $mysqli->prepare("INSERT INTO images (path) VALUES (?)");
-    if (!$stmt) {
-        echo json_encode(['error' => 'Prepare statement failed: ' . $mysqli->error]);
-        exit;
-    }
-
-    $stmt->bind_param('s', $filename_raw);
-    if (!$stmt->execute()) {
-        echo json_encode(['error' => 'Execute statement failed: ' . $stmt->error]);
-        exit;
-    }
-
-    $stmt->close();
-    $mysqli->close();
-
     echo json_encode(['success' => $filename_raw]);
 }
 ?>
