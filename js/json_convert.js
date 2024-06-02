@@ -24,7 +24,9 @@ function convert_to_json() {
                 break;
             case "IMG":
                 content_type = "image";
-                content_value = note.children[i].src;
+                let img_id = note.children[i].id;
+                content_value = imagePaths[img_id];
+                console.log(imagePaths[img_id]);
                 break;
             case "TEXTAREA":
                 content_type = "code";
@@ -53,6 +55,7 @@ function convert_to_json() {
 var note_date = 0;
 function convert_from_json(data) {
     let note_content = document.getElementById('note_content');
+    imagePaths = {};
 
     let object = data[0];
     let preview = data[1];
@@ -99,6 +102,7 @@ function insertAfter(newNode, referenceNode) {
     }
 }
 
+var lastCreatedImage = -1;
 function createImage(doFocus, content) {
 
     let note_content = document.getElementById('note_content');
@@ -108,9 +112,16 @@ function createImage(doFocus, content) {
     obj.id = `image${image_num}`;
     obj.src = `/img/Cover.jpg`;
     obj.tabIndex = "0";
+
+    lastCreatedImage = obj.id;
+
+    console.log(content);
     
     if (content != undefined) {
-        obj.src = content;
+        displayImage(obj, content);
+    } else {
+        let img_id = obj.id;
+        imagePaths[img_id] = content;
     }
 
     if (doFocus != false) {
