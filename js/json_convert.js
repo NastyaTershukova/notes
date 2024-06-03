@@ -126,7 +126,12 @@ function createImage(doFocus, content) {
 
     if (doFocus != false) {
         pushToHistory();
-        insertAfter(obj, document.getElementById(currentFocus));
+        if (currentFocus == -1) {
+            note_content.appendChild(obj);
+        } else {
+            insertAfter(obj, document.getElementById(currentFocus));
+        }
+        
     } else {
         note_content.appendChild(obj);
     }

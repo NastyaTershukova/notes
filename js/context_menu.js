@@ -150,6 +150,7 @@ function get_object_count(obj) {
 }
 
 document.getElementById('context_menu-image').addEventListener('click', createImage);
+document.getElementById('mobile_image').addEventListener('click', createImage);
 
 document.getElementById('context_menu-paragraph').addEventListener('click', createParagraph);
 
@@ -234,4 +235,26 @@ document.getElementById('context_menu-delete_forever').addEventListener('click',
 });
 document.getElementById('context_menu-trash_recover').addEventListener('click', () => {
     deleteNote(0, true);
+});
+document.getElementById('mobile_cursor').addEventListener('click', (event) => {
+    let focusTag = 'P';
+    if (currentFocus != -1) {
+        focusTag = document.getElementById(currentFocus).tagName;
+    }
+    if (!(focusTag == 'P' || focusTag == 'IMG')) {
+        focusTag = 'P';
+    }
+
+    if (!context_menu.classList.contains('hidden')) {
+        context_menu.classList.add("hidden");
+    } else {
+        contextmenu_click(event);
+        context_tab(focusTag);
+        setTimeout(() => {
+            document.addEventListener('click', () => {
+                context_menu.classList.add("hidden");
+            }, { once: true });
+        }, 1);
+    }
+    
 });

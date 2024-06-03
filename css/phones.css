@@ -173,4 +173,8 @@
         display: none;
     }
 
+    .popup_window {
+        width: calc(100vw - 32px);
+    }
+
 }

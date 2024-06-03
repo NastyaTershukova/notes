@@ -972,6 +972,7 @@ a {
 #note_content img {
     border-radius: 4px;
     max-height: 320px;
+    max-width: 100%;
     margin: 8px auto;
     display: block;
     color: gray;
@@ -985,6 +986,7 @@ a {
 #note_content img.unloaded {
     height: 200px;
     padding: 50px;
+    background-color: #EFEFEF;
 
     color: gray;
 }
