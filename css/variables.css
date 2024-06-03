@@ -1,0 +1,58 @@
+
+:root {
+    --list_width: 27vw;
+
+    --accent: rgb(4, 2, 156);
+    --accent-02: rgba(4, 2, 156,0.2);
+    --accent-dark: rgb(2, 0, 130);
+
+    --note-card: var(--accent-dark);
+
+    --border: rgba(0,0,0,0.1);
+    --dark_gray: rgb(146,146,146);
+    --hover: rgba(0,0,0,0.05);
+    --note_hover: #dbdbdb;
+
+    --side_nav: #EFEFEF;
+    --light_gray: rgba(0,0,0,0.3);
+
+    --page_bg: #fff;
+    --text: #000;
+
+    --spinner: rgba(0,0,0,0.3);
+    --context_bg: rgba(255,255,255,0.85);
+
+    --mobile_nav: rgba(0, 0, 0, 0.03);
+    --mobile_nav-border: rgba(0,0,0,0.08);
+
+    --note_preview: rgb(102, 102, 102);
+
+    --red: #ba000d;
+}
+[dark-theme='true'] {
+    --page_bg: #000;
+    --text: #dddddd;
+    --border: #393939;
+    --side_nav: rgb(38, 38, 38);
+
+    --accent: rgb(167, 166, 231);
+    --accent-02: rgba(167, 166, 231, 0.2);
+    --accent-dark: rgb(179, 178, 238);
+
+    --note-card: rgb(135, 134, 207);
+
+    --hover: rgba(255,255,255,0.1);
+    --note_hover: rgba(45,45,45);
+
+    --spinner: var(--border);
+
+    --mobile_nav: rgba(45,45,45,0.85);
+    --mobile_nav-border: rgba(60,60,60,0.95);
+
+    --context_bg: rgba(30,30,30,0.85);
+    --light_gray: rgba(255,255,255,0.25);
+
+    --note_preview: rgb(140, 140, 140);
+
+    --red: #ef4d58;
+}
