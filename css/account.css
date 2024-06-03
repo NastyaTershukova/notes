@@ -1,0 +1,11 @@
+html, body {
+    margin: 0;
+    width: 100%;
+}
+.sign_up_text {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+a {
+    cursor: pointer;
+}

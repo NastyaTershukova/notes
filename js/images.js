@@ -103,6 +103,7 @@ async function displayImage(obj, filename) {
 
     if (result.error) {
       obj.src = '/img/image-broken.svg';
+      obj.classList.add('broken');
       console.error('Error:', result.error)
       return
     }
