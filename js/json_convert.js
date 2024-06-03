@@ -1,10 +1,22 @@
+function encodeSpecialChars(str) {
+    // Расширенный набор символов для кодирования
+    const specialChars = /[&<>"'\\]/g;
+    return str.replace(specialChars, function(match) {
+        return '*(' + match.charCodeAt(0) + ')';
+    });
+}
+function decodeSpecialChars(str) {
+    return str.replace(/\*\((\d+)\)/g, function(match, num) {
+        return String.fromCharCode(num);
+    });
+}
 function convert_to_json() {
     let note = document.getElementById('note_content');
     let json_contents = {
         content: []
     }
     let json_preview = {
-        title: document.getElementById('note_content-title').innerText,
+        title: encodeSpecialChars(document.getElementById('note_content-title').innerHTML),
         text: ""
     }
 
@@ -17,9 +29,10 @@ function convert_to_json() {
         switch (note.children[i].tagName) {
             case "P":
                 content_type = "paragraph";
-                content_value = note.children[i].innerHTML;
+                content_value = encodeSpecialChars(note.children[i].innerHTML);
+                console.log(content_value);
                 if (json_preview.text == "" && getParagraphLength(note.children[i]) > 0) {
-                    json_preview.text = note.children[i].innerText;
+                    json_preview.text = encodeSpecialChars(note.children[i].innerText);
                 }
                 break;
             case "IMG":
@@ -63,7 +76,7 @@ function convert_from_json(data) {
 
     note_date = formatRelativeDate(data.date);
 
-    document.getElementById('note_content-title').innerText = preview.title;
+    document.getElementById('note_content-title').innerHTML = decodeSpecialChars(preview.title);
     if (getParagraphLength(document.getElementById('note_content-title')) > 0) {
         document.getElementById('note_content-title_placeholder').style.display = "none";
     } else {
@@ -74,7 +87,7 @@ function convert_from_json(data) {
     for (let i in object.content) {
         switch (object.content[i].type) {
             case "paragraph":
-                createParagraph(false, object.content[i].value);
+                createParagraph(false, decodeSpecialChars(object.content[i].value));
                 break;
             case "image":
                 createImage(false, object.content[i].value);

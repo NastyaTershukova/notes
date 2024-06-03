@@ -84,13 +84,19 @@ function loadNotesList(selectNote, doUpdate) {
 
         let data = JSON.parse(xhr.responseText).map(item => {
             // item[0] - строка JSON, которую нужно разобрать
-            let note = JSON.parse(item[0]);
+            try {
+                let note = JSON.parse(item[0]);
+                note.date_edited = item[1];
+                note.date_created = item[2];
+                note.tags = item[3];
+                note.uuid = item[4];
+                return note;
+            } catch (e) {
+                console.log(e);
+            }
+            
             // Добавим теги, даты создания и обновления как свойства объекта note
-            note.date_edited = item[1];
-            note.date_created = item[2];
-            note.tags = item[3];
-            note.uuid = item[4];
-            return note;
+            
         });
 
         
@@ -98,7 +104,12 @@ function loadNotesList(selectNote, doUpdate) {
         list.innerHTML = "";
         for (let i=0;i<data.length;i++) {
             let preview = data[i];
-            addListCard(preview);
+            try {
+                addListCard(preview);
+            } catch (e) {
+                console.log(e);
+            }
+            
         }
         try {
             if (doUpdate && currentNote != -1) {
@@ -151,11 +162,11 @@ function loadNotesList(selectNote, doUpdate) {
 function addListCard(preview, place) {
     let list = document.getElementById('list_notes');
     let card = document.createElement("div");
-    let title = preview.title;
+    let title = decodeSpecialChars(preview.title);
     if (title == "") {
         title = "Новая заметка";
     }
-    let text = preview.text;
+    let text = decodeSpecialChars(preview.text);
     if (text == "") {
         text = "[Пустая заметка]";
     }
