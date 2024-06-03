@@ -102,11 +102,13 @@ async function displayImage(obj, filename) {
     const result = await response.json();
 
     if (result.error) {
+      obj.src = '/img/image-broken.svg';
       console.error('Error:', result.error)
       return
     }
 
     obj.src = 'data:image/jpeg;base64,' + result.image;
+    obj.classList.remove('unloaded');
   } catch (error) {
     console.error('Error:', error)
   }

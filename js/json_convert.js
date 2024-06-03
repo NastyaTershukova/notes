@@ -110,7 +110,8 @@ function createImage(doFocus, content) {
 
     let image_num = get_object_count("IMG");
     obj.id = `image${image_num}`;
-    obj.src = `/img/Cover.jpg`;
+    obj.src = `/img/image.svg`;
+    obj.className = 'unloaded';
     obj.tabIndex = "0";
 
     lastCreatedImage = obj.id;
