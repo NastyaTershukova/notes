@@ -181,6 +181,12 @@ document.getElementById('context_menu-paste').addEventListener('click', async ()
     }
 });
 
+document.getElementById('context_menu-upload_img').addEventListener('click', () => {
+    setNoteChanged();
+    newImagePopup(true);
+     lastCreatedImage = currentFocus;
+});
+
 document.getElementById('context_menu-remove_img').addEventListener('click', () => {
     pushToHistory();
     let previous_element = -1;
