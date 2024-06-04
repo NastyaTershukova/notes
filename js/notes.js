@@ -1,4 +1,5 @@
 var currentNote = -1;
+var currentNoteTags = [];
 var isNoteChanged = false;
 var isNoteSynced = false;
 

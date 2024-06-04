@@ -17,7 +17,8 @@ function convert_to_json() {
     }
     let json_preview = {
         title: encodeSpecialChars(document.getElementById('note_content-title').innerHTML),
-        text: ""
+        text: "",
+        tags: currentNoteTags
     }
 
     for (let i=0; i<note.children.length; i++) {

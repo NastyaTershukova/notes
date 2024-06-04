@@ -109,7 +109,7 @@ async function displayImage(obj, filename) {
     }
 
     obj.src = 'data:image/jpeg;base64,' + result.image;
-    obj.classList.remove('unloaded');
+    obj.classList = '';
   } catch (error) {
     console.error('Error:', error)
   }
