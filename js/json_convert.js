@@ -18,7 +18,7 @@ function convert_to_json() {
     let json_preview = {
         title: encodeSpecialChars(document.getElementById('note_content-title').innerHTML),
         text: "",
-        tags: currentNoteTags
+        tags: currentNoteTags.toString()
     }
 
     for (let i=0; i<note.children.length; i++) {
@@ -62,15 +62,14 @@ function convert_to_json() {
     let result = {
         contents : JSON.stringify(json_contents),
         preview : JSON.stringify(json_preview),
+        contents_json: json_contents,
+        preview_json: json_preview
     };
     return result;
 }
 
 var note_date = 0;
 function convert_from_json(data) {
-    let note_content = document.getElementById('note_content');
-    console.log('cleared imagePaths');
-
     let object = data[0];
     let preview = data[1];
     let date_edited = formatFullDate(data[2]);
@@ -96,6 +95,12 @@ function convert_from_json(data) {
             default:
                 console.error(`Произошла ошибка при загрузке элемента типа ${object.content[i].content_type}.`);
         }
+    }
+
+    try {
+        currentNoteTags = preview.tags.split(',');
+    } catch (e) {
+        currentNoteTags = [];
     }
 
     if (object.content.length == 0) {

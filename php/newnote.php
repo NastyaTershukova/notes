@@ -22,8 +22,8 @@ if ($id == "error_not_executable") {
 }
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `uuid`, `contents`, `preview`, `time_edited`, `time_created`, `tags`, `is_deleted`)
-VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, 0)");
+$request = $mysql->prepare("INSERT INTO `notes` (`owner`, `uuid`, `contents`, `preview`, `time_edited`, `time_created`, `is_deleted`)
+VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), 0)");
 
 $data = array(
     'content' => [],
@@ -57,9 +57,8 @@ $encryptedPreview = encryptNote($preview_encode, $contents_key);
 if ($request === false) {
     die("MySQL prepare error: " . $mysqli->error);
 }
-$tags = json_encode([]);
 $cur_time = time();
-$request->bind_param("isssiis", $_SESSION['user_id'], $uuid, $encryptedNote, $encryptedPreview, $cur_time, $cur_time, $tags);
+$request->bind_param("isssii", $_SESSION['user_id'], $uuid, $encryptedNote, $encryptedPreview, $cur_time, $cur_time);
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();

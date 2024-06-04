@@ -54,7 +54,7 @@ async function newNote() {
     try {
         const response = await fetch(url);
         const text = await response.text();
-        console.log(text);
+        //console.log(text);
 
         if (text == "token_reloaded") {
             console.log('Token is reloaded. Retry in 300ms...');
@@ -68,8 +68,10 @@ async function newNote() {
     }
 }
 
+var notesList = {};
 function loadNotesList(selectNote, doUpdate) {
     loadingSpinner(true);
+    notesList = {};
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() {
@@ -88,8 +90,7 @@ function loadNotesList(selectNote, doUpdate) {
                 let note = JSON.parse(item[0]);
                 note.date_edited = item[1];
                 note.date_created = item[2];
-                note.tags = item[3];
-                note.uuid = item[4];
+                note.uuid = item[3];
                 return note;
             } catch (e) {
                 console.log(e);
@@ -107,7 +108,7 @@ function loadNotesList(selectNote, doUpdate) {
             try {
                 addListCard(preview);
             } catch (e) {
-                console.log(e);
+                //console.log(e);
             }
             
         }
@@ -177,10 +178,25 @@ function addListCard(preview, place) {
         <p class="note_text">${text}</p>
         <div class="bottom_row">
             <i id="list_notes${preview.uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
+            <div class="note_tags" id="tags${preview.uuid}">
+                ${tagsToIcons(preview.tags)}
+            </div>
             <p id='list_notes${preview.uuid}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
         </div>
         
     `;
+    
+    let note_tags = '';
+    if ((preview.tags != undefined) && (preview.tags != '[]')) {
+        note_tags = preview.tags;
+    }
+
+    notesList[preview.uuid] = {
+        title: preview.title,
+        text: preview.text,
+        tags: note_tags
+    };
+
     card.className = "note";
     card.id = `list_note${preview.uuid}`;
     card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
@@ -264,4 +280,14 @@ function formatFullDate(dateString) {
 
     // Формирование итоговой строки
     return `${day} ${month} ${year}г. в ${hours}:${minutes}`;
+}
+
+function tagsToIcons(tags) {
+
+    if (tags == '') {
+        return '';
+    }
+    return tags.split(',')
+        .map(tag => `<div class="tag ${tag.trim()}"></div>`)
+        .join('')
 }

@@ -56,6 +56,17 @@ function context_tab(name, data) {
             if (isTrashBinOpened == 0) {
                 document.getElementById(`context-list`).style.display = 'block';
                 document.getElementById('context-list').innerHTML = '';
+
+                let tags_row = `<div class="tags"><i class="ph-tag-bold"></i>`;
+                for (let i=0; i<colors.length; i++) {
+                    if (notesList[data].tags.includes(colors[i])) {
+                        tags_row += `<button onclick="toggleTag('${data}', '${colors[i]}')" class="tag ${colors[i]}"> <div><span class="tag_dot"></span></div> </button>`;
+                    } else {
+                        tags_row += `<button onclick="toggleTag('${data}', '${colors[i]}')" class="tag ${colors[i]}"> <div></div> </button>`;
+                    }
+                }
+                tags_row += '</div>';
+
                 document.getElementById('context-list').innerHTML = `
                     <button id="context_menu-select"><i class="ph-check-circle-bold"></i> Выбрать</button>
                     <button id="context_menu-list_share"><i class="ph-export-bold"></i> Поделиться...</button>
@@ -63,14 +74,7 @@ function context_tab(name, data) {
                     <button id="context_menu-list_update"><i class="ph-arrows-clockwise-bold"></i> Обновить список</button>
                     <button id="context_menu-pin"><i class="ph-push-pin-bold"></i> Закрепить</button>
         
-                    <div class="tags">
-                        <i class="ph-tag-bold"></i>
-                        <button class="tag red"> <div></div> </button>
-                        <button class="tag orange"> <div></div> </button>
-                        <button class="tag yellow"> <div></div> </button>
-                        <button class="tag green"> <div></div> </button>
-                        <button class="tag blue"> <div></div> </button>
-                    </div>
+                    ${tags_row}
         
                     <hr>
         
@@ -109,6 +113,35 @@ function context_tab(name, data) {
             break;
     }
 }
+
+function toggleTag(uuid, color) {
+    console.log(notesList[uuid].tags);
+    let tags_array = []
+    try {
+      console.log(notesList[uuid])
+      tags_array = notesList[uuid].tags ? notesList[uuid].tags.split(',').filter(tag => tag.trim() !== '') : [] // Преобразование строки в массив и удаление пустых элементов
+    } catch (e) {
+      console.log(e)
+    }
+  
+    const colorIndex = tags_array.indexOf(color);
+  
+    if (colorIndex !== -1) {
+      // Удаление элемента
+      tags_array.splice(colorIndex, 1);
+    } else {
+      // Добавление элемента
+      tags_array.push(color);
+    }
+  
+    // Присвоение измененной строки обратно в notesList
+    notesList[uuid].tags = tags_array.filter(tag => tag.trim() !== '').join(',');
+
+    document.getElementById(`tags${uuid}`).innerHTML = tagsToIcons(notesList[uuid].tags);
+  
+    syncNotePreview(uuid);
+}
+  
 
 var contextMenuData = -1;
 function summon_context_menu(event, tagName, data) {

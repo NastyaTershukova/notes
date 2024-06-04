@@ -1,6 +1,6 @@
 let list = document.getElementById('list_notes');
 var color_tags = [];
-let colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+var colors = ['red', 'orange', 'yellow', 'green', 'blue'];
 
 function sortAscending() {
     list.style.flexDirection = "column";
@@ -65,7 +65,7 @@ function checkSortTags() {
         if (index === -1) {
             tag_list.children[i].children[0].innerHTML = ``;
         } else {
-            tag_list.children[i].children[0].innerHTML = `<i class="ph-check"></i>`;
+            tag_list.children[i].children[0].innerHTML = `<span class="tag_dot"></span>`;
             let searchTag = document.createElement('div');
             searchTag.className = colors[i-1];
             searchTags.appendChild(searchTag);

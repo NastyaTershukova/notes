@@ -102,6 +102,17 @@ function syncNote() {
 
             isNoteChanged = false;
             isNoteSynced = true;
+
+            let note_tags = '';
+            if (note.preview_json.tags != undefined) {
+                note_tags = note.preview_json.tags;
+            }
+            notesList[currentNote] = {
+                title: note.preview_json.title,
+                content: note.preview_json.text,
+                tags: note_tags
+            };
+
             resolve('synced');
             loadingSpinner(false);
             
@@ -286,4 +297,40 @@ function toggleLeftHints(value) {
     //     list.children[i].classList.add('hidden');
     // }
     // document.querySelector(`#hint_${value}`).classList.remove('hidden');
+}
+
+function syncNotePreview(uuid) {
+    loadingSpinner(true);
+    return new Promise((resolve, reject) => {
+
+        if (notesList[uuid] == undefined) {
+            reject('error');
+            return;
+        }
+        let xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            if (xhr.responseText == "token_reloaded") {
+                console.log('Token is reloaded. Retry in 300ms...');
+                setTimeout(() => {
+                    syncNotePreview(uuid);
+                }, 300);
+                return "token_reloaded";
+            }
+            console.log(xhr.responseText);
+            resolve('synced');
+            loadingSpinner(false);
+            
+        } else {
+            console.error('Request failed with status ', xhr.status);
+            reject('error');
+        }
+        };
+
+        let url = 'php/updatenote.php';
+        xhr.open('POST', url);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(`id=${uuid}&preview=${JSON.stringify(notesList[uuid])}`);
+    });
 }

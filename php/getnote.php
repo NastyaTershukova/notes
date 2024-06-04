@@ -54,7 +54,7 @@ $result = $request->get_result()->fetch_assoc();
 $contents_encrypt_key = 'FSK10-klFA_01;ASFDyio[sDLVm, w45we51!!@m';
 $contents_key = decryptToken($_SESSION['contents_key'], $contents_encrypt_key);
 
-$result_note = Array(decryptNote($result['contents'], $contents_key), decryptNote($result['preview'], $contents_key), $result['time_edited'], $result['time_created'], $result['tags']);
+$result_note = Array(decryptNote($result['contents'], $contents_key), decryptNote($result['preview'], $contents_key), $result['time_edited'], $result['time_created']);
 // Возвращаем JSON как ответ на запрос
 header('Content-Type: application/json');
 echo json_encode($result_note);
