@@ -181,3 +181,84 @@ h1 {
     max-width: 100%;
     margin-top: 48px;
 }
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: 0 48px;
+}
+.feature {
+    flex: 1;
+}
+.feature p {
+    color: gray;
+    font-size: 14px;
+    margin-left: 10px;
+    line-height: 1.4;
+}
+.feature-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    fill: var(--accent);
+    border-left: 2px solid var(--accent);
+    height: 20px;
+    padding-left: 8px;
+}
+.feature-header h3 {
+    font-size: 15px;
+}
+.feature-header svg {
+    width: 20px;
+}
+.review-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 64px 0 64px 0;
+}
+.review {
+    background-color: white;
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,0.1);
+    flex: 1;
+
+    border-radius: 12px;
+}
+.review-header {
+    display: flex;
+    align-items: center;
+}
+.review-header img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100px;
+    margin-right: 8px;
+}
+.review-header p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: gray;
+}
+.review-header p.name {
+    font-weight: bold;
+    color: var(--text);
+    font-size: 16px;
+}
+.review-text {
+    margin: 8px 0 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.review-description {
+    flex: 1;
+}
+
+.price-free {
+
+}
+.price-free li {
+    list-style-image: url(/img/icons/check-bold.svg);
+}
