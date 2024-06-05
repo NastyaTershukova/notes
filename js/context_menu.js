@@ -147,8 +147,8 @@ function toggleTag(uuid, color) {
 var contextMenuData = -1;
 function summon_context_menu(event, tagName, data) {
     contextMenuData = data;
-    contextmenu_click(event);
     context_tab(tagName, data);
+    contextmenu_click(event);
     document.addEventListener('click', () => {
         context_menu.classList.add("hidden");
         contextMenuData = -1;
@@ -159,8 +159,14 @@ function contextmenu_click(event, xx, yy) {
     event.preventDefault();
     let context_menu = document.getElementById("context_menu");
 
-    let x = Math.min(event.pageX, window.innerWidth - 216);
-    let y = Math.min(event.pageY - window.scrollY, window.innerHeight - context_menu.clientHeight - 16);
+    let rect = context_menu.getBoundingClientRect();
+
+    let x = Math.min(event.clientX, window.innerWidth - rect.width - 16);
+    let y = Math.min(event.clientY, window.innerHeight - rect.height - 16);
+
+    if (rect.height > 500) {
+        y = event.clientY;
+    }
 
     if (xx != undefined) { x = xx; }
     if (yy != undefined) { y = yy; }
