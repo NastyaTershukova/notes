@@ -31,6 +31,7 @@ $data = array(
 $preview = array(
     'title' => '',
     'text' => '',
+    'tags' => ''
 );
 
 function generateUUIDv4() {
