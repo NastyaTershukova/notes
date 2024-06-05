@@ -105,12 +105,7 @@ function loadNotesList(selectNote, doUpdate) {
         list.innerHTML = "";
         for (let i=0;i<data.length;i++) {
             let preview = data[i];
-            try {
-                addListCard(preview);
-            } catch (e) {
-                //console.log(e);
-            }
-            
+            addListCard(preview);
         }
         try {
             if (doUpdate && currentNote != -1) {
@@ -130,7 +125,7 @@ function loadNotesList(selectNote, doUpdate) {
         if (selectNote != undefined) {
 
             if (typeof selectNote == "number") {
-                //openNote(data[selectNote].uuid);
+                openNote(data[selectNote].uuid);
             } else {
                 openNote(selectNote);
             }
@@ -163,50 +158,84 @@ function loadNotesList(selectNote, doUpdate) {
 function addListCard(preview, place) {
     let list = document.getElementById('list_notes');
     let card = document.createElement("div");
-    let title = decodeSpecialChars(preview.title);
-    if (title == "") {
-        title = "Новая заметка";
-    }
-    let text = decodeSpecialChars(preview.text);
-    if (text == "") {
-        text = "[Пустая заметка]";
-    }
-    let date = new Date(preview.date_edited);
+    try {
+        let title = decodeSpecialChars(preview.title);
+        if (title == "") {
+            title = "Новая заметка";
+        }
+        let text = decodeSpecialChars(preview.text);
+        if (text == "") {
+            text = "[Пустая заметка]";
+        }
+        let date = new Date(preview.date_edited);
 
-    card.innerHTML = `
-        <p class="note_title">${title}</p>
-        <p class="note_text">${text}</p>
-        <div class="bottom_row">
-            <i id="list_notes${preview.uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
-            <div class="note_tags" id="tags${preview.uuid}">
-                ${tagsToIcons(preview.tags)}
+        card.innerHTML = `
+            <p class="note_title">${title}</p>
+            <p class="note_text">${text}</p>
+            <div class="bottom_row">
+                <i id="list_notes${preview.uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
+                <div class="note_tags" id="tags${preview.uuid}">
+                    ${tagsToIcons(preview.tags)}
+                </div>
+                <p id='list_notes${preview.uuid}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
             </div>
-            <p id='list_notes${preview.uuid}-edit_date' class="note_time">${formatRelativeDate(date.getTime() / 1000)}</p>
-        </div>
+            
+        `;
         
-    `;
-    
-    let note_tags = '';
-    if ((preview.tags != undefined) && (preview.tags != '[]')) {
-        note_tags = preview.tags;
+        let note_tags = '';
+        if ((preview.tags != undefined) && (preview.tags != '[]')) {
+            note_tags = preview.tags;
+        }
+
+        notesList[preview.uuid] = {
+            title: preview.title,
+            text: preview.text,
+            tags: note_tags
+        };
+
+        card.className = "note";
+        card.id = `list_note${preview.uuid}`;
+        card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
+
+        let uuid = preview.uuid;
+
+        card.addEventListener('contextmenu', (event) => {
+            summon_context_menu(event, "list", uuid);
+        });
+
+    } catch (e) {
+        let warn_text = "Повреждённая заметка. <a>Подробнее</a>";
+        let uuid = "broken";
+        try {
+            uuid = preview.uuid;
+            card.addEventListener('contextmenu', (event) => {
+                summon_context_menu(event, "list", uuid);
+            });
+            card.setAttribute("onclick", `brokenNotePopup('${uuid}')`);
+        } catch (e) {
+            warn_text = "Повреждённая заметка. <a>Подробнее</a>";
+        }
+
+        
+        card.innerHTML = `
+            <p class="note_title"></p>
+            <p class="note_text"></p>
+            <div class="broken"><i class="ph-warning"></i><span>${warn_text}</span></div>
+            <div class="bottom_row">
+                <i id="list_notes${uuid}-edit_icon" class="ph-pencil-simple-line-bold"></i>
+                <div class="note_tags" id="tags${uuid}">
+                    
+                </div>
+                <p id='list_notes${uuid}-edit_date' class="note_time"></p>
+            </div>
+            
+        `;
+        
+        card.className = "note broken";
+        card.id = `list_note${uuid}`;
+
+
     }
-
-    notesList[preview.uuid] = {
-        title: preview.title,
-        text: preview.text,
-        tags: note_tags
-    };
-
-    card.className = "note";
-    card.id = `list_note${preview.uuid}`;
-    card.setAttribute("onclick", `openNote('${preview.uuid}', this)`);
-
-    let uuid = preview.uuid;
-
-    card.addEventListener('contextmenu', (event) => {
-        summon_context_menu(event, "list", uuid);
-    });
-
     if (place != undefined) {
         list.insertBefore(card, list.children[place+1]);
     } else {

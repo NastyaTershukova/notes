@@ -46,7 +46,7 @@ function login() {
             document.querySelector('#mobile_userphoto').src = responseData.picture;
 
             loadingSpinner(false);
-            loadNotesList(0);
+            loadNotesList();
 
         } else {
             console.error('Request failed with status ', xhr.status);

@@ -346,7 +346,7 @@
         </div>
     </div>
 
-    <div class="new_image_popup hidden">
+    <div class="new_image_popup popup_container hidden">
         <div class="popup_window">
             <h3>Новое изображение</h3>
             <div class="image_picker-container">
@@ -361,6 +361,19 @@
                     Готово
                 </button>
                 <button onclick="newImagePopup(false)">Отмена</button>
+            </div>
+        </div>
+    </div>
+    <div class="broken_note_popup popup_container hidden">
+        <div class="popup_window">
+            <div class="flex-center"> <i class="ph-warning-fill popup_icon_big yellow"></i> </div>
+            <h3>Эта заметка повреждена</h3>
+            <p class="popup_text">Заметка, которую вы пытаетесь открыть, возможно имеет повреждения. Вы можете попробовать открыть эту заметку и сохранить её, чтобы устранить проблемы.</p>
+            <div class="popup_buttons">
+                <button onclick="openNote()" class="accent">
+                    Открыть
+                </button>
+                <button onclick="brokenNotePopup(false)">Не открывать</button>
             </div>
         </div>
     </div>

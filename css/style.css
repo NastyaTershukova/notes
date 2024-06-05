@@ -689,10 +689,14 @@ a {
     user-select: none;
     -webkit-user-select: none;
 }
-.note:hover {
+.note:not(.broken):hover {
     background-color: var(--note_hover);
     transition-duration: .15s;
 }
+.note .broken {
+    display: none;
+}
+
 
 .note.selected {
     background-color: var(--note-card);
@@ -701,7 +705,31 @@ a {
 .note.selected:hover {
     background-color: var(--accent);
 }
-
+.note.broken {
+    height: auto;
+    cursor: default;
+}
+.note.broken .broken {
+    display: flex;
+}
+.note.broken .note_title, .note.broken .note_text, .note.broken .bottom_row {
+    display: none;
+}
+.note.broken div:not(.bottom_row) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.note.broken i.ph-warning {
+    color: red;
+}
+.note.broken span, .note.broken a {
+    color: inherit;
+}
+.note.broken a {
+    cursor: pointer;
+    text-decoration: underline;
+}
 .note.search-hidden {
     display: none;
 }
@@ -1802,7 +1830,7 @@ a {
     --border: #1e40af;
 }
 
-.new_image_popup {
+.popup_container {
     position: fixed;
     top: 0;
     left: 0px;
@@ -1817,14 +1845,34 @@ a {
 
     opacity: 1;
     transition: .5s opacity;
+    z-index: 10;
 }
 
-.new_image_popup.hidden {
+.popup_container.hidden {
     opacity: 0;
     pointer-events: none;
 }
-.new_image_popup.hidden .popup_window {
+.popup_container.hidden .popup_window {
     transform: translateY(-32px);
+}
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup_icon_big {
+    font-size: 72px;
+    margin: 0 0 16px 0;
+}
+.popup_icon_big.yellow {
+    color: #f59e0b;
+}
+.popup_text {
+    text-align: center;
+    color: gray;
+    font-size: 14px;
+    margin-top: 8px;
 }
 
 .popup_window {
@@ -1850,12 +1898,13 @@ a {
 }
 .popup_buttons button {
     background: none;
-    background-color: var(--light_gray);
-    padding: 0 28px;
-    border-radius: 4px;
-    height: 36px;
+    background-color: none;
+    border: 1px solid var(--border);
+    padding: 0 24px;
+    border-radius: 6px;
+    height: 30px;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
 

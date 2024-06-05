@@ -98,6 +98,7 @@ function syncNote() {
             document.querySelector('#context_menu-save').innerHTML = `<i class="ph-cloud-check-bold"></i> Синхронизировано`;
             document.getElementById('note_content-date').innerText = note_date;
             document.getElementById(`list_notes${currentNote}-edit_icon`).style.display = "none";
+            document.getElementById(`list_note${currentNote}`).classList.remove('broken');
 
 
             isNoteChanged = false;

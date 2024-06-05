@@ -123,3 +123,38 @@ let settings_order = localStorage.getItem('sort-order');
 if (settings_order == 'descending') {
     sortDescending();
 }
+
+function brokenNotePopup(status) {
+    let popup = document.querySelector('.broken_note_popup');
+  
+    if (status == false) {
+      popup.classList.add('hidden');
+      return;
+    }
+
+    popup.classList.remove('hidden');
+
+    if (status == 'broken') {
+        popup.querySelector('.popup_window').innerHTML = `
+            <div class="flex-center"> <i class="ph-warning-fill popup_icon_big yellow"></i> </div>
+            <h3>Эта заметка окончательно повреждена</h3>
+            <p class="popup_text">Заметка, которую вы пытаетесь открыть, имеет необратимые повреждения. Удалите её через контекстное меню.</p>
+            <div class="popup_buttons">
+                <button onclick="brokenNotePopup(false)">Закрыть</button>
+            </div>
+        `;
+        return;
+    }
+
+    popup.querySelector('.popup_window').innerHTML = `
+        <div class="flex-center"> <i class="ph-warning-fill popup_icon_big yellow"></i> </div>
+        <h3>Эта заметка повреждена</h3>
+        <p class="popup_text">Заметка, которую вы пытаетесь открыть, возможно имеет повреждения. Вы можете попробовать открыть эту заметку и сохранить её, чтобы устранить проблемы.</p>
+        <div class="popup_buttons">
+            <button onclick="openNote('${status}'); brokenNotePopup(false)" class="accent">
+                Открыть
+            </button>
+            <button onclick="brokenNotePopup(false)">Не открывать</button>
+        </div>
+    `;
+}

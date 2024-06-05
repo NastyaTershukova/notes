@@ -45,7 +45,7 @@ function newImagePopup(status) {
     return true;
   }
 
-  document.querySelector('.popup_buttons').children[0].innerHTML = `Готово`;
+  popup.querySelector('.popup_buttons').children[0].innerHTML = `Готово`;
   document.querySelector('.popup_buttons').classList.remove('disabled');
   document.querySelector('#picture__input').disabled = false;
   pictureImage.innerHTML = pictureImageTxt;
