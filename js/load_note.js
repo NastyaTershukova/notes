@@ -208,14 +208,14 @@ function addListCard(preview, place) {
         let uuid = "broken";
         try {
             uuid = preview.uuid;
-            card.addEventListener('contextmenu', (event) => {
-                summon_context_menu(event, "list", uuid);
-            });
-            card.setAttribute("onclick", `brokenNotePopup('${uuid}')`);
         } catch (e) {
             warn_text = "Повреждённая заметка. <a>Подробнее</a>";
         }
 
+        card.addEventListener('contextmenu', (event) => {
+            summon_context_menu(event, "list", uuid);
+        });
+        card.setAttribute("onclick", `brokenNotePopup('${uuid}')`);
         
         card.innerHTML = `
             <p class="note_title"></p>
