@@ -82,8 +82,74 @@ function checkSortTags() {
             
         }
     }
+
+    filterNotesList();
 }
 document.querySelector('#search_tags').addEventListener('click', () => {
     color_tags = [];
     checkSortTags();
 });
+
+
+document.querySelector('#search-field').addEventListener('input', () => {
+    filterNotesList();
+});
+document.querySelector('#search_clear').addEventListener('click', () => {
+
+    document.querySelector('#search-field').value = '';
+    document.querySelector('#search_clear').classList.add('hidden');
+
+    for (let i=0; i<list.children.length; i++) {
+        list.children[i].classList.remove('search-hidden');
+    }
+
+});
+
+function filterNotesList() {
+    let list = document.getElementById('list_notes');
+
+    let value = document.querySelector('#search-field').value.trim().toLowerCase();
+
+    let clear_btn = document.querySelector('#search_clear');
+    if (value != '') {
+        clear_btn.classList.remove('hidden');
+    } else {
+        clear_btn.classList.add('hidden');
+    }
+    let count = 0;
+
+    for (let i=0; i<list.children.length; i++) {
+        let conditionTitle = list.children[i].querySelector('.note_title').innerText.toLowerCase().includes(value);
+        let conditionText = list.children[i].querySelector('.note_text').innerText.toLowerCase().includes(value);
+        
+        let tagsDetected = 0;
+        let noteTagsHTML = list.children[i].querySelector('.note_tags').innerHTML;
+
+        for (let j = 0; j < color_tags.length; j++) {
+            if (noteTagsHTML.includes(`tag ${color_tags[j]}`)) {
+                tagsDetected++;
+            }
+        }
+
+        if (tagsDetected < color_tags.length) {
+            count++;
+            list.children[i].classList.add('search-hidden');
+            continue;
+        } else {
+            list.children[i].classList.remove('search-hidden');
+        }
+
+        if (conditionTitle || conditionText) {
+            list.children[i].classList.remove('search-hidden');
+        } else {
+            list.children[i].classList.add('search-hidden');
+            count++;
+        }
+    }
+
+    if (count >= list.children.length) {
+        toggleLeftHints('search_empty');
+    } else {
+        toggleLeftHints(false);
+    }
+}

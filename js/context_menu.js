@@ -59,7 +59,7 @@ function context_tab(name, data) {
 
                 let tags_row = `<div class="tags"><i class="ph-tag-bold"></i>`;
                 for (let i=0; i<colors.length; i++) {
-                    if (notesList[data].tags.includes(colors[i])) {
+                    if (notesList[data] != undefined && notesList[data].tags.includes(colors[i])) {
                         tags_row += `<button onclick="toggleTag('${data}', '${colors[i]}')" class="tag ${colors[i]}"> <div><span class="tag_dot"></span></div> </button>`;
                     } else {
                         tags_row += `<button onclick="toggleTag('${data}', '${colors[i]}')" class="tag ${colors[i]}"> <div></div> </button>`;
@@ -115,13 +115,11 @@ function context_tab(name, data) {
 }
 
 function toggleTag(uuid, color) {
-    console.log(notesList[uuid].tags);
     let tags_array = []
     try {
       console.log(notesList[uuid])
       tags_array = notesList[uuid].tags ? notesList[uuid].tags.split(',').filter(tag => tag.trim() !== '') : [] // Преобразование строки в массив и удаление пустых элементов
     } catch (e) {
-      console.log(e)
     }
   
     const colorIndex = tags_array.indexOf(color);
@@ -135,6 +133,9 @@ function toggleTag(uuid, color) {
     }
   
     // Присвоение измененной строки обратно в notesList
+    if (notesList[uuid] == undefined) {
+        notesList[uuid] = {};
+    }
     notesList[uuid].tags = tags_array.filter(tag => tag.trim() !== '').join(',');
 
     document.getElementById(`tags${uuid}`).innerHTML = tagsToIcons(notesList[uuid].tags);
