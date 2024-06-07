@@ -1726,7 +1726,7 @@ a {
     /*border-bottom: 1px solid rgba(0,0,0,0.25);*/
 }
 .top_row button {
-    height: 40px;
+    height: 36px;
     color: gray;
     justify-content: center;
 }
@@ -1735,6 +1735,7 @@ a {
 }
 .top_row svg {
     color: inherit;
+    width: 28px;
 }
 .note_tags {
     display: flex;
@@ -1929,6 +1930,10 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    margin-right: 32px;
+    margin-left: 24px;
+    margin-top: 32px;
 }
 .left_side_hints.hidden {
     display: none;
@@ -1954,4 +1959,33 @@ a {
     text-align: center;
 
     color: var(--light_gray);
+}
+
+.user_block {
+    position: fixed;
+    bottom: 8px;
+    background-color: var(--side_nav);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+
+    padding: 16px;
+    display: none;
+}
+.user_block-picture {
+    width: 48px;
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.user_block-top_row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.user_block-name {
+    font-weight: bold;
+}
+.user_block-email {
+    color: gray;
+    font-size: 14px;
 }

@@ -44,6 +44,7 @@ function login() {
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
             document.querySelector('#user_photo').src = responseData.picture;
             document.querySelector('#mobile_userphoto').src = responseData.picture;
+            document.querySelector('.user_block-picture').src = responseData.picture;
 
             loadingSpinner(false);
             loadNotesList();

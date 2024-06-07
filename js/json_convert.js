@@ -271,6 +271,13 @@ function addEventsToText(obj) {
     });
     obj.addEventListener('input', () => {
         currentFocus = obj.id;
+
+        const range = saveSelection();
+
+        obj.innerHTML = replaceURLsWithLinks(obj.innerHTML);
+
+        restoreSelection(range);
+
         setNoteChanged();
     });
     obj.addEventListener('keydown', (event) => {
@@ -310,5 +317,37 @@ function getElementOrder(obj) {
         if (note_content.children[i].id == obj.id) {
             return i;
         }
+    }
+}
+
+const urlPattern = /(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?/gi;
+
+function replaceURLsWithLinks(text) {
+    return text.replace(urlPattern, function(url) {
+        const href = url.startsWith('http') ? url : `https://${url}`;
+        return `<a href="${href}" target="_blank">${url}</a>`;
+    });
+}
+function saveSelection() {
+    if (window.getSelection) {
+      const sel = window.getSelection();
+      if (sel.rangeCount > 0) {
+        return sel.getRangeAt(0);
+      }
+    } else if (document.selection && document.selection.createRange) {
+      return document.selection.createRange();
+    }
+    return null;
+}
+
+  function restoreSelection(range) {
+    if (range) {
+      if (window.getSelection) {
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } else if (document.selection && range.select) {
+        range.select();
+      }
     }
 }

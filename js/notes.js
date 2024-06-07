@@ -243,22 +243,22 @@ function isNoteOpened(status) {
 
 
 function toggleLeftHints(value) {
-    // let list = document.querySelector('.left_side_hints');
-    // let notes = document.querySelector('.first_part_screen');
-    // if (value == false) {
-    //     list.classList.add('hidden');
-    //     notes.classList.remove('hidden');
+    let list = document.querySelector('.left_side_hints');
+    let notes = document.querySelector('#list_notes');
+    if (value == false) {
+        list.classList.add('hidden');
+        notes.classList.remove('hidden');
         
-    //     return;
-    // }
+        return;
+    }
 
-    // list.classList.remove('hidden');
-    // notes.classList.add('hidden');
+    list.classList.remove('hidden');
+    notes.classList.add('hidden');
 
-    // for (let i=0; i<list.children.length; i++) {
-    //     list.children[i].classList.add('hidden');
-    // }
-    // document.querySelector(`#hint_${value}`).classList.remove('hidden');
+    for (let i=0; i<list.children.length; i++) {
+        list.children[i].classList.add('hidden');
+    }
+    document.querySelector(`#hint_${value}`).classList.remove('hidden');
 }
 
 function syncNotePreview(uuid) {

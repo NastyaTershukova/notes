@@ -138,8 +138,9 @@ function brokenNotePopup(status) {
         popup.querySelector('.popup_window').innerHTML = `
             <div class="flex-center"> <i class="ph-warning-fill popup_icon_big yellow"></i> </div>
             <h3>Эта заметка окончательно повреждена</h3>
-            <p class="popup_text">Заметка, которую вы пытаетесь открыть, имеет необратимые повреждения. Удалите её через контекстное меню.</p>
+            <p class="popup_text">Заметка, которую вы пытаетесь открыть, имеет необратимые повреждения.</p>
             <div class="popup_buttons">
+                <button class="accent" onclick="brokenNotePopup(false)">Удалить навсегда</button>
                 <button onclick="brokenNotePopup(false)">Закрыть</button>
             </div>
         `;

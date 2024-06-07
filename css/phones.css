@@ -177,4 +177,10 @@
         width: calc(100vw - 32px);
     }
 
+    .left_side_hints {
+        width: 100%;
+        min-width: none;
+        margin: 0;
+    }
+
 }

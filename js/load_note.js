@@ -51,6 +51,10 @@ async function newNote() {
     let url = 'php/newnote.php';
     loadingSpinner(true);
 
+    if (isTrashBinOpened == 1) {
+        openTrash(0);
+    }
+
     try {
         const response = await fetch(url);
         const text = await response.text();
@@ -103,6 +107,16 @@ function loadNotesList(selectNote, doUpdate) {
         
         let list = document.getElementById('list_notes');
         list.innerHTML = "";
+
+        if (data.length == 0) {
+            if (isTrashBinOpened == 1) {
+                toggleLeftHints('trash_empty');
+            } else {
+                toggleLeftHints('no_notes');
+            }
+        } else {
+            toggleLeftHints(false);
+        }
         for (let i=0;i<data.length;i++) {
             let preview = data[i];
             addListCard(preview);
