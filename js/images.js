@@ -80,6 +80,7 @@ async function uploadImage() {
     } else if (result.error) {
       console.log(result.error);
       //TODO ВЫВОДИТЬ ОШИБКУ
+      pushToHistory();
       newImagePopup(false);
     }
   } catch (error) {

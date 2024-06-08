@@ -11,6 +11,7 @@ function eraseHistory() {
 // let note_content = document.getElementById('note_content');
 
 function pushToHistory() {
+    console.log(`I've been a bad girl`);
     let note_content = document.getElementById('note_content');
     if (!history.back.length || history.back[history.back.length - 1] != note_content.innerHTML) {
         history.back.push(note_content.innerHTML);

@@ -64,3 +64,7 @@ function login() {
     }
     
 }
+
+function toggleUserBlock() {
+    document.querySelector(`.user_block`).classList.toggle('hidden');
+}

@@ -60,7 +60,7 @@
         <div id="nav_bar-loading">
             <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
-        <button onclick="" id="btn_user"> <img src="img/user_photo.jpg" id="user_photo"> <p id="nav_bar-name"> Нет аккаунта</p></button>
+        <button onclick="toggleUserBlock()" id="btn_user"> <img src="img/user_photo.jpg" id="user_photo"> <p id="nav_bar-name"> Нет аккаунта</p></button>
         <button onclick="newNote()" id="btn_create"> <i class="ph-note-pencil"></i> <p>Новая заметка...</p> </button>
         <button onclick="tab('help')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
     </nav>
@@ -379,7 +379,7 @@
         </div>
     </div>
 
-    <div class="user_block">
+    <div class="user_block hidden">
         
         <div class="user_block-top_row">
             <img class="user_block-picture">
@@ -388,6 +388,12 @@
                 <p class="user_block-email">devio10@outlook.com</p>
             </div>
         </div>
+
+        <button><i class="ph-gear-six-bold"></i> Настройки</button>
+        <button><i class="ph-pencil-simple-bold"></i> Редактирование профиля</button>
+        <button class="red"><i class="ph-sign-out-bold"></i> Выйти из аккаунта</button>
+
+        <span>NOTES 0.9.0. Для защиты диплома</span>
     </div>
 
     <div id="loading-screen">

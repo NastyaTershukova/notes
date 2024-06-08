@@ -785,6 +785,8 @@ a {
     display: none;
     height: 14px;
     color: inherit;
+    font-size: 14px;
+    margin-right: 12px;
 }
 .note_time {
     font-size: 12px;
@@ -1481,6 +1483,8 @@ a {
     transition: width .2s ease-in-out;
     overflow-x: clip;
     flex-shrink: 0;
+
+    z-index: 14;
   }
   .ui-side_nav.opened {
     width: 270px;
@@ -1964,13 +1968,28 @@ a {
 .user_block {
     position: fixed;
     bottom: 8px;
-    background-color: var(--side_nav);
+    background-color: var(--context_bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
     border-radius: 16px;
     border: 1px solid var(--border);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 
-    padding: 16px;
-    display: none;
+    padding: 8px;
+    width: 300px;
+
+    transition: transform, opacity;
+    transition-duration: .3s;
+    z-index: 12;
 }
+.user_block.hidden {
+    pointer-events: none;
+    opacity: 0;
+
+    transform: translateX(-30px);
+}
+
 .user_block-picture {
     width: 48px;
     aspect-ratio: 1/1;
@@ -1981,6 +2000,8 @@ a {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-bottom: 16px;
+    padding: 8px 8px 0 8px;
 }
 .user_block-name {
     font-weight: bold;
@@ -1988,4 +2009,50 @@ a {
 .user_block-email {
     color: gray;
     font-size: 14px;
+}
+.user_block button {
+    width: 100%;
+    height: 36px;
+    background: none;
+
+    cursor: pointer;
+
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-transform: capitalize;
+    text-align: left;
+}
+.user_block button.red {
+    color: var(--red);
+    --color: var(--red);
+    font-weight: bold;
+}
+.user_block button:hover, .user_block button:focus {
+    background-color: var(--accent);
+    color: white;
+    --color: white;
+}
+
+.user_block button.red:hover, .user_block button.red:focus {
+    background-color: var(--red);
+    color: white;
+    --color: white;
+}
+.user_block button i {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--color);
+}
+.user_block span {
+    font-size: 12px;
+    color: gray;
+    margin-left: 40px;
 }

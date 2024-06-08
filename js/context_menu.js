@@ -84,6 +84,9 @@ function context_tab(name, data) {
                 document.getElementById('context_menu-list_delete').addEventListener('click', function() {
                     deleteNote(data);
                 });
+                document.getElementById('context_menu-list_update').addEventListener('click', () => {
+                    loadNotesList(undefined, true);
+                });
             } else {
                 document.getElementById(`context-list_trash`).style.display = 'block';
 
@@ -282,6 +285,7 @@ document.getElementById('context_menu-delete_forever').addEventListener('click',
 document.getElementById('context_menu-trash_recover').addEventListener('click', () => {
     deleteNote(0, true);
 });
+
 document.getElementById('mobile_cursor').addEventListener('click', (event) => {
     let focusTag = 'P';
     if (currentFocus != -1) {

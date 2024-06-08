@@ -272,11 +272,11 @@ function addEventsToText(obj) {
     obj.addEventListener('input', () => {
         currentFocus = obj.id;
 
-        const range = saveSelection();
+        // const range = saveSelection();
 
-        obj.innerHTML = replaceURLsWithLinks(obj.innerHTML);
+        // obj.innerHTML = replaceURLsWithLinks(obj.innerHTML);
 
-        restoreSelection(range);
+        // restoreSelection(range);
 
         setNoteChanged();
     });
