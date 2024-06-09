@@ -28,6 +28,9 @@
     --note_preview: rgb(102, 102, 102);
 
     --red: #ba000d;
+    --warning: #ffedd5;
+    --warning-border: #fdba74;
+    --warning-text: #c2410c;
 }
 [dark-theme='true'] {
     --page_bg: #000;
