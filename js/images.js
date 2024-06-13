@@ -21,6 +21,7 @@ inputFile.addEventListener("change", function (e) {
       const readerTarget = e.target;
 
       loadedImage = readerTarget.result;
+      
 
       const img = document.createElement("img");
       img.src = readerTarget.result;
@@ -65,7 +66,7 @@ async function uploadImage() {
     const response = await fetch('php/upload_image.php', {
       method: 'POST',
       body: JSON.stringify({
-        image: loadedImage
+        image: loadedImage.split(',')[1]
       })
     })
     const result = await response.json();

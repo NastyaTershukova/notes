@@ -49,7 +49,7 @@
         
         // Выполнение подготовленного запроса
         if ($token_result->execute()) {
-            echo "login_successful";
+            //echo "login_successful";
         } else {
             echo "error_token_unsuccessful";
         }

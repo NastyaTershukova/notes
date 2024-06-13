@@ -84,6 +84,12 @@ if ($data['image'] != 0) {
     $filename = uniqid() . '.jpg';
     $filepath = __DIR__ . '/../userpictures/' . $filename;
 
+    $imageData = base64_decode($data['image']);
+    if (!$imageData) {
+        echo json_encode(['warn' => 'Invalid image data']);
+        exit;
+    }
+
     // Сохранение изображения на сервере
     if (!file_put_contents($filepath, $imageData)) {
         echo json_encode(['warn' => 'Failed to save profile photo']);
@@ -112,8 +118,6 @@ $result = $request->get_result();
 
 $login_result = login($email, $pass_raw);
 
-if ($login_result == "login_successful") {
-    header('Location: /');
-}
+echo json_encode(['success' => 'signup successful']);
 
 $mysql->close();

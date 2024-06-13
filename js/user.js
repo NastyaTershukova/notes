@@ -42,9 +42,13 @@ function login() {
             }
             let responseData = JSON.parse(xhr.responseText);
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
-            document.querySelector('#user_photo').src = responseData.picture;
-            document.querySelector('#mobile_userphoto').src = responseData.picture;
-            document.querySelector('.user_block-picture').src = responseData.picture;
+
+            if (responseData.picture != "") {
+                document.querySelector('#user_photo').src = '/userpictures/'+responseData.picture;
+                document.querySelector('#mobile_userphoto').src = '/userpictures/'+responseData.picture;
+                document.querySelector('.user_block-picture').src = '/userpictures/'+responseData.picture;
+            }
+            
 
             loadingSpinner(false);
             loadNotesList();

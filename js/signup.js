@@ -87,12 +87,12 @@ async function signUp() {
             password: password,
             name: first_name,
             last_name: last_name,
-            image: loadedImage
+            image: loadedImage.split(',')[1]
           })
         })
         
         const result_json = await response.json();
-        // console.log(result);
+        console.log(result_json);
     
         if (result_json.success) {
           window.open('index.html', '_self');
