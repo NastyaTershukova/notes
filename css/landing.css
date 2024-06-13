@@ -113,6 +113,7 @@ header a {
     border-radius: 100px;
     
     margin-left: auto;
+    text-decoration: none;
 }
 
 h1 {
@@ -261,4 +262,22 @@ h1 {
 }
 .price-free li {
     list-style-image: url(/img/icons/check-bold.svg);
+}
+
+footer {
+    background-color: rgba(0,0,0,0.05);
+    width: 100vw;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    margin-top: 64px;
+}
+footer div {
+    color: gray;
+    width: 1280px;
+    font-size: 14px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
 }

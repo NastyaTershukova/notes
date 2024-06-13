@@ -22,7 +22,7 @@ if ($id == "error_not_executable") {
 }
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
-$result = $mysql->query("SELECT `contents_key`, `name`, `lastname`, `picture` FROM `users` WHERE `id` = '$id'");
+$result = $mysql->query("SELECT `contents_key`, `name`, `lastname`, `picture`, `email` FROM `users` WHERE `id` = '$id'");
 $data = $result->fetch_assoc();
 if($data === null) {
     echo "user_not_found";

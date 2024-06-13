@@ -42,6 +42,8 @@ function login() {
             }
             let responseData = JSON.parse(xhr.responseText);
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
+            document.querySelector('.user_block-name').innerText = `${responseData.name} ${responseData.lastname}`;
+            document.querySelector('.user_block-email').innerText = responseData.email;
 
             if (responseData.picture != "") {
                 document.querySelector('#user_photo').src = '/userpictures/'+responseData.picture;

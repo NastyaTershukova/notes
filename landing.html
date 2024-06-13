@@ -15,13 +15,10 @@
     <div class="main-content">
         <header>
             <label class="notes-logo">NOTES</label>
-            <a>Возможности</a>
-            <a>Стоимость</a>
-            <a>Начать</a>
-            <a class="link-login">Войти</a>
+            <a class="link-login" href="login.html">Войти</a>
         </header>
 
-        <button class="pill-promo">
+        <button class="pill-promo" onclick="window.open('signup.html', '_self')">
             <img src="img/present.png">
             Попробовать бесплатно
             <div class="arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256"><path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path></svg></div>
@@ -30,8 +27,8 @@
         <p class="text-short_description">Все записки будут доступны со всех ваших устройств.<br> Зайдите в NOTES с любого браузера.</p>
 
         <div class="top-button-row">
-            <button class="accent">Зарегистрироваться</button>
-            <button>Войти</button>
+            <button class="accent" onclick="window.open('signup.html', '_self')">Зарегистрироваться</button>
+            <button onclick="window.open('login.html', '_self')">Войти</button>
         </div>
 
         <img src="img/promo-desktop.png" class="promo-desktop">
@@ -87,7 +84,7 @@
             </div>
         </div>
 
-        <div id="price">
+        <div id="price" style="display: none">
             <h2>Стоимость</h2>
             <p>Используйте NOTES полностью бесплатно.<br> Никаких подписок, одноразовых платежей и изменений условий!</p>
             
@@ -111,7 +108,13 @@
                 </ul>
             </div>
         </div>
+ 
     </div>
+    <footer>
+        <div>
+            <p>NOTES by Anastasia Tershukova. For graduate work only.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
