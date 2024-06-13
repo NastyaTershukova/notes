@@ -73,11 +73,14 @@ function checkAllData() {
 async function signUp() {
     try {
 
-        document.querySelector('.popup_buttons').children[0].innerHTML = `<div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
-        document.querySelector('.popup_buttons').classList.add('disabled');
-        document.querySelector('#picture__input').disabled = true;
+        let email = document.querySelector(`#email`).value;
+        let password = document.querySelector(`#password`).value;
+        let first_name = document.querySelector(`#name`).value;
+        let last_name = document.querySelector(`#last_name`).value;
+
+        document.querySelector('#finish_btn').disabled = true;
     
-        const response = await fetch('php/upload_image.php', {
+        const response = await fetch('php/signup.php', {
           method: 'POST',
           body: JSON.stringify({
             email: email,
@@ -87,22 +90,18 @@ async function signUp() {
             image: loadedImage
           })
         })
-        const result = await response.json();
+        
+        const result_json = await response.json();
         // console.log(result);
     
-        if (result.success) {
-          // console.log(result.success);
-          imagePaths[lastCreatedImage] = result.success;
-          displayImage(document.getElementById(lastCreatedImage), result.success);
-    
-          newImagePopup(false);
-        } else if (result.error) {
-          console.log(result.error);
-          //TODO ВЫВОДИТЬ ОШИБКУ
-          pushToHistory();
-          newImagePopup(false);
+        if (result_json.success) {
+          window.open('index.html', '_self');
+        } else if (result_json.error) {
+            showWarning(result_json.error);
+            console.log(result_json);
         }
       } catch (error) {
         console.error('Error: ', error)
+        showWarning(error);
       }
 }

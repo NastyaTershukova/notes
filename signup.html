@@ -29,58 +29,56 @@
                 Назад
             </a>
 
-            <div class="sign_up_part_container">
-                <h2 class="sign_up_logo">NOTES</h2>
-                <div class="create_account">
+            <h2 class="notes_logo">NOTES</h2>
+            <div class="center_block">
 
-                    <div class="warning">
-                        <i class="ph-warning"></i>Текст предупреждения.
-                    </div>
-                    
-                    <div id="step0" class="signup_step">
-                        <h2 class="create_account_title">Создать учетную запись</h2>
-                        <div class="fields_container">
-                            <div class="field">
-                                <input type="email" id="email" placeholder="Электронная почта">
-                            </div>
-                            <div class="field">
-                                <input type="password" id="password" placeholder="Пароль">
-                            </div>
+                <div class="warning">
+                    <i class="ph-warning"></i>Текст предупреждения.
+                </div>
+                
+                <div id="step0" class="signup_step">
+                    <h2 class="create_account_title">Создать учетную запись</h2>
+                    <div class="fields_container">
+                        <div class="field">
+                            <input type="email" id="email" placeholder="Электронная почта">
                         </div>
-                        <button onclick="nextStep()">Продолжить</button>
-                    </div>
-
-                    <div id="step1" class="signup_step hidden">
-                        <h2 class="create_account_title">Добавьте немного информации</h2>
-                        <div class="fields_container">
-                            <div class="field">
-                                <input type="text" id="name" placeholder="Имя">
-                            </div>
-                            <div class="field">
-                                <input type="text" id="last_name" placeholder="Фамилия">
-                            </div>
+                        <div class="field">
+                            <input type="password" id="password" placeholder="Пароль">
                         </div>
-                        <button onclick="nextStep()">Продолжить</button>
                     </div>
+                    <button onclick="nextStep()">Продолжить</button>
+                </div>
 
-                    <div id="step2" class="signup_step hidden">
-                        <h2 class="create_account_title">Хотите поставить фотографию?</h2>
-                        <div class="fields_container">
-                            <div class="image_picker-container">
-                                <label class="picture" for="picture__input" tabIndex="0">
-                                    <span class="picture__image"></span>
-                                  </label>
-                                  
-                                  <input type="file" name="picture__input" id="picture__input">
-                            </div>
+                <div id="step1" class="signup_step hidden">
+                    <h2 class="create_account_title">Добавьте немного информации</h2>
+                    <div class="fields_container">
+                        <div class="field">
+                            <input type="text" id="name" placeholder="Имя">
                         </div>
-                        <button onclick="checkAllData()">Завершить</button>
+                        <div class="field">
+                            <input type="text" id="last_name" placeholder="Фамилия">
+                        </div>
                     </div>
+                    <button onclick="nextStep()">Продолжить</button>
+                </div>
 
-                    <div class="alternate_method">
-                        <p>У вас уже есть учетная запись?</p>
-                        <a href="login.html">Войти</a>
+                <div id="step2" class="signup_step hidden">
+                    <h2 class="create_account_title">Хотите поставить фотографию?</h2>
+                    <div class="fields_container">
+                        <div class="image_picker-container">
+                            <label class="picture" for="picture__input" tabIndex="0">
+                                <span class="picture__image"></span>
+                                </label>
+                                
+                                <input type="file" name="picture__input" id="picture__input">
+                        </div>
                     </div>
+                    <button id="finish_btn" onclick="checkAllData()">Завершить</button>
+                </div>
+
+                <div class="alternate_method">
+                    <p>У вас уже есть учётная запись?</p>
+                    <a href="login.html">Войдите в неё.</a>
                 </div>
             </div>
         </div>

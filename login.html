@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/account.css">
     <link rel="stylesheet" href="css/media.css">
+
+    <link rel="stylesheet" href="/fonts/icons.css">
 </head>
 
 <body>
@@ -21,32 +23,32 @@
         </div>
 
         <div class="sign_up_part">
-            <a href="main.html">
-                <div class="back">
-                    <i class="arrow left"></i>
-                    <p class="back_title">Назад</p>
-                </div>
+            <a class="back_button" href="landing.html">
+                <i class="ph-caret-left-bold"></i>
+                Назад
             </a>
             <div class="sign_up_part_container">
-                <h2 class="sign_up_logo">NOTES</h2>
-                <div class="create_account">
+                <h2 class="notes_logo">NOTES</h2>
+                <div class="center_block">
+                    <div class="warning">
+                        <i class="ph-warning"></i>Текст предупреждения.
+                    </div>
+
                     <h2 class="create_account_title">Войти в аккаунт</h2>
                     <form action="php/login_page.php" method="post">
-                        <div class="email_and_password">
-                            <div class="email">
-                                <p class="email_title">Электронная почта</p>
-                                <input type="email" class="input_email" name="email" id="email">
+                        <div class="fields_container">
+                            <div class="field">
+                                <input type="email" id="email" placeholder="Электронная почта" name="email" id="email">
                             </div>
-                            <div class="password">
-                                <p class="password_title">Пароль</p>
-                                <input type="password" class="input_password" name="pass" id="pass">
+                            <div class="field">
+                                <input type="password" id="password" placeholder="Пароль" name="pass" id="pass">
                             </div>
                         </div>
-                        <button class="sign_up_button">Войти</button>
+                        <button>Войти</button>
                     </form>
-                    <div class="sign_up_text">
-                        <p class="sign_up_text1">У вас нет учетной записи?</p>
-                        <a href="signup.html" class="sign_up_text2">Зарегистрироваться</a>
+                    <div class="alternate_method">
+                        <p>У вас ещё нет учётной записи?</p>
+                        <a href="signup.html">Создайте её!</a>
                     </div>
                 </div>
             </div>

@@ -11,14 +11,41 @@ function generateRandomString($length = 32) {
     return $randomString;
 }
 
-$email = filter_var(
-    trim($_POST['email']),
-    FILTER_UNSAFE_RAW
-);
-$pass_raw = filter_var(
-    trim($_POST['pass']),
-    FILTER_UNSAFE_RAW
-);
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    echo json_encode(['error' => 'Invalid request method']);
+    exit;
+}
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!$data) {
+    echo json_encode(['error' => 'Invalid JSON']);
+    exit;
+}
+
+if (!isset($data['email'])) {
+    echo json_encode(['error' => 'Email is required']);
+
+    exit();
+}
+if (!isset($data['password'])) {
+    echo json_encode(['error' => 'Password is required']);
+    
+    exit();
+}
+if (!isset($data['name'])) {
+    echo json_encode(['error' => 'First name is required']);
+    
+    exit();
+}
+if (!isset($data['last_name'])) {
+    echo json_encode(['error' => 'Last name is required']);
+    
+    exit();
+}
+
+$email = $data['email'];
+$pass_raw = $data['password'];
 
 if (mb_strlen($email) < 5 || mb_strlen($email) > 90) {
     echo "Недопустимая длина почты";
@@ -28,7 +55,7 @@ if (mb_strlen($email) < 5 || mb_strlen($email) > 90) {
     exit();
 }
 
-$pass = hash("sha256", $pass_raw."ecbccdjcn3474");
+$pass = hash("sha256", $data['password']."ecbccdjcn3474");
 
 function encryptPassword($password, $key) {
     // Генерируем случайную строку для использования в качестве соли
@@ -50,9 +77,20 @@ function encryptPassword($password, $key) {
 
 $contents_key = encryptPassword(generateRandomString(), $pass_raw);
 
-$name = 'Добавь Поле для имени';
-$lastname = 'Добавь Поле для фамилии';
-$picture = '/userpictures/devio.jpg';
+$name = $data['name'];
+$lastname = $data['last_name'];
+
+if ($data['image'] != 0) {
+    $filename = uniqid() . '.jpg';
+    $filepath = __DIR__ . '/../userpictures/' . $filename;
+
+    // Сохранение изображения на сервере
+    if (!file_put_contents($filepath, $imageData)) {
+        echo json_encode(['warn' => 'Failed to save profile photo']);
+    }
+} else {
+    $filename = '';
+}
 
 $mysql = new mysqli('localhost', 'root', '', 'register-bd');
 $request = $mysql->prepare("INSERT INTO `users` (`email`, `pass`, `contents_key`, `name`, `lastname`, `picture`)
@@ -61,7 +99,7 @@ VALUES(?, ?, ?, ?, ?, ?)");
 if ($request === false) {
     die("MySQL prepare error: " . $mysqli->error);
 }
-$request->bind_param("ssssss", $email, $pass, $contents_key, $name, $lastname, $picture);
+$request->bind_param("ssssss", $email, $pass, $contents_key, $name, $lastname, $filename);
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
     exit();
@@ -73,7 +111,6 @@ if(!$request->execute()) {
 $result = $request->get_result();
 
 $login_result = login($email, $pass_raw);
-echo $login_result;
 
 if ($login_result == "login_successful") {
     header('Location: /');
