@@ -96,7 +96,7 @@ function toggleUserBlock() {
 }
 function editProfile(arg) {
 
-    
+    document.querySelector(`.user_block`).classList.add('hidden');
 
     let popup = document.querySelector('.edit_profile_popup');
     if (arg == false) {
