@@ -69,10 +69,10 @@ function context_tab(name, data) {
 
                 document.getElementById('context-list').innerHTML = `
                     <button id="context_menu-select"><i class="ph-check-circle-bold"></i> Выбрать</button>
-                    <button id="context_menu-list_share"><i class="ph-export-bold"></i> Поделиться...</button>
-                    <button id="context_menu-duplicate"><i class="ph-copy-bold"></i> Дублировать</button>
+                    <button id="context_menu-list_share" style="display: none"><i class="ph-export-bold"></i> Поделиться...</button>
+                    <button id="context_menu-duplicate" style="display: none"><i class="ph-copy-bold"></i> Дублировать</button>
                     <button id="context_menu-list_update"><i class="ph-arrows-clockwise-bold"></i> Обновить список</button>
-                    <button id="context_menu-pin"><i class="ph-push-pin-bold"></i> Закрепить</button>
+                    <button id="context_menu-pin" style="display: none"><i class="ph-push-pin-bold"></i> Закрепить</button>
         
                     ${tags_row}
         

@@ -70,6 +70,23 @@ function login() {
     }
     
 }
+function logout() {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        window.open('landing.html', '_self');
+    } else {
+        console.error('Request failed with status ', xhr.status);
+    }
+    };
+
+    let url = 'php/logout.php';
+    xhr.open('GET', url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.send();
+}
 
 function toggleUserBlock() {
     document.querySelector(`.user_block`).classList.toggle('hidden');
