@@ -43,12 +43,15 @@ function login() {
             let responseData = JSON.parse(xhr.responseText);
             document.querySelector('#nav_bar-name').innerText = `${responseData.name} ${responseData.lastname}`;
             document.querySelector('.user_block-name').innerText = `${responseData.name} ${responseData.lastname}`;
+            document.querySelector('#edit_profile-name').value = responseData.name;
+            document.querySelector('#edit_profile-lastname').value = responseData.lastname;
             document.querySelector('.user_block-email').innerText = responseData.email;
 
             if (responseData.picture != "") {
                 document.querySelector('#user_photo').src = '/userpictures/'+responseData.picture;
                 document.querySelector('#mobile_userphoto').src = '/userpictures/'+responseData.picture;
                 document.querySelector('.user_block-picture').src = '/userpictures/'+responseData.picture;
+                document.querySelector('#edit_profile-image').src = '/userpictures/'+responseData.picture;
             }
             
 
@@ -90,4 +93,47 @@ function logout() {
 
 function toggleUserBlock() {
     document.querySelector(`.user_block`).classList.toggle('hidden');
+}
+function editProfile(arg) {
+
+    
+
+    let popup = document.querySelector('.edit_profile_popup');
+    if (arg == false) {
+        popup.classList.add('hidden');
+        return;
+    }
+    if (arg == true) {
+        popup.classList.remove('hidden');
+        return;
+    }
+
+    loadingSpinner(true);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        if (xhr.responseText == "token_reloaded") {
+            setTimeout(() => {
+                editProfile();
+                console.log('Token is reloaded. Retry in 300ms...');
+            }, 300);
+            return;
+        }
+
+        //console.log(xhr.responseText);
+
+        location.reload();
+    } else {
+        console.error('Request failed with status ', xhr.status);
+    }
+    };
+    let name = document.querySelector('#edit_profile-name').value.trim();
+    let lastname = document.querySelector('#edit_profile-lastname').value.trim();
+    let url = `php/updateprofile.php?name=${name}&lastname=${lastname}`;
+    xhr.open('GET', url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.send();
 }

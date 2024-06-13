@@ -195,7 +195,7 @@ function get_object_count(obj) {
 document.getElementById('context_menu-image').addEventListener('click', createImage);
 document.getElementById('mobile_image').addEventListener('click', createImage);
 
-document.getElementById('context_menu-paragraph').addEventListener('click', createParagraph);
+//document.getElementById('context_menu-paragraph').addEventListener('click', createParagraph);
 
 document.getElementById('context_menu-bold').addEventListener('click', function () {
     performAction('bold');

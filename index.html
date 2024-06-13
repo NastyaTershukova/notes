@@ -18,39 +18,6 @@
 </head>
 
 <body class="menu-shrinkable">
-    
-
-    <div class="account_popup-bg">
-        <div class="account_popup">
-            <div class="account_title_close">
-                <h5 class="account_popup_title">Мой профиль</h5>
-                <div class="close-popup"></div>
-            </div>
-            <form action="">
-                <div class="account_title">
-                    <div class="account_photo_and_change">
-                        <img src="img/user_photo.jpg" class="user_photo_change">
-                        <p class="change_photo">Изменить</p>
-                    </div>
-                    <div class="name_and_email">
-                        <h2 class="account_name">Анастасия <br> Тершукова</h2>
-                        <p class="account_email">nastya@gmail.com</p>
-                    </div>
-                </div>
-                <div class="input_account">
-                    <p class="input_name_title">Имя</p>
-                    <input type="text" class="input_name">
-                    <p class="input_surname_title">Фамилия</p>
-                    <input type="text" class="input_surname">
-                    <p class="input_email_title">Почта</p>
-                    <input type="email" class="input_email_account">
-                    <p class="input_password_title">Пароль</p>
-                    <input type="password" class="input_password_account">
-                </div>
-                <input value="Сохранить" type="submit">
-            </form>
-        </div>
-    </div>
 
     <nav id="nav_bar" class="ui-side_nav">
         <button onclick="toggle_navbar()"> <i class="ph-list"></i> <h2>NOTES</h2> </button>
@@ -62,7 +29,7 @@
         </div>
         <button onclick="toggleUserBlock()" id="btn_user"> <img src="img/user_photo.jpg" id="user_photo"> <p id="nav_bar-name"> Нет аккаунта</p></button>
         <button onclick="newNote()" id="btn_create"> <i class="ph-note-pencil"></i> <p>Новая заметка...</p> </button>
-        <button onclick="tab('help')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
+        <button onclick="window.open('landing.html', '_self')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
     </nav>
 
     <div class="flex-row security">
@@ -186,31 +153,7 @@
     
         </div>
     </div>
-    
-
-    <div class="share_popup-bg">
-        <div class="share_popup">
-            <form action="">
-                <div class="close-popup"></div>
-                <h5 class="share_popup_title">Поделиться</h5>
-                <p class="share_popup_text">Скопируйте ссылку и поделитесь с друзьями</p>
-                <div class="copy_link">
-                    <p class="share_link">https://notes.com</p>
-                </div>
-                <button class="share_copy">Скопировать</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="delete_popup-bg">
-        <div class="delete_popup">
-            <form action="">
-                <div class="close-popup"></div>
-                <h5 class="delete_popup_title">Вы действительно хотите удалить заметку?</h5>
-                <input value="Да" type="submit">
-            </form>
-        </div>
-    </div>
+ds
     <footer>
         <div class="menu_mobile">
             <div class="menu_mainpage">
@@ -347,6 +290,24 @@
         </div>
     </div>
 
+    <div class="edit_profile_popup popup_container hidden">
+        <div class="popup_window">
+            <h3>Редактирование профиля</h3>
+
+            <img id="edit_profile-image">
+
+            <div class="fields">
+                <input type="text" placeholder="Имя" id="edit_profile-name">
+                <input type="text" placeholder="Фамилия" id="edit_profile-lastname">
+            </div>
+
+            <div class="popup_buttons">
+                <button class="accent" onclick="editProfile()">Сохранить</button>
+                <button onclick="editProfile(false)">Отмена</button>
+            </div>
+        </div>
+    </div>
+
     <div class="new_image_popup popup_container hidden">
         <div class="popup_window">
             <h3>Новое изображение</h3>
@@ -389,8 +350,8 @@
             </div>
         </div>
 
-        <button><i class="ph-gear-six-bold"></i> Настройки</button>
-        <button><i class="ph-pencil-simple-bold"></i> Редактирование профиля</button>
+        <button style="display: none"><i class="ph-gear-six-bold"></i> Настройки</button>
+        <button onclick="editProfile(true)"><i class="ph-pencil-simple-bold"></i> Редактирование профиля</button>
         <button onclick="logout()" class="red"><i class="ph-sign-out-bold"></i> Выйти из аккаунта</button>
 
         <span>NOTES 0.9.0. Для защиты диплома</span>
