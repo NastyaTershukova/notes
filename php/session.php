@@ -57,7 +57,7 @@ function refreshToken() {
     $result = $mysql->prepare("UPDATE tokens SET token = ?, expiration_date = DATE_ADD(NOW(), INTERVAL 30 MINUTE) WHERE user_id = ? AND refresh_token = ?");
     
     if ($result === false) {
-        die("MySQL prepare error: " . $mysqli->error);
+        die("MySQL prepare error: " . $mysql->error);
     }
 
     $result->bind_param("sis", $new_token, $_SESSION['user_id'], $refresh_token);

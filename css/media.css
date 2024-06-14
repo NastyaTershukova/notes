@@ -110,39 +110,6 @@
         width: 100%;
     }
 
-    /*Всплывающее окно Помощь*/
-
-    .support_popup {
-        width: 340px;
-    }
-
-    .new_note_popup,
-    .share_popup,
-    .delete_popup {
-        width: 440px;
-    }
-
-    .close-popup {
-        width: 8px;
-        height: 8px;
-    }
-
-    .close-popup::before,
-    .close-popup::after {
-        width: 18px;
-    }
-
-    .support_popup form input[type="submit"],
-    .new_note_popup input[type="submit"] {
-        width: 120px;
-        height: 40px;
-        font-size: 14px;
-    }
-
-    .account_popup-bg {
-        display: none;
-    }
-
     /* Главная страница после входа */
     .logo_main {
         font-size: 24px;
@@ -298,34 +265,6 @@
         margin: 40px auto 16px auto;
     }
 
-
-    /* Всплывающее окно Помощь */
-
-    .support_popup,
-    .new_note_popup {
-        width: 320px;
-    }
-
-    .share_popup,
-    .delete_popup {
-        width: 400px;
-    }
-
-    .account_page {
-        padding: 16px 40px 24px 40px;
-    }
-
-    .account_title_main {
-        font-size: 18px;
-    }
-
-    .account_title_mobile {
-        margin-top: 32px;
-    }
-
-    .input_account_mobile {
-        margin-top: 32px;
-    }
 }
 
 @media screen and (min-width: 560px) and (max-width: 960px) {

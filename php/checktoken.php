@@ -5,7 +5,7 @@ function checkToken($token) {
     $request = $mysql->prepare("SELECT user_id FROM `tokens` WHERE token = ? AND expiration_date > FROM_UNIXTIME(?)");
 
     if ($request === false) {
-        die("MySQL prepare error: " . $mysqli->error);
+        die("MySQL prepare error: " . $mysql->error);
     }
 
     $time = time();
