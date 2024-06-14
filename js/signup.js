@@ -79,6 +79,14 @@ async function signUp() {
         let last_name = document.querySelector(`#last_name`).value;
 
         document.querySelector('#finish_btn').disabled = true;
+
+        console.log(JSON.stringify({
+            email: email,
+            password: password,
+            name: first_name,
+            last_name: last_name,
+            image: loadedImage.split(',')[1]
+        }));
     
         const response = await fetch('php/signup.php', {
           method: 'POST',
