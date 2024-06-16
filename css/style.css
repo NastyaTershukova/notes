@@ -324,6 +324,7 @@ a {
     border-radius: 10px;
     margin: 16px auto 0 auto;
     display: block;
+    background-color: white;
 }
 
 .support_popup,
@@ -582,6 +583,7 @@ a {
     object-fit: cover;
     border-radius: 100%;
     margin-left: 4px;
+    background-color: white;
 }
 
 .menu {
@@ -1813,6 +1815,7 @@ a {
     aspect-ratio: 1/1;
     border-radius: 4px;
     object-fit: cover;
+    background-color: white;
 }
 .user_block-top_row {
     display: flex;

@@ -47,13 +47,15 @@ function login() {
             document.querySelector('#edit_profile-lastname').value = responseData.lastname;
             document.querySelector('.user_block-email').innerText = responseData.email;
 
+            let img = '/img/no_profile_image.png'
+
             if (responseData.picture != "") {
-                document.querySelector('#user_photo').src = '/userpictures/'+responseData.picture;
-                document.querySelector('#mobile_userphoto').src = '/userpictures/'+responseData.picture;
-                document.querySelector('.user_block-picture').src = '/userpictures/'+responseData.picture;
-                document.querySelector('#edit_profile-image').src = '/userpictures/'+responseData.picture;
+                img = '/userpictures/'+responseData.picture;
             }
-            
+            document.querySelector('#user_photo').src = img;
+            document.querySelector('#mobile_userphoto').src = img;
+            document.querySelector('.user_block-picture').src = img;
+            document.querySelector('#edit_profile-image').src = img;
 
             loadingSpinner(false);
             loadNotesList();

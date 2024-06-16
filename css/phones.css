@@ -118,6 +118,7 @@
         height: 32px;
         border-radius: 100%;
         object-fit: cover;
+        background-color: white;
     }
 
     .menu_note, .menu_mainpage {
