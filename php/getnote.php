@@ -24,7 +24,7 @@ if ($id == "error_not_executable") {
 $note_id = $_POST['id'];
 
 session_start();
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 
 if (!is_numeric($note_id)) {
     $request = $mysql->prepare("SELECT * from `notes` WHERE owner = ? AND uuid = ?");

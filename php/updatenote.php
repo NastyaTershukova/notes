@@ -46,7 +46,7 @@ if (!isset($_POST['contents']) && isset($_POST['preview'])) {
     $note_preview = encryptNote($_POST['preview'], $contents_key);
 }
 
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 $request = $mysql->prepare("UPDATE notes SET contents = ?, preview = ?, time_edited = NOW() WHERE owner = ? AND uuid = ?");
 
 if ($preview_only == true) {

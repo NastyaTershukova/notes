@@ -21,7 +21,7 @@ if ($id == "error_not_executable") {
     exit();
 }
 
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 $request = $mysql->prepare("INSERT INTO `notes` (`owner`, `uuid`, `contents`, `preview`, `time_edited`, `time_created`, `is_deleted`)
 VALUES(?, ?, ?, ?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), 0)");
 

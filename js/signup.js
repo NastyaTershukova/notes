@@ -79,14 +79,10 @@ async function signUp() {
         let last_name = document.querySelector(`#last_name`).value;
 
         document.querySelector('#finish_btn').disabled = true;
-
-        console.log(JSON.stringify({
-            email: email,
-            password: password,
-            name: first_name,
-            last_name: last_name,
-            image: loadedImage.split(',')[1]
-        }));
+        let image = "";
+        if (loadedImage != 0) {
+            image = loadedImage.split(',')[1];
+        }
     
         const response = await fetch('php/signup.php', {
           method: 'POST',
@@ -95,7 +91,7 @@ async function signUp() {
             password: password,
             name: first_name,
             last_name: last_name,
-            image: loadedImage.split(',')[1]
+            image: image
           })
         })
         
@@ -106,6 +102,7 @@ async function signUp() {
           window.open('index.html', '_self');
         } else if (result_json.error) {
             showWarning(result_json.error);
+            document.querySelector('#finish_btn').disabled = false;
             console.log(result_json);
         }
       } catch (error) {

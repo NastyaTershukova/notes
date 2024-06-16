@@ -25,7 +25,7 @@ if (!isset($_POST['uuid'])) {
     exit;
 }
 
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 $request = $mysql->prepare("DELETE FROM `notes` WHERE owner = ? AND uuid = ?");
 
 session_start();

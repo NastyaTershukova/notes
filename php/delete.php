@@ -2,6 +2,8 @@
 include "checktoken.php";
 include "session.php";
 
+session_start();
+
 if (!isset($_COOKIE['token'])) {
     refreshToken();
     echo "token_reloaded";
@@ -27,14 +29,12 @@ if (!isset($_POST['uuid'])) {
 
 echo $_POST['uuid'];
 
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 $request = $mysql->prepare("UPDATE `notes` SET is_deleted = 1, delete_time = DATE_ADD(NOW(), INTERVAL 14 DAY) WHERE owner = ? AND uuid = ?");
 
 if (isset($_POST['recover'])) {
     $request = $mysql->prepare("UPDATE `notes` SET is_deleted = 0, delete_time = NULL WHERE owner = ? AND uuid = ?");
 }
-
-session_start();
 
 if ($request === false) {
     die("MySQL prepare error: " . $mysqli->error);

@@ -31,7 +31,7 @@ if ($id == "error_not_executable") {
     exit();
 }
 
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 
 $result = $mysql->prepare("UPDATE users SET name = ?, lastname = ? WHERE id = ".$id."");
 

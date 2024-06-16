@@ -41,7 +41,7 @@ function refreshToken() {
         exit;
     }
 
-    $mysql = new mysqli('localhost', 'root', '', 'register-bd');
+    $mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
     $refresh_key = 'fsqA1!fmsd-2OW94msdfA012gmkWQ)$f,sdf';
     $refresh_token = decryptToken($_SESSION['refresh_token'], $refresh_key);
 

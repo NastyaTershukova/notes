@@ -1,7 +1,7 @@
 <?php
 
 function checkToken($token) {
-    $mysql = new mysqli('localhost', 'root', '', 'register-bd');
+    $mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
     $request = $mysql->prepare("SELECT user_id FROM `tokens` WHERE token = ? AND expiration_date > FROM_UNIXTIME(?)");
 
     if ($request === false) {

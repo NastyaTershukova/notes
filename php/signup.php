@@ -80,7 +80,7 @@ $contents_key = encryptPassword(generateRandomString(), $pass_raw);
 $name = $data['name'];
 $lastname = $data['last_name'];
 
-if ($data['image'] != 0) {
+if ($data['image'] != "") {
     $filename = uniqid() . '.jpg';
     $filepath = __DIR__ . '/../userpictures/' . $filename;
 
@@ -98,7 +98,7 @@ if ($data['image'] != 0) {
     $filename = '';
 }
 
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 $request = $mysql->prepare("INSERT INTO `users` (`email`, `pass`, `contents_key`, `name`, `lastname`, `picture`)
 VALUES(?, ?, ?, ?, ?, ?)");
 

@@ -69,7 +69,7 @@ function login() {
 
         xhr.send();
     } else {
-        window.open('login.html', '_self');
+        window.open('landing.html', '_self');
     }
     
 }

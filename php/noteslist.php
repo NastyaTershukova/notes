@@ -30,7 +30,7 @@ if (!isset($_GET['is_deleted'])) {
 
 
 session_start();
-$mysql = new mysqli('localhost', 'root', '', 'register-bd');
+$mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
 $request = $mysql->prepare("SELECT uuid, preview, time_edited, time_created from `notes` WHERE owner = ? AND is_deleted = ? ORDER BY ".$_GET['sortby']." DESC");
 
 if ($request === false) {

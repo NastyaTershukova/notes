@@ -5,7 +5,7 @@
         $salt = "ecbccdjcn3474";
         $hashed_password = hash('sha256', $pass . $salt);
         
-        $mysql = new mysqli('localhost', 'root', '', 'register-bd');
+        $mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
         // $result = $mysql->query("SELECT `id` FROM `users` WHERE `email` = '$email' AND `pass` = '$hashed_password'");
         // $user = $result->fetch_assoc();
 
