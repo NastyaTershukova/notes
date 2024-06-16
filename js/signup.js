@@ -102,7 +102,7 @@ async function signUp() {
           window.open('index.html', '_self');
         } else if (result_json.error) {
             showWarning(result_json.error);
-            document.querySelector('#finish_btn').disabled = false;
+            document.querySelector('#finish_btn').disabled = "false";
             console.log(result_json);
         }
       } catch (error) {

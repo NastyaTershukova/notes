@@ -99,12 +99,30 @@ if ($data['image'] != "") {
 }
 
 $mysql = new mysqli('localhost', 'u2695624_backend', 'dixkyj-1gUjje-qagdog', 'u2695624_graduate_notes');
+
+//CHECK EMAIL
+$request = $mysql->prepare("SELECT `email` FROM `users` WHERE `email` = ?");
+if ($request === false) {
+    echo json_encode(['error' => $mysql->error]);
+}
+$request->bind_param('s', $email);
+if ($mysql->error) {
+    echo json_encode(['error' => $mysql->error]);
+    exit();
+}
+if(!$request->execute()) {
+    echo json_encode(['error' => 'Error while executing the request']);
+    exit();
+}
+$result = $request->get_result();
+if ($result->num_rows != 0) {
+    echo json_encode(['error' => 'Email is occupied. Please choose another one']);
+    exit();
+}
+
+
 $request = $mysql->prepare("INSERT INTO `users` (`email`, `pass`, `contents_key`, `name`, `lastname`, `picture`)
 VALUES(?, ?, ?, ?, ?, ?)");
-
-if ($request === false) {
-    die("MySQL prepare error: " . $mysqli->error);
-}
 $request->bind_param("ssssss", $email, $pass, $contents_key, $name, $lastname, $filename);
 if ($mysql->error) {
     echo "Error: " . $mysql->error;
