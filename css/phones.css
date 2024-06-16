@@ -184,4 +184,14 @@
         margin: 0;
     }
 
+    .user_block {
+        bottom: 64px;
+        right: 8px;
+        width: calc(100vw - 16px);
+        max-width: 360px;
+    }
+    .user_block.hidden {
+        transform: translateY(30px);
+    }
+
 }
