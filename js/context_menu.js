@@ -120,7 +120,6 @@ function context_tab(name, data) {
 function toggleTag(uuid, color) {
     let tags_array = []
     try {
-      console.log(notesList[uuid])
       tags_array = notesList[uuid].tags ? notesList[uuid].tags.split(',').filter(tag => tag.trim() !== '') : [] // Преобразование строки в массив и удаление пустых элементов
     } catch (e) {
     }

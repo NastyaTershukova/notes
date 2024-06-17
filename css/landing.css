@@ -168,6 +168,7 @@ h1 {
 }
 .top-button-row button {
     background-color: white;
+    color: var(--text);
     border-radius: 100px;
     padding: 12px 24px;
     font-size: 14px;
@@ -181,6 +182,9 @@ h1 {
 .promo-desktop {
     max-width: 100%;
     margin-top: 48px;
+}
+.promo-mobile {
+    display: none;
 }
 .features {
     display: flex;

@@ -144,7 +144,6 @@ function deleteNote(uuid, isRecover) {
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             console.log('Token is reloaded. Retry in 300ms...');
             setTimeout(() => {
@@ -190,7 +189,6 @@ function deleteNoteForever(uuid) {
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        console.log(xhr.responseText);
         if (xhr.responseText == "token_reloaded") {
             console.log('Token is reloaded. Retry in 300ms...');
             setTimeout(() => {
@@ -280,7 +278,6 @@ function syncNotePreview(uuid) {
                 }, 300);
                 return "token_reloaded";
             }
-            console.log(xhr.responseText);
             resolve('synced');
             loadingSpinner(false);
             

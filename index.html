@@ -27,9 +27,9 @@
         <div id="nav_bar-loading">
             <div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
-        <button onclick="toggleUserBlock()" id="btn_user"> <img src="img/user_photo.jpg" id="user_photo"> <p id="nav_bar-name"> Нет аккаунта</p></button>
+        <button onclick="toggleUserBlock()" id="btn_user"> <img id="user_photo"> <p id="nav_bar-name"> Нет аккаунта</p></button>
         <button onclick="newNote()" id="btn_create"> <i class="ph-note-pencil"></i> <p>Новая заметка...</p> </button>
-        <button onclick="window.open('landing.html', '_self')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
+        <button onclick="window.open('about.html', '_self')" id="btn_help"> <i class="ph-question"></i> <p>Помощь</p> </button>
     </nav>
 
     <div class="flex-row security">
@@ -349,11 +349,62 @@
             </div>
         </div>
 
-        <button style="display: none"><i class="ph-gear-six-bold"></i> Настройки</button>
+        <button onclick="toggleSettings()"><i class="ph-gear-six-bold"></i> Настройки</button>
         <button onclick="editProfile(true)"><i class="ph-pencil-simple-bold"></i> Редактирование профиля</button>
+        <button onclick="window.open('about.html', '_self')"><i class="ph-question-bold"></i> Помощь</button>
         <button onclick="logout()" class="red"><i class="ph-sign-out-bold"></i> Выйти из аккаунта</button>
 
-        <span>NOTES 0.9.0. Для защиты диплома</span>
+        <span>NOTES 0.9.1</span>
+    </div>
+
+    <div class="settings_block hidden">
+        <div class="window">
+            <div class="window-top_bar">
+                <h3>Настройки</h3>
+                <button class="close" onclick="toggleSettings()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"></path></svg></button>
+            </div>
+            
+            <div class="settings_list">
+                <button class="blue">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M220,32H76A20,20,0,0,0,56,52V72H36A20,20,0,0,0,16,92V204a20,20,0,0,0,20,20H180a20,20,0,0,0,20-20V184h20a20,20,0,0,0,20-20V52A20,20,0,0,0,220,32ZM176,96v16H40V96Zm0,104H40V136H176Zm40-40H200V92a20,20,0,0,0-20-20H80V56H216Z"></path></svg></div>
+                    <label>Интерфейс</label>
+                    <label class="value">По Умолчанию</label>
+                </button>
+                <button class="fuchsia">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M90.86,50.89a12,12,0,0,0-21.72,0l-64,136a12,12,0,0,0,21.71,10.22L42.44,164h75.12l15.58,33.11a12,12,0,0,0,21.72-10.22ZM53.74,140,80,84.18,106.27,140ZM200,84c-13.85,0-24.77,3.86-32.45,11.48a12,12,0,1,0,16.9,17c3-3,8.26-4.52,15.55-4.52,11,0,20,7.18,20,16v4.39A47.28,47.28,0,0,0,200,124c-24.26,0-44,17.94-44,40s19.74,40,44,40a47.18,47.18,0,0,0,22-5.38A12,12,0,0,0,244,192V124C244,101.94,224.26,84,200,84Zm0,96c-11,0-20-7.18-20-16s9-16,20-16,20,7.18,20,16S211,180,200,180Z"></path></svg></div>
+                    <label>Размер шрифта</label>
+                    <input type="number" class="value" max="26" min="12" value="16">
+                </button>
+                <button class="yellow">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"></path></svg></div>
+                    <label>Тема оформления</label>
+                    <label class="value">Автоматическая</label>
+                </button>
+            </div>
+            <div class="settings_list">
+                <button class="green">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M208,156H48a20,20,0,0,0-20,20v24a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V176A20,20,0,0,0,208,156Zm-4,40H52V180H204Zm4-116H48a20,20,0,0,0-20,20v24a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V100A20,20,0,0,0,208,80Zm-4,40H52V104H204ZM96,36a12,12,0,0,1,12-12h8V16a12,12,0,0,1,24,0v8h8a12,12,0,0,1,0,24h-8v8a12,12,0,0,1-24,0V48h-8A12,12,0,0,1,96,36Z"></path></svg></div>
+                    <label>Частота синхронизации</label>
+                    <label class="value">30 секунд</label>
+                </button>
+                <p>Этот параметр определяет, как часто будет обновляться список всех ваших заметок.</p>
+            </div>
+            <div class="settings_list">
+                <button class="light_blue">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M208,28H83.31a19.86,19.86,0,0,0-14.14,5.86L33.86,69.17A19.86,19.86,0,0,0,28,83.31V208a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V48A20,20,0,0,0,208,28ZM92,52h72V72H92ZM204,204H52V85L68,69v7A20,20,0,0,0,88,96h80a20,20,0,0,0,20-20V52h16Zm-76-96a42,42,0,1,0,42,42A42,42,0,0,0,128,108Zm0,60a18,18,0,1,1,18-18A18,18,0,0,1,128,168Z"></path></svg></div>
+                    <label>Автосохранение заметок</label>
+                    <label class="value">Выключено</label>
+                </button>
+                <p>Вы можете включить автоматическое синхронизирование с облачным хранилищем заметки, над которой работаете.</p>
+            </div>
+            <div class="settings_list">
+                <button class="red">
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M199,125.31l-49.88-18.39L130.69,57a19.92,19.92,0,0,0-37.38,0L74.92,106.92,25,125.31a19.92,19.92,0,0,0,0,37.38l49.88,18.39L93.31,231a19.92,19.92,0,0,0,37.38,0l18.39-49.88L199,162.69a19.92,19.92,0,0,0,0-37.38Zm-63.38,35.16a12,12,0,0,0-7.11,7.11L112,212.28l-16.47-44.7a12,12,0,0,0-7.11-7.11L43.72,144l44.7-16.47a12,12,0,0,0,7.11-7.11L112,75.72l16.47,44.7a12,12,0,0,0,7.11,7.11L180.28,144ZM140,40a12,12,0,0,1,12-12h12V16a12,12,0,0,1,24,0V28h12a12,12,0,0,1,0,24H188V64a12,12,0,0,1-24,0V52H152A12,12,0,0,1,140,40ZM252,88a12,12,0,0,1-12,12h-4v4a12,12,0,0,1-24,0v-4h-4a12,12,0,0,1,0-24h4V72a12,12,0,0,1,24,0v4h4A12,12,0,0,1,252,88Z"></path></svg></div>
+                    <label>Сбросить все настройки</label>
+                </button>
+                <p>Будут сброшены все ваши настройки, включая размер шрифта и частоту синхронизации.</p>
+            </div>
+        </div>
     </div>
 
     <div id="loading-screen">
@@ -371,6 +422,7 @@
     <script src="js/context_menu.js"></script>
     <script src="js/load_note.js"></script>
     <script src="js/images.js"></script>
+    <script src="js/settings.js"></script>
     <script src="js/master.js"></script>
 </body>
 

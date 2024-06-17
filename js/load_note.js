@@ -26,7 +26,6 @@ function load_note(id) {
               return item; // Если не получается, возвращаем исходный элемент
             }
           });
-        console.log(xhr.responseText);
         convert_from_json(data);
 
         add_context_menus();
@@ -58,7 +57,6 @@ async function newNote() {
     try {
         const response = await fetch(url);
         const text = await response.text();
-        console.log(text);
 
         if (text == "token_reloaded") {
             console.log('Token is reloaded. Retry in 300ms...');
@@ -149,7 +147,7 @@ function loadNotesList(selectNote, doUpdate) {
 
         setTimeout(() => {
             loadNotesList(undefined, true);
-        }, 60000);
+        }, 30000);
 
     } else {
         console.error('Request failed with status ', xhr.status);

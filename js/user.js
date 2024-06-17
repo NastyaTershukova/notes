@@ -36,7 +36,6 @@ function login() {
                 }, 300);
                 return;
             }
-            console.log(xhr.responseText);
             if (xhr.responseText == "error_old_session") {
                 window.open('login.html', '_self');
             }
@@ -71,7 +70,7 @@ function login() {
 
         xhr.send();
     } else {
-        window.open('landing.html', '_self');
+        window.open('about.html', '_self');
     }
     
 }
@@ -80,7 +79,7 @@ function logout() {
 
     xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-        window.open('landing.html', '_self');
+        window.open('about.html', '_self');
     } else {
         console.error('Request failed with status ', xhr.status);
     }
@@ -94,6 +93,7 @@ function logout() {
 }
 
 function toggleUserBlock() {
+    document.querySelector('.settings_block').classList.add('hidden');
     document.querySelector(`.user_block`).classList.toggle('hidden');
 }
 function editProfile(arg) {

@@ -11,7 +11,7 @@ function nextStep() {
 function previousStep() {
     showWarning(false);
     if (currentStep == 0) {
-        window.open('landing.html', '_self');
+        window.open('about.html', '_self');
         return;
     }
     document.querySelector(`#step${currentStep}`).classList.add('hidden');
@@ -96,14 +96,12 @@ async function signUp() {
         })
         
         const result_json = await response.json();
-        console.log(result_json);
     
         if (result_json.success) {
           window.open('index.html', '_self');
         } else if (result_json.error) {
             showWarning(result_json.error);
             document.querySelector('#finish_btn').disabled = "false";
-            console.log(result_json);
         }
       } catch (error) {
         console.error('Error: ', error)

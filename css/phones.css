@@ -194,4 +194,43 @@
         transform: translateY(30px);
     }
 
+    .settings_block {
+        align-items: flex-end;
+        background-color: rgba(0,0,0,0.75);
+    }
+
+    .settings_block .window {
+        width: 100vw;
+        max-width: 460px;
+        border-radius: 24px 24px 0 0;
+        max-height: calc(100% - 48px);
+        overflow-y: auto;
+        padding-bottom: calc(100px + env(safe-area-inset-bottom));
+    }
+    .settings_block.hidden .window {
+        transform: translateY(32px);
+    }
+
+    .settings_list button {
+        height: 42px;
+    }
+    .settings_list button label {
+        font-size: 13px;
+    }
+    #context_menu {
+        min-width: 240px;
+    }
+
+    #context_menu button:not(.tag) {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+    .tag_dot {
+        width: 10px;
+    }
+    .tag div, #search_tags div, .note_tags div {
+        width: 20px;
+        height: 20px;
+    }
+
 }

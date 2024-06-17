@@ -31,7 +31,6 @@ function convert_to_json() {
             case "P":
                 content_type = "paragraph";
                 content_value = encodeSpecialChars(note.children[i].innerHTML);
-                console.log(content_value);
                 if (json_preview.text == "" && getParagraphLength(note.children[i]) > 0) {
                     json_preview.text = encodeSpecialChars(note.children[i].innerText);
                 }
@@ -134,8 +133,6 @@ function createImage(doFocus, content) {
     obj.tabIndex = "0";
 
     lastCreatedImage = obj.id;
-
-    console.log(content);
     
     if (content != undefined) {
         displayImage(obj, content);
