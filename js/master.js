@@ -1,4 +1,6 @@
 tab('home')
+initializeSettings();
+
 var isTrashBinOpened = 0;
 
 let title_obj = document.getElementById('note_content-title');

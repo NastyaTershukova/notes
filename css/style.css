@@ -1884,10 +1884,11 @@ a {
     margin-left: 40px;
 }
 .settings_block .window {
-    background-color: var(--side_nav);
+    background-color: var(--settings);
     padding: 16px;
     border-radius: 16px;
     width: 420px;
+    border: 1px solid var(--border);
 
     transition: .5s transform;
 }
@@ -1917,7 +1918,7 @@ a {
     border-radius: 8px;
     overflow: clip;
     margin-top: 16px;
-    background: var(--page_bg);
+    background: var(--settings_btn);
 }
 .settings_list button {
     --background: var(--red);
@@ -1925,7 +1926,7 @@ a {
 
     width: 100%;
     height: 40px;
-    background: var(--page_bg);
+    background: var(--settings_btn);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -1954,6 +1955,9 @@ a {
     justify-content: center;
     color: var(--icon);
     border: 1px solid var(--icon_border);
+}
+.settings_list button.top_border {
+    border-top: 1px solid var(--border);
 }
 .settings_list button.blue {
     --background: #bfdbfe;

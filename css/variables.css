@@ -31,6 +31,9 @@
     --warning: #ffedd5;
     --warning-border: #fdba74;
     --warning-text: #c2410c;
+
+    --settings: var(--side_nav);
+    --settings_btn: var(--page_bg);
 }
 [dark-theme='true'] {
     --page_bg: #000;
@@ -58,4 +61,7 @@
     --note_preview: rgb(140, 140, 140);
 
     --red: #ef4d58;
+
+    --settings: rgba(20,20,20,1);
+    --settings_btn: var(--side_nav);
 }

@@ -1,7 +1,7 @@
 var currentNote = -1;
 var currentNoteTags = [];
 var isNoteChanged = false;
-var isNoteSynced = false;
+var isNoteSynced = true;
 
 function closeNote() {
     if (currentNote != -1 && !isNoteSynced) {

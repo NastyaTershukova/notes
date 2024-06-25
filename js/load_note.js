@@ -147,7 +147,8 @@ function loadNotesList(selectNote, doUpdate) {
 
         setTimeout(() => {
             loadNotesList(undefined, true);
-        }, 30000);
+            console.log('refreshing...');
+        }, Number(getSetting('listSyncFrequency')) * 1000);
 
     } else {
         console.error('Request failed with status ', xhr.status);
